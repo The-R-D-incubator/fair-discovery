@@ -2,26 +2,31 @@
 header("Content-Type: application/json");
 session_start();
 
+$file = __DIR__ . "/discovery.json";
+
 try {
-    $input = file_get_contents("php://input");
-    $data = json_decode($input, true);
-    
-    if (!$data || !isset($data["path"])) {
-        http_response_code(400);
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!$data) exit;
+
+    $log = json_decode(file_get_contents($file), true);
+
+    // --- HANDLE SETTINGS UPDATE ---
+    if (isset($data['update_settings'])) {
+        $log['site'] = filter_var($data['site'], FILTER_SANITIZE_STRING);
+        $log['whatsapp'] = filter_var($data['whatsapp'], FILTER_SANITIZE_STRING);
+        $log['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
+        $log['password'] = filter_var($data['password'], FILTER_SANITIZE_STRING);
+        file_put_contents($file, json_encode($log, JSON_PRETTY_PRINT));
+        echo json_encode(["status" => "updated"]);
         exit;
     }
 
-    $file = __DIR__ . "/discovery.json";
-    $fp = fopen($file, 'c+');
-    if (!flock($fp, LOCK_EX)) throw new Exception("Lock Fail");
+    // --- NORMAL DATA RECORDING ---
+    // Bot Check: Ignore if no score and no path
+    if (!isset($data["path"]) || (int)$data["score"] === 0) exit;
 
-    $fileSize = filesize($file);
-    $jsonContent = $fileSize > 0 ? fread($fp, $fileSize) : "{}";
-    $log = json_decode($jsonContent, true);
-
-    // Weekly Rotation Logic 
-    $isMonday = (date('N') == 1);
-    if ($isMonday && $log["visitors"]["current_week_start"] !== date("Y-m-d")) {
+    // Weekly Reset (Mondays)
+    if (date('N') == 1 && $log["visitors"]["current_week_start"] !== date("Y-m-d")) {
         $log["visitors"]["week_4"] = $log["visitors"]["week_3"];
         $log["visitors"]["week_3"] = $log["visitors"]["week_2"];
         $log["visitors"]["week_2"] = $log["visitors"]["week_1"];
@@ -29,13 +34,13 @@ try {
         $log["visitors"]["current_week_start"] = date("Y-m-d");
     }
 
-    // Unique Human Visitor Count [cite: 8]
-    if (!isset($_SESSION['counted_visitor']) && (int)$data["score"] > 0) {
+    // Unique Human Visitor Count
+    if (!isset($_SESSION['counted'])) {
         $log["visitors"]["week_1"]++;
-        $_SESSION['counted_visitor'] = true;
+        $_SESSION['counted'] = true;
     }
 
-    // Update Page Score
+    // Page Score
     $path = filter_var($data["path"], FILTER_SANITIZE_URL);
     $found = false;
     foreach ($log["pages"] as &$p) {
@@ -43,11 +48,7 @@ try {
     }
     if (!$found) $log["pages"][] = ["url" => $path, "score" => (int)$data["score"]];
 
-    ftruncate($fp, 0);
-    rewind($fp);
-    fwrite($fp, json_encode($log, JSON_PRETTY_PRINT));
-    flock($fp, LOCK_UN);
-    fclose($fp);
+    file_put_contents($file, json_encode($log, JSON_PRETTY_PRINT));
     echo json_encode(["status" => "ok"]);
 
 } catch (Exception $e) { http_response_code(500); }
