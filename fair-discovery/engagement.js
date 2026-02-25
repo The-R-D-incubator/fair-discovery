@@ -1,37 +1,33 @@
 /**
- * Fair Discovery | Source-Aware Gatekeeper
- * Automatically identifies YouTube, TikTok, and Search traffic.
+ * Fair Discovery | Global Gatekeeper & Source Tracker
  */
 (() => {
   const CONFIG = {
-    DASHBOARD_PATH: "/fair-discovery/record.php"
+    DASHBOARD_PATH: "/fair-discovery/record.php",
+    PIXELS: { FB: "YOUR_FB_ID", GTAG: "G-XXXXXXXXXX", LI: "YOUR_LI_ID", TT: "YOUR_TT_ID" }
   };
 
-  let pixelsFired = false;
+  let fired = false;
   let sourceChannel = "Direct/Website";
 
-  // DETECT SOURCE: Identifies where the human came from
+  // Identify Source
   const ref = document.referrer.toLowerCase();
-  if (ref.includes("youtube.com") || location.search.includes("ref=youtube")) sourceChannel = "YouTube";
+  const params = new URLSearchParams(window.location.search);
+  if (ref.includes("youtube.com") || params.has("ref")) sourceChannel = "YouTube";
   else if (ref.includes("tiktok.com")) sourceChannel = "TikTok";
-  else if (ref.includes("google.com") || location.search.includes("gclid")) sourceChannel = "Google/Ads";
+  else if (ref.includes("google.com") || params.has("gclid")) sourceChannel = "Google/Ads";
 
   function release() {
-    if (pixelsFired) return;
-    pixelsFired = true;
+    if (fired) return; fired = true;
     console.log(`[FairDiscovery] Source: ${sourceChannel} | Human Verified.`);
-    // Pixel firing logic remains here...
+    // Pixel firing logic (FB, GTag, LI, TT) here...
   }
 
-  window.addEventListener("scroll", () => { if(window.scrollY > 20) release(); });
-  ["click", "mousemove", "keydown"].forEach(e => window.addEventListener(e, release, {once: true}));
+  window.addEventListener("scroll", () => { if(window.scrollY > 15) release(); });
+  ["click", "mousemove", "touchstart"].forEach(e => window.addEventListener(e, release, {once: true}));
 
   window.addEventListener("beforeunload", () => {
-    const data = JSON.stringify({ 
-        path: location.pathname, 
-        source: sourceChannel, // Sends the specific channel
-        score: 1 
-    });
+    const data = JSON.stringify({ path: location.pathname, source: sourceChannel, score: 1 });
     navigator.sendBeacon(CONFIG.DASHBOARD_PATH, data);
   });
 })();
