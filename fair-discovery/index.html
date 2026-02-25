@@ -1,164 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Private Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
-    .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
-    .hidden { display: none; }
-  </style>
-</head>
-<body class="p-4 md:p-10">
-
-  <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
-    <div class="glass p-8 rounded-3xl w-full max-w-sm text-center">
-      <h1 class="text-2xl font-black mb-6 tracking-tighter">FAIR DISCOVERY</h1>
-      <input type="password" id="pass-input" placeholder="Access Code" class="w-full p-3 rounded-xl bg-zinc-900 border border-zinc-800 mb-4 text-center focus:border-blue-500 outline-none">
-      <button onclick="attemptLogin()" class="w-full bg-blue-600 p-3 rounded-xl font-bold hover:bg-blue-500">Login</button>
-    </div>
-  </div>
-
-  <div id="dashboard" class="max-w-6xl mx-auto hidden">
-    <div class="flex justify-between items-center mb-10">
-      <div>
-        <h1 id="display-name" class="text-3xl font-extrabold tracking-tighter">--</h1>
-        <p class="text-zinc-500 text-sm">Gatekeeper Insight Dashboard</p>
+<div id="dashboard" class="max-w-6xl mx-auto hidden">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div class="glass p-6 rounded-3xl border-red-500/20">
+        <p class="text-red-500 text-[10px] font-bold uppercase tracking-widest">YouTube Traffic</p>
+        <h2 id="yt-count" class="text-4xl font-black italic">0</h2>
       </div>
-      <div class="flex gap-3">
-        <button onclick="toggleSettings()" class="p-3 glass rounded-xl hover:bg-zinc-800">Settings</button>
-        <button onclick="location.reload()" class="p-3 glass rounded-xl hover:bg-zinc-800 text-red-500 text-xs font-bold uppercase">Logout</button>
+      <div class="glass p-6 rounded-3xl border-pink-500/20">
+        <p class="text-pink-500 text-[10px] font-bold uppercase tracking-widest">TikTok Traffic</p>
+        <h2 id="tt-count" class="text-4xl font-black italic">0</h2>
+      </div>
+      <div class="glass p-6 rounded-3xl border-blue-500/20">
+        <p class="text-blue-500 text-[10px] font-bold uppercase tracking-widest">Google/Search</p>
+        <h2 id="g-count" class="text-4xl font-black italic">0</h2>
+      </div>
+      <div class="glass p-6 rounded-3xl border-zinc-700">
+        <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Direct/Other</p>
+        <h2 id="d-count" class="text-4xl font-black italic">0</h2>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-      <div class="glass p-8 rounded-3xl">
-        <p class="text-zinc-500 text-xs font-bold uppercase mb-2">Verified Humans (Week)</p>
-        <h2 id="w1" class="text-5xl font-black italic text-blue-500">0</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 glass p-8 rounded-3xl">
+        <h3 class="font-bold mb-6 text-zinc-400 uppercase text-[10px]">Real-Time Source Distribution</h3>
+        <canvas id="sourceChart" height="150"></canvas>
       </div>
       <div class="glass p-8 rounded-3xl">
-        <p class="text-zinc-500 text-xs font-bold uppercase mb-2">Engagement Intensity</p>
-        <h2 id="totalScore" class="text-5xl font-black italic">0</h2>
-      </div>
-      <div class="glass p-8 rounded-3xl border-green-500/20">
-        <p class="text-green-500 text-xs font-bold uppercase mb-2">Bot Status</p>
-        <h2 class="text-3xl font-black">Mitigated</h2>
-        <p class="text-[10px] text-zinc-600 mt-2 uppercase">Honeypot + Verification Active</p>
+        <h3 class="font-bold mb-6 text-zinc-400 uppercase text-[10px]">Engagement by Page</h3>
+        <div id="pageResults" class="space-y-3 text-[11px] font-mono"></div>
       </div>
     </div>
+</div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div class="glass p-8 rounded-3xl">
-        <h3 class="font-bold mb-6 text-zinc-400 uppercase text-xs tracking-widest">Page Performance</h3>
-        <div id="pageResults" class="space-y-4 font-mono text-xs"></div>
-      </div>
-      <div class="glass p-8 rounded-3xl">
-        <canvas id="engagementChart"></canvas>
-      </div>
-    </div>
-  </div>
+<script>
+// ... (Keep attemptLogin logic) ...
 
-  <div id="settings-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 p-4">
-    <div class="glass p-8 rounded-3xl w-full max-w-md">
-      <h2 class="text-xl font-bold mb-6">Discovery Settings</h2>
-      <div class="space-y-4">
-        <div>
-            <label class="text-[10px] text-zinc-500 uppercase">Company Name</label>
-            <input type="text" id="set-name" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label class="text-[10px] text-zinc-500 uppercase">WhatsApp</label>
-                <input type="text" id="set-wa" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
-            </div>
-            <div>
-                <label class="text-[10px] text-zinc-500 uppercase">Email</label>
-                <input type="text" id="set-email" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
-            </div>
-        </div>
-        <div>
-            <label class="text-[10px] text-zinc-500 uppercase">New Access Code (Password)</label>
-            <input type="password" id="set-pass" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
-        </div>
-      </div>
-      <div class="mt-8 flex gap-4">
-        <button onclick="saveSettings()" class="flex-1 bg-blue-600 p-3 rounded-xl font-bold">Save Changes</button>
-        <button onclick="toggleSettings()" class="flex-1 bg-zinc-800 p-3 rounded-xl font-bold">Cancel</button>
-      </div>
-    </div>
-  </div>
+function renderDashboard() {
+    // 1. Update Channel Counts
+    const s = rawData.sources || { "YouTube": 0, "TikTok": 0, "Google/Ads": 0, "Direct/Website": 0 };
+    document.getElementById('yt-count').innerText = (s["YouTube"] || 0).toLocaleString();
+    document.getElementById('tt-count').innerText = (s["TikTok"] || 0).toLocaleString();
+    document.getElementById('g-count').innerText = (s["Google/Ads"] || 0).toLocaleString();
+    document.getElementById('d-count').innerText = (s["Direct/Website"] || 0).toLocaleString();
 
-  <script>
-    let rawData = {};
-    let chart;
-
-    async function attemptLogin() {
-        const input = document.getElementById('pass-input').value;
-        const res = await fetch("discovery.json?" + Date.now());
-        rawData = await res.json();
-
-        if (input === rawData.password) {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
-            renderDashboard();
-        } else {
-            alert("Incorrect Access Code");
-        }
-    }
-
-    function renderDashboard() {
-        document.getElementById('display-name').innerText = rawData.site.toUpperCase();
-        document.getElementById('w1').innerText = rawData.visitors.week_1.toLocaleString();
-        
-        const list = document.getElementById('pageResults');
-        list.innerHTML = "";
-        let total = 0;
-        rawData.pages.sort((a,b) => b.score - a.score).forEach(p => {
-            total += p.score;
-            list.insertAdjacentHTML('beforeend', `<div class="flex justify-between border-b border-zinc-800 pb-2"><span>${p.url}</span><span class="text-blue-500 font-bold">${p.score}</span></div>`);
-        });
-        document.getElementById('totalScore').innerText = total.toLocaleString();
-
-        const ctx = document.getElementById('engagementChart').getContext('2d');
-        if(chart) chart.destroy();
-        chart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: rawData.pages.slice(0,5).map(p => p.url),
-                datasets: [{ data: rawData.pages.slice(0,5).map(p => p.score), backgroundColor: ['#3b82f6','#2563eb','#1d4ed8','#1e40af','#1e3a8a'], borderWidth: 0 }]
-            },
-            options: { plugins: { legend: { display: false } }, cutout: '85%' }
-        });
-    }
-
-    function toggleSettings() {
-        const modal = document.getElementById('settings-modal');
-        modal.classList.toggle('hidden');
-        document.getElementById('set-name').value = rawData.site;
-        document.getElementById('set-wa').value = rawData.whatsapp;
-        document.getElementById('set-email').value = rawData.email;
-        document.getElementById('set-pass').value = rawData.password;
-    }
-
-    async function saveSettings() {
-        const newData = {
-            update_settings: true,
-            site: document.getElementById('set-name').value,
-            whatsapp: document.getElementById('set-wa').value,
-            email: document.getElementById('set-email').value,
-            password: document.getElementById('set-pass').value
-        };
-
-        const res = await fetch("record.php", { method: 'POST', body: JSON.stringify(newData) });
-        if (res.ok) {
-            alert("Settings Updated! Refreshing...");
-            location.reload();
-        }
-    }
-  </script>
-</body>
-</html>
+    // 2. Render Graph
+    const ctx = document.getElementById('sourceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["YouTube", "TikTok", "Google", "Direct"],
+            datasets: [{
+                label: 'Verified Humans',
+                data: [s["YouTube"], s["TikTok"], s["Google/Ads"], s["Direct/Website"]],
+                backgroundColor: ['#ef4444', '#ec4899', '#3b82f6', '#71717a'],
+                borderRadius: 10
+            }]
+        },
+        options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } }
+    });
+}
+</script>
