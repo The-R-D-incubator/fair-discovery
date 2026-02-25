@@ -1,10 +1,14 @@
 {
-  "site": "your-website.com",
-  "category": "Tech",
-  "description": "Human-verified traffic insights.",
+  "site": "New Discovery",
   "whatsapp": "27820000000",
   "email": "info@example.com",
   "password": "1234",
+  "sources": {
+    "YouTube": 0,
+    "TikTok": 0,
+    "Google/Ads": 0,
+    "Direct/Website": 0
+  },
   "visitors": {
     "current_week_start": "2026-02-25",
     "week_1": 0, "week_2": 0, "week_3": 0, "week_4": 0
