@@ -3,52 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Industrial Web Tools</title>
+  <title>Fair Discovery | Engineered Traffic Integrity</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; }
+    .industrial-border { border: 1px solid rgba(255,255,255,0.05); }
+    .forge-gradient { background: linear-gradient(135deg, #0f172a 0%, #000 100%); }
+    .accent-glow { box-shadow: 0 0 50px -10px rgba(59, 130, 246, 0.2); }
+  </style>
 </head>
-<body class="bg-[#050505] text-white">
-  <nav class="p-6 flex justify-between max-w-6xl mx-auto">
-    <div class="font-black tracking-tighter text-2xl uppercase">Fair Discovery</div>
-    <div class="text-zinc-500 text-sm">Powered by Forge Vertical</div>
+<body class="antialiased">
+
+  <nav class="p-8 flex justify-between items-center max-w-7xl mx-auto">
+    <div class="text-2xl font-black tracking-tighter uppercase italic">Fair Discovery</div>
+    <div class="flex gap-8 text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-500">
+        <span>Architected by Forge Vertical</span>
+    </div>
   </nav>
 
-  <main class="max-w-6xl mx-auto px-6 py-20">
-    <h1 class="text-7xl font-black tracking-tighter mb-10 italic">The Suite.</h1>
+  <main class="max-w-7xl mx-auto px-8 py-16">
+    
+    <div class="mb-24 max-w-4xl">
+        <h1 class="text-7xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-8 uppercase italic">
+            Engineered <br><span class="text-blue-600">Integrity.</span>
+        </h1>
+        <p class="text-zinc-400 text-xl max-w-2xl leading-relaxed">
+            From solo creators to global enterprises. We build the gatekeepers that protect your budget, your content, and your infrastructure from the automated abyss.
+        </p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <div class="md:col-span-2 bg-blue-600 p-10 rounded-[2.5rem] flex flex-col justify-between min-h-[400px]">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <div class="md:col-span-8 forge-gradient industrial-border p-12 rounded-[3rem] accent-glow flex flex-col justify-between min-h-[500px] relative overflow-hidden group">
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="h-3 w-3 rounded-full bg-blue-500 animate-pulse"></span>
+            <span class="text-xs font-black uppercase tracking-widest text-blue-500">Flagship Node: Ad-Guard</span>
+          </div>
+          <h2 class="text-5xl font-black italic uppercase leading-none mb-6">Stop Paying <br>for Ghost Clicks.</h2>
+          <p class="text-zinc-400 max-w-md text-lg">
+              Ad networks profit from bots. You shouldn't. Ad-Guard verifies human interaction across YouTube, TikTok, and Google before a single pixel fires. Protect your spend with industrial-grade mitigation.
+          </p>
+        </div>
+        
+        <div class="mt-12 flex flex-wrap gap-4 relative z-10">
+          <a href="/pay" class="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-blue-600 hover:text-white transition-all">Unlock Lifetime (R1499)</a>
+          <a href="https://github.com/The-R-D-incubator/fair-discovery" class="px-10 py-5 industrial-border rounded-2xl font-black uppercase text-xs tracking-[0.2em] bg-zinc-900/50">Download Trial Kit</a>
+        </div>
+
+        <div class="absolute right-[-10%] bottom-[-10%] opacity-10 group-hover:opacity-20 transition-opacity">
+            <svg width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 bg-zinc-900/30 industrial-border p-10 rounded-[3rem] flex flex-col justify-between border-red-900/20 group hover:border-red-600/40 transition-colors">
         <div>
-          <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase">Main Attraction</span>
-          <h2 class="text-5xl font-black mt-6 tracking-tight">Ad-Guard & Source Tracker</h2>
-          <p class="mt-4 text-blue-100 max-w-md">Stop paying for bots. Verify YouTube, TikTok, and Google Ads traffic in real-time. 30-day free trial included.</p>
+            <div class="text-[10px] font-black uppercase tracking-widest text-red-600 mb-6">Nodes in Development</div>
+            <h3 class="text-3xl font-black italic uppercase mb-4">Sentinel <br>Decoy.</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed">
+                Counter-intelligence for creators. A sophisticated honeypot system that presents a "fabricated" infrastructure to hackers, leading them into an endless loop of misery while securing your actual assets.
+            </p>
         </div>
-        <div class="flex items-center gap-6">
-          <a href="/buy-adguard" class="bg-white text-blue-600 px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all">Get Lifetime (R1499)</a>
-          <a href="https://github.com/The-R-D-incubator/fair-discovery/archive/refs/heads/main.zip" class="text-white font-bold underline">Download Tool Kit</a>
+        <div class="mt-8 pt-8 border-t border-white/5 flex justify-between items-center">
+            <span class="text-[10px] font-bold text-zinc-600 uppercase">Status: Architecting</span>
+            <div class="h-2 w-2 rounded-full bg-red-600"></div>
         </div>
       </div>
 
-      <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-[2.5rem] flex flex-col justify-center text-center">
-        <div class="text-zinc-700 font-black text-4xl mb-2 italic">Coming Soon</div>
-        <p class="text-zinc-500 text-sm uppercase font-bold tracking-widest">AI Discovery Engine</p>
-      </div>
-
-      <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-[2.5rem] flex flex-col justify-center text-center">
-        <div class="text-zinc-700 font-black text-4xl mb-2 italic">Coming Soon</div>
-        <p class="text-zinc-500 text-sm uppercase font-bold tracking-widest">SEO Authority Mapper</p>
-      </div>
-
-      <div class="md:col-span-2 bg-zinc-900 border border-zinc-800 p-10 rounded-[2.5rem] flex items-center justify-between">
+      <div class="md:col-span-4 bg-zinc-900/30 industrial-border p-10 rounded-[3rem] flex flex-col justify-between border-emerald-900/20 group hover:border-emerald-600/40 transition-colors">
         <div>
-            <h3 class="text-2xl font-bold">The Roadmap</h3>
-            <p class="text-zinc-500 mt-2">We are building a decentralized directory of verified human-first websites. Join the movement.</p>
+            <h3 class="text-3xl font-black italic uppercase mb-4">AI-VPN.</h3>
+            <p class="text-zinc-500 text-sm leading-relaxed">
+                Adaptive network shielding. Beyond standard encryption, AI-VPN constantly mutates its pathing based on real-time threat detection to ensure zero-footprint discovery.
+            </p>
         </div>
-        <div class="h-20 w-20 bg-zinc-800 rounded-full flex items-center justify-center animate-pulse">
-            <div class="h-10 w-10 bg-blue-500 rounded-full"></div>
+        <div class="mt-8 pt-8 border-t border-white/5 flex justify-between items-center">
+            <span class="text-[10px] font-bold text-zinc-600 uppercase">Status: Research</span>
+            <div class="h-2 w-2 rounded-full bg-emerald-600"></div>
         </div>
       </div>
+
+      <div class="md:col-span-8 bg-zinc-900/30 industrial-border p-10 rounded-[3rem] flex items-center justify-between">
+        <div class="max-w-md">
+            <h3 class="text-xl font-black uppercase italic italic mb-2">Industrial Scale.</h3>
+            <p class="text-zinc-500 text-sm italic">
+                Whether you are a creator protecting your YouTube channel or a multi-national stopping click-fraud, our logic is optimized for performance, privacy, and ROI.
+            </p>
+        </div>
+        <div class="hidden md:block">
+            <div class="text-[10px] font-black uppercase text-zinc-700 text-right">01 // FAIR_DISCOVERY<br>02 // SENTINEL_DECOY<br>03 // AI_VPN</div>
+        </div>
+      </div>
+
     </div>
   </main>
+
+  <footer class="p-12 text-center text-zinc-800 text-[10px] font-black uppercase tracking-[0.5em]">
+    © 2026 Fair Discovery // A Product of Forge Vertical
+  </footer>
+
 </body>
 </html>
