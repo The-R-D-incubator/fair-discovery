@@ -1,10 +1,13 @@
 {
-  "site": "your-client-domain.com",
-  "category": "Business",
-  "description": "Human-verified ad spend protection.",
+  "site": "your-website.com",
+  "category": "Tech",
+  "description": "Summary of what you do.",
   "whatsapp": "27820000000",
+  "email": "info@yourbusiness.com", 
+  "password": "1234",
+  "location": "Cape Town, SA",
   "visitors": {
-    "current_week_start": "2026-02-25",
+    "current_week_start": "2026-01-01",
     "week_1": 0, "week_2": 0, "week_3": 0, "week_4": 0
   },
   "pages": []
