@@ -10,22 +10,31 @@ try {
 
     $log = json_decode(file_get_contents($file), true);
 
-    // --- HANDLE SETTINGS UPDATE ---
+    // Settings Update
     if (isset($data['update_settings'])) {
-        $log['site'] = filter_var($data['site'], FILTER_SANITIZE_STRING);
-        $log['whatsapp'] = filter_var($data['whatsapp'], FILTER_SANITIZE_STRING);
-        $log['email'] = filter_var($data['email'], FILTER_SANITIZE_EMAIL);
-        $log['password'] = filter_var($data['password'], FILTER_SANITIZE_STRING);
+        $log['site'] = htmlspecialchars($data['site']);
+        $log['whatsapp'] = htmlspecialchars($data['whatsapp']);
+        $log['email'] = htmlspecialchars($data['email']);
+        $log['password'] = htmlspecialchars($data['password']);
         file_put_contents($file, json_encode($log, JSON_PRETTY_PRINT));
         echo json_encode(["status" => "updated"]);
         exit;
     }
 
-    // --- NORMAL DATA RECORDING ---
-    // Bot Check: Ignore if no score and no path
-    if (!isset($data["path"]) || (int)$data["score"] === 0) exit;
+    // Normal Recording
+    if (!isset($data["path"])) exit;
 
-    // Weekly Reset (Mondays)
+    // Track Traffic Source
+    if (isset($data['source'])) {
+        $src = $data['source'];
+        if (!isset($log['sources'])) $log['sources'] = ["YouTube" => 0, "TikTok" => 0, "Google/Ads" => 0, "Direct/Website" => 0];
+        if (!isset($_SESSION['src_counted'])) {
+            $log['sources'][$src] = ($log['sources'][$src] ?? 0) + 1;
+            $_SESSION['src_counted'] = true;
+        }
+    }
+
+    // Weekly Rotation
     if (date('N') == 1 && $log["visitors"]["current_week_start"] !== date("Y-m-d")) {
         $log["visitors"]["week_4"] = $log["visitors"]["week_3"];
         $log["visitors"]["week_3"] = $log["visitors"]["week_2"];
@@ -34,19 +43,19 @@ try {
         $log["visitors"]["current_week_start"] = date("Y-m-d");
     }
 
-    // Unique Human Visitor Count
-    if (!isset($_SESSION['counted'])) {
+    // Count Visitor
+    if (!isset($_SESSION['human'])) {
         $log["visitors"]["week_1"]++;
-        $_SESSION['counted'] = true;
+        $_SESSION['human'] = true;
     }
 
     // Page Score
     $path = filter_var($data["path"], FILTER_SANITIZE_URL);
     $found = false;
     foreach ($log["pages"] as &$p) {
-        if ($p["url"] === $path) { $p["score"] += (int)$data["score"]; $found = true; break; }
+        if ($p["url"] === $path) { $p["score"] += 1; $found = true; break; }
     }
-    if (!$found) $log["pages"][] = ["url" => $path, "score" => (int)$data["score"]];
+    if (!$found) $log["pages"][] = ["url" => $path, "score" => 1];
 
     file_put_contents($file, json_encode($log, JSON_PRETTY_PRINT));
     echo json_encode(["status" => "ok"]);
