@@ -8,13 +8,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; display: none; } /* Hidden until passcode check */
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; display: none; }
     .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px); }
     .stat-value { background: linear-gradient(to bottom right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   </style>
 </head>
 <body class="p-4 md:p-10">
-
   <div class="max-w-6xl mx-auto">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
         <div>
@@ -23,66 +22,54 @@
         </div>
         <div class="flex gap-2">
             <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs font-bold border border-green-500/20">Gatekeeper Active</span>
-            <button onclick="loadData()" class="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition">Refresh</button>
+            <button onclick="loadData()" class="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition text-xs">Refresh Stats</button>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div class="glass-card p-6">
+        <div class="glass-card p-6 text-center md:text-left">
             <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Current Week</p>
             <h2 class="text-4xl font-black stat-value" id="w1">0</h2>
         </div>
-        <div class="glass-card p-6">
-            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Total Engagement Score</p>
+        <div class="glass-card p-6 text-center md:text-left">
+            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Engagement Intensity</p>
             <h2 class="text-4xl font-black stat-value" id="totalScore">0</h2>
         </div>
-        <div class="glass-card p-6 border-blue-500/30 bg-blue-500/5">
+        <div class="glass-card p-6 border-blue-500/30 bg-blue-500/5 text-center md:text-left">
             <p class="text-blue-400 text-xs uppercase font-bold tracking-widest mb-1">Bot Mitigation</p>
             <h2 class="text-4xl font-black text-blue-400">100%</h2>
-            <p class="text-blue-900 text-[10px] mt-2 font-bold leading-tight">Honeypot Active</p>
+            <p class="text-blue-900 text-[10px] mt-2 font-bold uppercase">Honeypot Active</p>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="glass-card p-8">
-            <h3 class="text-lg font-bold mb-6 italic">Top Content Engagement</h3>
-            <div id="pageResults" class="space-y-4"></div>
+            <h3 class="text-lg font-bold mb-6 italic">Top Content</h3>
+            <div id="pageResults" class="space-y-4 text-sm font-mono text-zinc-400"></div>
         </div>
-
-        <div class="glass-card p-8">
-            <h3 class="text-lg font-bold mb-6">Traffic Intensity</h3>
+        <div class="glass-card p-8 flex flex-col justify-center">
+            <h3 class="text-lg font-bold mb-6">Engagement Spread</h3>
             <canvas id="engagementChart" style="max-height: 250px;"></canvas>
         </div>
     </div>
   </div>
 
   <script>
-    const ACCESS_CODE = "1234"; // CUSTOMER SHOULD EDIT THIS
+    const ACCESS_CODE = "1234"; // CUSTOMER TO EDIT THIS
     let engagementChart;
 
     async function loadData() {
       const res = await fetch("discovery.json?" + Date.now());
       const data = await res.json();
+      document.getElementById('w1').innerText = (data.visitors.week_1 || 0).toLocaleString();
       
-      document.getElementById('w1').innerText = data.visitors.week_1.toLocaleString();
       const pageList = document.getElementById("pageResults");
       pageList.innerHTML = "";
-      
       let total = 0;
+      
       data.pages.sort((a,b) => b.score - a.score).forEach(p => {
           total += p.score;
-          pageList.insertAdjacentHTML("beforeend", `
-            <div class="flex justify-between items-center group">
-                <div class="w-full">
-                    <div class="flex justify-between text-xs mb-1">
-                        <span class="text-zinc-400 truncate w-40 font-mono">${p.url}</span>
-                        <span class="font-bold">${p.score.toLocaleString()}</span>
-                    </div>
-                    <div class="h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-blue-600" style="width: ${Math.min((p.score/1000)*100, 100)}%"></div>
-                    </div>
-                </div>
-            </div>`);
+          pageList.insertAdjacentHTML("beforeend", `<div class="flex justify-between border-b border-zinc-800 pb-2"><span>${p.url}</span><span class="text-white">${p.score}</span></div>`);
       });
       document.getElementById('totalScore').innerText = total.toLocaleString();
 
@@ -102,7 +89,6 @@
       });
     }
 
-    // Passcode Security
     function checkAccess() {
         const userCode = prompt("Enter Fair Discovery Access Code:");
         if (userCode !== ACCESS_CODE) {
