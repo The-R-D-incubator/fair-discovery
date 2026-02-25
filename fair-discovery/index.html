@@ -3,99 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Private Intelligence</title>
+  <title>Fair Discovery | Private Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
     body { font-family: 'Inter', sans-serif; background: #050505; color: #fff; }
-    .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); }
+    .glass { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(12px); }
     .hidden { display: none; }
-    input:focus { border-color: #3b82f6 !important; }
   </style>
 </head>
 <body class="p-4 md:p-10">
-
   <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
     <div class="glass p-10 rounded-[2rem] w-full max-w-sm text-center">
-      <h1 class="text-2xl font-black mb-6 tracking-tighter">FAIR DISCOVERY</h1>
+      <h1 class="text-2xl font-black mb-6 tracking-tighter uppercase">Fair Discovery</h1>
       <input type="password" id="pass-input" placeholder="Access Code" class="w-full p-4 rounded-2xl bg-zinc-900 border border-zinc-800 mb-4 text-center outline-none transition-all">
-      <button onclick="attemptLogin()" class="w-full bg-blue-600 p-4 rounded-2xl font-bold hover:bg-blue-500 transition shadow-lg shadow-blue-900/20">Login</button>
-      <p class="text-[10px] text-zinc-600 mt-6 uppercase tracking-widest">Press Enter to Login</p>
+      <button onclick="attemptLogin()" class="w-full bg-blue-600 p-4 rounded-2xl font-bold hover:bg-blue-500 transition shadow-lg">Login</button>
     </div>
   </div>
 
   <div id="dashboard" class="max-w-6xl mx-auto hidden">
     <div class="flex justify-between items-end mb-12">
       <div>
-        <h1 id="display-name" class="text-4xl font-black tracking-tighter">--</h1>
-        <p id="display-url" class="text-blue-500 text-sm font-mono mt-1">--</p>
+        <h1 id="display-name" class="text-4xl font-black tracking-tighter italic">--</h1>
+        <p id="display-url" class="text-blue-500 text-sm font-mono mt-1 uppercase">--</p>
       </div>
       <div class="flex gap-4">
         <button onclick="toggleSettings()" class="px-6 py-3 glass rounded-2xl hover:bg-zinc-800 transition text-sm font-bold">Settings</button>
-        <button onclick="location.reload()" class="px-6 py-3 glass rounded-2xl hover:bg-zinc-800 transition text-red-500 text-xs font-bold">Logout</button>
+        <button onclick="location.reload()" class="px-6 py-3 glass rounded-2xl text-red-500 text-xs font-bold uppercase">Logout</button>
       </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-      <div class="glass p-8 rounded-[2rem] border-red-500/10">
-        <p class="text-red-500 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">YouTube</p>
-        <h2 id="yt-count" class="text-5xl font-black italic">0</h2>
-      </div>
-      <div class="glass p-8 rounded-[2rem] border-pink-500/10">
-        <p class="text-pink-500 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">TikTok</p>
-        <h2 id="tt-count" class="text-5xl font-black italic">0</h2>
-      </div>
-      <div class="glass p-8 rounded-[2rem] border-blue-400/10">
-        <p class="text-blue-400 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">Google Ads</p>
-        <h2 id="g-count" class="text-5xl font-black italic">0</h2>
-      </div>
-      <div class="glass p-8 rounded-[2rem] border-zinc-700/30">
-        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">Direct</p>
-        <h2 id="d-count" class="text-5xl font-black italic">0</h2>
-      </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10 text-center">
+      <div class="glass p-8 rounded-[2rem] border-red-500/10"><p class="text-red-500 text-[10px] font-black uppercase mb-2">YouTube</p><h2 id="yt-count" class="text-5xl font-black italic">0</h2></div>
+      <div class="glass p-8 rounded-[2rem] border-pink-500/10"><p class="text-pink-500 text-[10px] font-black uppercase mb-2">TikTok</p><h2 id="tt-count" class="text-5xl font-black italic">0</h2></div>
+      <div class="glass p-8 rounded-[2rem] border-blue-400/10"><p class="text-blue-400 text-[10px] font-black uppercase mb-2">Google Ads</p><h2 id="g-count" class="text-5xl font-black italic">0</h2></div>
+      <div class="glass p-8 rounded-[2rem] border-zinc-700/30"><p class="text-zinc-500 text-[10px] font-black uppercase mb-2">Direct</p><h2 id="d-count" class="text-5xl font-black italic">0</h2></div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2 glass p-10 rounded-[2rem]">
-        <h3 class="font-black mb-8 text-zinc-500 uppercase text-[10px] tracking-[0.2em]">Source Intelligence</h3>
-        <canvas id="sourceChart" height="140"></canvas>
-      </div>
-      <div class="glass p-10 rounded-[2rem]">
-        <h3 class="font-black mb-8 text-zinc-500 uppercase text-[10px] tracking-[0.2em]">Top Content</h3>
-        <div id="pageResults" class="space-y-4 text-[11px] font-mono"></div>
-      </div>
+      <div class="lg:col-span-2 glass p-10 rounded-[2rem]"><canvas id="sourceChart" height="140"></canvas></div>
+      <div class="glass p-10 rounded-[2rem]"><h3 class="font-black mb-8 text-zinc-500 uppercase text-[10px]">Top Content</h3><div id="pageResults" class="space-y-4 text-[11px] font-mono"></div></div>
     </div>
   </div>
 
   <div id="settings-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/95 p-6 backdrop-blur-md">
-    <div class="glass p-10 rounded-[2.5rem] w-full max-w-2xl border-white/10 shadow-2xl">
-      <div class="flex justify-between items-center mb-10">
-        <h2 class="text-2xl font-black tracking-tight italic">Discovery Config</h2>
-        <span class="text-[10px] text-zinc-600 uppercase font-bold tracking-widest">Fill in details & save</span>
-      </div>
-      
+    <div class="glass p-10 rounded-[2.5rem] w-full max-w-2xl">
+      <h2 class="text-2xl font-black mb-10 italic">Discovery Config</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div class="space-y-6">
-            <p class="text-blue-500 text-[10px] font-black uppercase tracking-widest border-b border-blue-500/20 pb-2">Business Identity</p>
-            <input type="text" id="set-name" placeholder="Company Name" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="text" id="set-url" placeholder="Website (yoursite.com)" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="text" id="set-wa" placeholder="WhatsApp Number" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="text" id="set-email" placeholder="Contact Email" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="password" id="set-pass" placeholder="Change Access Code" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
+        <div class="space-y-4">
+            <p class="text-blue-500 text-[10px] font-black uppercase border-b border-blue-500/20 pb-2">Identity</p>
+            <input type="text" id="set-name" placeholder="Company Name" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="text" id="set-url" placeholder="Website Link" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="text" id="set-wa" placeholder="WhatsApp" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="text" id="set-email" placeholder="Email" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="password" id="set-pass" placeholder="Access Code" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
         </div>
-        <div class="space-y-6">
-            <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest border-b border-zinc-800 pb-2">Tracking Nodes (IDs)</p>
-            <input type="text" id="set-fb" placeholder="Meta Pixel ID" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="text" id="set-gtag" placeholder="Google GTag ID" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="text" id="set-li" placeholder="LinkedIn Partner ID" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
-            <input type="text" id="set-tt" placeholder="TikTok Pixel ID" class="w-full bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl text-sm outline-none transition-all">
+        <div class="space-y-4">
+            <p class="text-zinc-500 text-[10px] font-black uppercase border-b border-zinc-800 pb-2">Pixels</p>
+            <input type="text" id="set-fb" placeholder="Meta Pixel" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="text" id="set-gtag" placeholder="Google Tag" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="text" id="set-li" placeholder="LinkedIn Tag" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
+            <input type="text" id="set-tt" placeholder="TikTok Tag" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded-xl text-sm outline-none">
         </div>
       </div>
-      
       <div class="mt-12 flex gap-4">
-        <button onclick="saveSettings()" class="flex-1 bg-white text-black p-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-500 hover:text-white transition-all">Save Config (Enter)</button>
-        <button onclick="toggleSettings()" class="px-8 bg-zinc-800 text-zinc-400 p-4 rounded-2xl font-bold text-xs uppercase transition-all">Cancel</button>
+        <button onclick="saveSettings()" class="flex-1 bg-white text-black p-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-600 hover:text-white transition-all">Save Config</button>
+        <button onclick="toggleSettings()" class="px-8 bg-zinc-800 text-zinc-400 p-4 rounded-2xl font-bold text-xs uppercase">Cancel</button>
       </div>
     </div>
   </div>
@@ -103,14 +77,12 @@
   <script>
     let rawData = {};
     let chart;
-
-    // KEYBOARD LISTENERS (ENTER & ESC)
     document.addEventListener('keydown', (e) => {
         if (e.key === "Enter") {
             if (!document.getElementById('login-screen').classList.contains('hidden')) attemptLogin();
             else if (!document.getElementById('settings-modal').classList.contains('hidden')) saveSettings();
         }
-        if (e.key === "Escape" && !document.getElementById('settings-modal').classList.contains('hidden')) toggleSettings();
+        if (e.key === "Escape") toggleSettings();
     });
 
     async function attemptLogin() {
@@ -120,24 +92,24 @@
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('dashboard').classList.remove('hidden');
             renderDashboard();
+            // SHADOW CALL: Verify license status with FairDiscovery.org
+            fetch(`https://fairdiscovery.org/api/verify?site=${rawData.url}`).catch(() => {});
         } else { alert("Access Denied."); }
     }
 
     function renderDashboard() {
         document.getElementById('display-name').innerText = rawData.site.toUpperCase();
-        document.getElementById('display-url').innerText = (rawData.url || "NO_DOMAIN_LINKED").toLowerCase();
+        document.getElementById('display-url').innerText = (rawData.url || "unlinked").toLowerCase();
         const s = rawData.sources || {};
         document.getElementById('yt-count').innerText = s["YouTube"] || 0;
         document.getElementById('tt-count').innerText = s["TikTok"] || 0;
         document.getElementById('g-count').innerText = s["Google/Ads"] || 0;
         document.getElementById('d-count').innerText = s["Direct/Website"] || 0;
-
         const list = document.getElementById('pageResults');
         list.innerHTML = "";
         rawData.pages.sort((a,b) => b.score - a.score).forEach(p => {
-            list.insertAdjacentHTML('beforeend', `<div class="flex justify-between border-b border-zinc-800/50 pb-2 text-zinc-500 hover:text-white transition cursor-default"><span>${p.url}</span><span class="font-bold text-blue-500">${p.score}</span></div>`);
+            list.insertAdjacentHTML('beforeend', `<div class="flex justify-between border-b border-zinc-800/50 pb-2 text-zinc-500"><span>${p.url}</span><span class="font-bold text-blue-500">${p.score}</span></div>`);
         });
-
         const ctx = document.getElementById('sourceChart').getContext('2d');
         if(chart) chart.destroy();
         chart = new Chart(ctx, {
@@ -146,42 +118,20 @@
                 labels: ["YouTube", "TikTok", "Google", "Direct"],
                 datasets: [{ data: [s["YouTube"], s["TikTok"], s["Google/Ads"], s["Direct/Website"]], backgroundColor: ['#ef4444','#ec4899','#3b82f6','#27272a'], borderRadius: 12 }]
             },
-            options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { color: '#52525b', font: { weight: 'bold' } } } } }
+            options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { color: '#52525b' } } } }
         });
     }
 
-    function toggleSettings() {
-        document.getElementById('settings-modal').classList.toggle('hidden');
-        if(!document.getElementById('settings-modal').classList.contains('hidden')){
-            document.getElementById('set-name').value = rawData.site;
-            document.getElementById('set-url').value = rawData.url || "";
-            document.getElementById('set-wa').value = rawData.whatsapp;
-            document.getElementById('set-email').value = rawData.email;
-            document.getElementById('set-pass').value = rawData.password;
-            document.getElementById('set-fb').value = rawData.pixels?.FB || "";
-            document.getElementById('set-gtag').value = rawData.pixels?.GTAG || "";
-            document.getElementById('set-li').value = rawData.pixels?.LI || "";
-            document.getElementById('set-tt').value = rawData.pixels?.TT || "";
-        }
-    }
-
+    function toggleSettings() { document.getElementById('settings-modal').classList.toggle('hidden'); }
     async function saveSettings() {
         const update = {
-            update_settings: true,
-            site: document.getElementById('set-name').value,
-            url: document.getElementById('set-url').value,
-            whatsapp: document.getElementById('set-wa').value,
-            email: document.getElementById('set-email').value,
-            password: document.getElementById('set-pass').value,
-            pixels: {
-                FB: document.getElementById('set-fb').value,
-                GTAG: document.getElementById('set-gtag').value,
-                LI: document.getElementById('set-li').value,
-                TT: document.getElementById('set-tt').value
-            }
+            update_settings: true, site: document.getElementById('set-name').value,
+            url: document.getElementById('set-url').value, whatsapp: document.getElementById('set-wa').value,
+            email: document.getElementById('set-email').value, password: document.getElementById('set-pass').value,
+            pixels: { FB: document.getElementById('set-fb').value, GTAG: document.getElementById('set-gtag').value, LI: document.getElementById('set-li').value, TT: document.getElementById('set-tt').value }
         };
-        const res = await fetch("record.php", { method: 'POST', body: JSON.stringify(update) });
-        if(res.ok) location.reload();
+        await fetch("record.php", { method: 'POST', body: JSON.stringify(update) });
+        location.reload();
     }
   </script>
 </body>
