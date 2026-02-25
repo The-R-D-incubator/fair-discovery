@@ -3,103 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Private Intelligence</title>
+  <title>Fair Discovery | Private Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; display: none; }
-    .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px); }
-    .stat-value { background: linear-gradient(to bottom right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+    .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+    .hidden { display: none; }
   </style>
 </head>
 <body class="p-4 md:p-10">
-  <div class="max-w-6xl mx-auto">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+
+  <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-black">
+    <div class="glass p-8 rounded-3xl w-full max-w-sm text-center">
+      <h1 class="text-2xl font-black mb-6 tracking-tighter">FAIR DISCOVERY</h1>
+      <input type="password" id="pass-input" placeholder="Access Code" class="w-full p-3 rounded-xl bg-zinc-900 border border-zinc-800 mb-4 text-center focus:border-blue-500 outline-none">
+      <button onclick="attemptLogin()" class="w-full bg-blue-600 p-3 rounded-xl font-bold hover:bg-blue-500">Login</button>
+    </div>
+  </div>
+
+  <div id="dashboard" class="max-w-6xl mx-auto hidden">
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h1 id="display-name" class="text-3xl font-extrabold tracking-tighter">--</h1>
+        <p class="text-zinc-500 text-sm">Gatekeeper Insight Dashboard</p>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="toggleSettings()" class="p-3 glass rounded-xl hover:bg-zinc-800">Settings</button>
+        <button onclick="location.reload()" class="p-3 glass rounded-xl hover:bg-zinc-800 text-red-500 text-xs font-bold uppercase">Logout</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="glass p-8 rounded-3xl">
+        <p class="text-zinc-500 text-xs font-bold uppercase mb-2">Verified Humans (Week)</p>
+        <h2 id="w1" class="text-5xl font-black italic text-blue-500">0</h2>
+      </div>
+      <div class="glass p-8 rounded-3xl">
+        <p class="text-zinc-500 text-xs font-bold uppercase mb-2">Engagement Intensity</p>
+        <h2 id="totalScore" class="text-5xl font-black italic">0</h2>
+      </div>
+      <div class="glass p-8 rounded-3xl border-green-500/20">
+        <p class="text-green-500 text-xs font-bold uppercase mb-2">Bot Status</p>
+        <h2 class="text-3xl font-black">Mitigated</h2>
+        <p class="text-[10px] text-zinc-600 mt-2 uppercase">Honeypot + Verification Active</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="glass p-8 rounded-3xl">
+        <h3 class="font-bold mb-6 text-zinc-400 uppercase text-xs tracking-widest">Page Performance</h3>
+        <div id="pageResults" class="space-y-4 font-mono text-xs"></div>
+      </div>
+      <div class="glass p-8 rounded-3xl">
+        <canvas id="engagementChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 p-4">
+    <div class="glass p-8 rounded-3xl w-full max-w-md">
+      <h2 class="text-xl font-bold mb-6">Discovery Settings</h2>
+      <div class="space-y-4">
         <div>
-            <h1 class="text-3xl font-extrabold tracking-tighter stat-value">FAIR DISCOVERY</h1>
-            <p class="text-zinc-500 text-sm">Human-Verified Traffic Intelligence</p>
+            <label class="text-[10px] text-zinc-500 uppercase">Company Name</label>
+            <input type="text" id="set-name" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
         </div>
-        <div class="flex gap-2">
-            <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs font-bold border border-green-500/20">Gatekeeper Active</span>
-            <button onclick="loadData()" class="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition text-xs">Refresh Stats</button>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="text-[10px] text-zinc-500 uppercase">WhatsApp</label>
+                <input type="text" id="set-wa" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
+            </div>
+            <div>
+                <label class="text-[10px] text-zinc-500 uppercase">Email</label>
+                <input type="text" id="set-email" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
+            </div>
         </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div class="glass-card p-6 text-center md:text-left">
-            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Current Week</p>
-            <h2 class="text-4xl font-black stat-value" id="w1">0</h2>
+        <div>
+            <label class="text-[10px] text-zinc-500 uppercase">New Access Code (Password)</label>
+            <input type="password" id="set-pass" class="w-full bg-zinc-900 border border-zinc-800 p-2 rounded-lg text-sm">
         </div>
-        <div class="glass-card p-6 text-center md:text-left">
-            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Engagement Intensity</p>
-            <h2 class="text-4xl font-black stat-value" id="totalScore">0</h2>
-        </div>
-        <div class="glass-card p-6 border-blue-500/30 bg-blue-500/5 text-center md:text-left">
-            <p class="text-blue-400 text-xs uppercase font-bold tracking-widest mb-1">Bot Mitigation</p>
-            <h2 class="text-4xl font-black text-blue-400">100%</h2>
-            <p class="text-blue-900 text-[10px] mt-2 font-bold uppercase">Honeypot Active</p>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="glass-card p-8">
-            <h3 class="text-lg font-bold mb-6 italic">Top Content</h3>
-            <div id="pageResults" class="space-y-4 text-sm font-mono text-zinc-400"></div>
-        </div>
-        <div class="glass-card p-8 flex flex-col justify-center">
-            <h3 class="text-lg font-bold mb-6">Engagement Spread</h3>
-            <canvas id="engagementChart" style="max-height: 250px;"></canvas>
-        </div>
+      </div>
+      <div class="mt-8 flex gap-4">
+        <button onclick="saveSettings()" class="flex-1 bg-blue-600 p-3 rounded-xl font-bold">Save Changes</button>
+        <button onclick="toggleSettings()" class="flex-1 bg-zinc-800 p-3 rounded-xl font-bold">Cancel</button>
+      </div>
     </div>
   </div>
 
   <script>
-    const ACCESS_CODE = "1234"; // CUSTOMER TO EDIT THIS
-    let engagementChart;
+    let rawData = {};
+    let chart;
 
-    async function loadData() {
-      const res = await fetch("discovery.json?" + Date.now());
-      const data = await res.json();
-      document.getElementById('w1').innerText = (data.visitors.week_1 || 0).toLocaleString();
-      
-      const pageList = document.getElementById("pageResults");
-      pageList.innerHTML = "";
-      let total = 0;
-      
-      data.pages.sort((a,b) => b.score - a.score).forEach(p => {
-          total += p.score;
-          pageList.insertAdjacentHTML("beforeend", `<div class="flex justify-between border-b border-zinc-800 pb-2"><span>${p.url}</span><span class="text-white">${p.score}</span></div>`);
-      });
-      document.getElementById('totalScore').innerText = total.toLocaleString();
+    async function attemptLogin() {
+        const input = document.getElementById('pass-input').value;
+        const res = await fetch("discovery.json?" + Date.now());
+        rawData = await res.json();
 
-      const ctx = document.getElementById('engagementChart').getContext('2d');
-      if (engagementChart) engagementChart.destroy();
-      engagementChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-              labels: data.pages.slice(0,5).map(p => p.url),
-              datasets: [{
-                  data: data.pages.slice(0,5).map(p => p.score),
-                  backgroundColor: ['#3b82f6', '#1d4ed8', '#1e3a8a', '#172554', '#0f172a'],
-                  borderWidth: 0
-              }]
-          },
-          options: { plugins: { legend: { display: false } }, cutout: '80%' }
-      });
-    }
-
-    function checkAccess() {
-        const userCode = prompt("Enter Fair Discovery Access Code:");
-        if (userCode !== ACCESS_CODE) {
-            alert("Unauthorized");
-            window.location.href = "https://fairdiscovery.org";
+        if (input === rawData.password) {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            renderDashboard();
         } else {
-            document.body.style.display = "block";
-            loadData();
+            alert("Incorrect Access Code");
         }
     }
-    document.addEventListener("DOMContentLoaded", checkAccess);
+
+    function renderDashboard() {
+        document.getElementById('display-name').innerText = rawData.site.toUpperCase();
+        document.getElementById('w1').innerText = rawData.visitors.week_1.toLocaleString();
+        
+        const list = document.getElementById('pageResults');
+        list.innerHTML = "";
+        let total = 0;
+        rawData.pages.sort((a,b) => b.score - a.score).forEach(p => {
+            total += p.score;
+            list.insertAdjacentHTML('beforeend', `<div class="flex justify-between border-b border-zinc-800 pb-2"><span>${p.url}</span><span class="text-blue-500 font-bold">${p.score}</span></div>`);
+        });
+        document.getElementById('totalScore').innerText = total.toLocaleString();
+
+        const ctx = document.getElementById('engagementChart').getContext('2d');
+        if(chart) chart.destroy();
+        chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: rawData.pages.slice(0,5).map(p => p.url),
+                datasets: [{ data: rawData.pages.slice(0,5).map(p => p.score), backgroundColor: ['#3b82f6','#2563eb','#1d4ed8','#1e40af','#1e3a8a'], borderWidth: 0 }]
+            },
+            options: { plugins: { legend: { display: false } }, cutout: '85%' }
+        });
+    }
+
+    function toggleSettings() {
+        const modal = document.getElementById('settings-modal');
+        modal.classList.toggle('hidden');
+        document.getElementById('set-name').value = rawData.site;
+        document.getElementById('set-wa').value = rawData.whatsapp;
+        document.getElementById('set-email').value = rawData.email;
+        document.getElementById('set-pass').value = rawData.password;
+    }
+
+    async function saveSettings() {
+        const newData = {
+            update_settings: true,
+            site: document.getElementById('set-name').value,
+            whatsapp: document.getElementById('set-wa').value,
+            email: document.getElementById('set-email').value,
+            password: document.getElementById('set-pass').value
+        };
+
+        const res = await fetch("record.php", { method: 'POST', body: JSON.stringify(newData) });
+        if (res.ok) {
+            alert("Settings Updated! Refreshing...");
+            location.reload();
+        }
+    }
   </script>
 </body>
 </html>
