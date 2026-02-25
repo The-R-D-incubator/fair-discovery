@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Performance Insights</title>
+  <title>Fair Discovery | Private Intelligence</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; display: none; } /* Hidden until passcode check */
     .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; backdrop-filter: blur(10px); }
     .stat-value { background: linear-gradient(to bottom right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   </style>
@@ -22,96 +22,70 @@
             <p class="text-zinc-500 text-sm">Human-Verified Traffic Intelligence</p>
         </div>
         <div class="flex gap-2">
-            <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs font-bold border border-green-500/20">Active Protection</span>
-            <button onclick="loadData()" class="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            </button>
+            <span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs font-bold border border-green-500/20">Gatekeeper Active</span>
+            <button onclick="loadData()" class="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition">Refresh</button>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div class="glass-card p-6">
             <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Current Week</p>
             <h2 class="text-4xl font-black stat-value" id="w1">0</h2>
-            <p class="text-zinc-600 text-[10px] mt-2 leading-tight">Verified Human Visitors</p>
         </div>
         <div class="glass-card p-6">
-            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Total Score</p>
+            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Total Engagement Score</p>
             <h2 class="text-4xl font-black stat-value" id="totalScore">0</h2>
-            <p class="text-zinc-600 text-[10px] mt-2 leading-tight">Net Engagement Intensity</p>
         </div>
         <div class="glass-card p-6 border-blue-500/30 bg-blue-500/5">
             <p class="text-blue-400 text-xs uppercase font-bold tracking-widest mb-1">Bot Mitigation</p>
             <h2 class="text-4xl font-black text-blue-400">100%</h2>
-            <p class="text-blue-900 text-[10px] mt-2 font-bold leading-tight">Gatekeeper Active</p>
-        </div>
-        <div class="glass-card p-6">
-            <p class="text-zinc-500 text-xs uppercase font-bold tracking-widest mb-1">Historical</p>
-            <div class="flex gap-2 mt-2">
-                <div class="h-8 w-full bg-zinc-800 rounded relative overflow-hidden"><div id="bar2" class="absolute bottom-0 bg-zinc-600 w-full" style="height:0%"></div></div>
-                <div class="h-8 w-full bg-zinc-800 rounded relative overflow-hidden"><div id="bar3" class="absolute bottom-0 bg-zinc-600 w-full" style="height:0%"></div></div>
-                <div class="h-8 w-full bg-zinc-800 rounded relative overflow-hidden"><div id="bar4" class="absolute bottom-0 bg-zinc-600 w-full" style="height:0%"></div></div>
-            </div>
+            <p class="text-blue-900 text-[10px] mt-2 font-bold leading-tight">Honeypot Active</p>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="glass-card p-8">
-            <h3 class="text-lg font-bold mb-6">Page-Level Engagement</h3>
-            <div id="pageResults" class="space-y-4">
-                </div>
+            <h3 class="text-lg font-bold mb-6 italic">Top Content Engagement</h3>
+            <div id="pageResults" class="space-y-4"></div>
         </div>
 
         <div class="glass-card p-8">
-            <h3 class="text-lg font-bold mb-6">Discovery Source</h3>
+            <h3 class="text-lg font-bold mb-6">Traffic Intensity</h3>
             <canvas id="engagementChart" style="max-height: 250px;"></canvas>
-            <div class="mt-6 pt-6 border-t border-zinc-800">
-                <p class="text-zinc-500 text-xs">High scores indicate deep content consumption. Low scores suggest "bounce" behavior even in humans.</p>
-            </div>
         </div>
     </div>
   </div>
 
   <script>
+    const ACCESS_CODE = "1234"; // CUSTOMER SHOULD EDIT THIS
     let engagementChart;
 
     async function loadData() {
       const res = await fetch("discovery.json?" + Date.now());
       const data = await res.json();
       
-      // Update Main Numbers
       document.getElementById('w1').innerText = data.visitors.week_1.toLocaleString();
-      
-      // Update History Bars (Simple visual representation)
-      const maxW = Math.max(data.visitors.week_2, data.visitors.week_3, data.visitors.week_4, 1);
-      document.getElementById('bar2').style.height = (data.visitors.week_2 / maxW * 100) + "%";
-      document.getElementById('bar3').style.height = (data.visitors.week_3 / maxW * 100) + "%";
-      document.getElementById('bar4').style.height = (data.visitors.week_4 / maxW * 100) + "%";
-
-      // Update Page List
       const pageList = document.getElementById("pageResults");
       pageList.innerHTML = "";
       
       let total = 0;
       data.pages.sort((a,b) => b.score - a.score).forEach(p => {
           total += p.score;
-          const row = `
+          pageList.insertAdjacentHTML("beforeend", `
             <div class="flex justify-between items-center group">
-                <div class="w-full mr-4">
+                <div class="w-full">
                     <div class="flex justify-between text-xs mb-1">
-                        <span class="text-zinc-400 truncate w-40">${p.url}</span>
+                        <span class="text-zinc-400 truncate w-40 font-mono">${p.url}</span>
                         <span class="font-bold">${p.score.toLocaleString()}</span>
                     </div>
                     <div class="h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
                         <div class="h-full bg-blue-600" style="width: ${Math.min((p.score/1000)*100, 100)}%"></div>
                     </div>
                 </div>
-            </div>`;
-          pageList.insertAdjacentHTML("beforeend", row);
+            </div>`);
       });
       document.getElementById('totalScore').innerText = total.toLocaleString();
 
-      // Chart Update
       const ctx = document.getElementById('engagementChart').getContext('2d');
       if (engagementChart) engagementChart.destroy();
       engagementChart = new Chart(ctx, {
@@ -121,15 +95,25 @@
               datasets: [{
                   data: data.pages.slice(0,5).map(p => p.score),
                   backgroundColor: ['#3b82f6', '#1d4ed8', '#1e3a8a', '#172554', '#0f172a'],
-                  borderWidth: 0,
-                  hoverOffset: 10
+                  borderWidth: 0
               }]
           },
           options: { plugins: { legend: { display: false } }, cutout: '80%' }
       });
     }
 
-    document.addEventListener("DOMContentLoaded", loadData);
+    // Passcode Security
+    function checkAccess() {
+        const userCode = prompt("Enter Fair Discovery Access Code:");
+        if (userCode !== ACCESS_CODE) {
+            alert("Unauthorized");
+            window.location.href = "https://fairdiscovery.org";
+        } else {
+            document.body.style.display = "block";
+            loadData();
+        }
+    }
+    document.addEventListener("DOMContentLoaded", checkAccess);
   </script>
 </body>
 </html>
