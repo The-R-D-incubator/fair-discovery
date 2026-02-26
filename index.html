@@ -3,106 +3,142 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Engineered Integrity</title>
-  
+  <title>Fair Discovery | Forge Vertical Ecosystem</title>
   <link rel="icon" type="image/png" href="logo.png">
-
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
     
-    .grid-bg {
-      background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-    .neon-border { border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
-    .neon-border:hover { border-color: #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); }
+    .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
     
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Neon Border Glow Animation */
+    .neon-card { 
+        position: relative;
+        background: #000;
+        border: 1px solid rgba(255,255,255,0.08); 
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow: hidden;
     }
-    .animate-fade { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+    .neon-card:hover { 
+        border-color: rgba(59, 130, 246, 0.5); 
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
+        transform: translateY(-5px);
+    }
+
+    /* Logic Animations (The "Imagery") */
+    .scan-line {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+        animation: scan 3s linear infinite;
+    }
+    @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
+
+    .pulse-node {
+        width: 100px; height: 100px;
+        border: 1px solid #3b82f6;
+        border-radius: 50%;
+        animation: pulse 2s ease-out infinite;
+        position: absolute;
+    }
+    @keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+
+    .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
-<body class="grid-bg min-h-screen">
+<body class="grid-bg">
 
-  <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
+  <nav class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center sticky top-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
     <div class="flex items-center gap-4">
-      <img src="logo.png" alt="Fair Discovery Logo" class="h-10 w-auto">
-      <span class="font-bold tracking-tighter text-xl uppercase italic">Fair Discovery</span>
+      <img src="logo.png" alt="Fair Discovery Logo" class="h-8 w-auto">
+      <span class="font-bold tracking-tighter text-lg uppercase italic">Fair Discovery</span>
     </div>
-    <a href="https://forgevertical.com" target="_blank" class="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition">
-        Forge Vertical Ecosystem
-    </a>
+    <a href="https://forgevertical.com" target="_blank" class="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600 hover:text-white transition">Forge Vertical</a>
   </nav>
 
   <main class="max-w-7xl mx-auto px-6 py-24">
     
-    <div class="max-w-4xl mb-32 animate-fade">
+    <div class="max-w-4xl mb-32 reveal-anim">
         <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
             Protecting Your <br><span class="text-blue-600">Business Online.</span>
         </h1>
-        <p class="text-zinc-400 text-xl font-light leading-relaxed max-w-2xl">
-            We engineer industrial-grade tools to secure digital growth. From ad-spend integrity to proactive hacker neutralization, our ecosystem is built for the global frontier.
+        <p class="text-zinc-500 text-xl font-light leading-relaxed">
+            Industrial integrity for the digital frontier. We build advanced protection nodes designed to secure your ad spend, creator profile, and personal assets.
         </p>
-        <div class="mt-10 flex flex-wrap gap-4">
-            <a href="mailto:jarrit@forgevertical.com" class="bg-white text-black px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">Acquisition Inquiry</a>
-            <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank" class="px-8 py-4 rounded-xl border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-zinc-800 transition">Get Aurora Repair</a>
-        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-32">
 
-      <div class="md:col-span-8 neon-border bg-zinc-900/20 p-12 rounded-[3rem] flex flex-col justify-between min-h-[450px] animate-fade" style="animation-delay: 0.2s;">
-        <div>
-          <div class="flex items-center gap-2 mb-8 text-blue-500">
-            <span class="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
-            <span class="text-[10px] font-bold uppercase tracking-widest">Active Protection: Ad-Guard</span>
+      <div class="md:col-span-8 neon-card p-12 rounded-[3rem] flex flex-col justify-between min-h-[500px] reveal-anim" style="animation-delay: 0.1s;">
+        <div class="scan-line"></div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-10">
+            <span class="px-3 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-bold uppercase rounded">Available Globally</span>
           </div>
-          <h2 class="text-4xl font-bold tracking-tighter mb-4 italic">AD-GUARD & SOURCE TRACKER</h2>
-          <p class="text-zinc-500 max-w-md leading-relaxed">
-              Stop overspending on bot clicks. Verify human engagement across YouTube, TikTok, and Google Ads before your tracking pixels fire.
+          <h2 class="text-5xl font-black tracking-tighter mb-4 italic uppercase">AD-GUARD & SOURCE TRACKER</h2>
+          <p class="text-zinc-500 max-w-sm leading-relaxed mb-8">
+              Verify human engagement across YouTube, TikTok, and Google Ads. Stop paying for bot clicks and secure your actual ad spend. [cite: 5]
           </p>
         </div>
-        <div class="flex flex-wrap gap-4 mt-8">
-            <a href="/fair-discovery/toolkit.zip" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-blue-500 shadow-lg shadow-blue-900/20">30-Day Free Trial</a>
-            <a href="/pay" class="px-8 py-4 rounded-xl border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">Lifetime Access (R1499)</a>
+        <div class="flex flex-wrap gap-4 relative z-10">
+            <a href="/fair-discovery/toolkit.zip" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-blue-500">30-Day Free Trial</a>
+            <a href="/pay" class="px-8 py-4 rounded-xl border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">Lifetime Access</a>
         </div>
       </div>
 
-      <div class="md:col-span-4 neon-border bg-zinc-900/10 p-10 rounded-[3rem] flex flex-col justify-between animate-fade" style="animation-delay: 0.4s;">
-        <div>
-          <span class="text-[9px] font-bold text-zinc-600 uppercase tracking-widest border border-zinc-800 px-2 py-1 rounded">In Testing</span>
-          <h3 class="text-2xl font-bold tracking-tighter mt-6 mb-4 uppercase">Secure Ur Phone</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed">Advanced anti-theft system designed to prevent unauthorized control and secure personal data during physical theft events.</p>
-        </div>
-        <a href="https://www.secureurphone.com/" class="text-zinc-700 text-[10px] font-bold uppercase tracking-widest mt-6">Visit secureurphone.com</a>
-      </div>
-
-      <div class="md:col-span-6 neon-border bg-zinc-900/10 p-10 rounded-[3rem] flex flex-col justify-between">
-        <div>
-          <span class="text-[9px] font-bold text-zinc-600 uppercase tracking-widest border border-zinc-800 px-2 py-1 rounded">Under Development</span>
-          <h3 class="text-2xl font-bold tracking-tighter mt-6 mb-4 uppercase italic">Creator Protect</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed">Honeypot-based counter-intelligence for content creators. Neutralize profile hijacking by leading attackers into automated loops of fabricated system data.</p>
+      <div class="md:col-span-4 neon-card p-10 rounded-[3rem] flex flex-col justify-between reveal-anim" style="animation-delay: 0.2s;">
+        <div class="flex justify-center items-center h-24 opacity-20"><div class="pulse-node"></div></div>
+        <div class="relative z-10">
+          <span class="px-3 py-1 bg-green-500/10 text-green-500 text-[9px] font-bold uppercase rounded">Live Node</span>
+          <h3 class="text-3xl font-black tracking-tighter mt-6 mb-4 italic uppercase">AURORA REPAIR</h3>
+          <p class="text-zinc-600 text-sm leading-relaxed mb-6">Automated car repair estimation app. Built for international scalability. [cite: 5]</p>
+          <a href="https://play.google.com/store/apps/details?id=com.aurora.repair" target="_blank" class="text-blue-500 text-xs font-bold uppercase tracking-widest">Get it on Google Play →</a>
         </div>
       </div>
 
-      <div class="md:col-span-6 neon-border bg-zinc-900/10 p-10 rounded-[3rem] flex flex-col justify-between">
-        <div>
-          <span class="text-[9px] font-bold text-zinc-600 uppercase tracking-widest border border-zinc-800 px-2 py-1 rounded">Research Phase</span>
-          <h3 class="text-2xl font-bold tracking-tighter mt-6 mb-4 uppercase italic">AI-VPN</h3>
-          <p class="text-zinc-500 text-sm leading-relaxed">Autonomous network shielding. Mutating encryption pathing that adapts in real-time to active threat discovery signatures.</p>
+      <div class="md:col-span-6 neon-card p-10 rounded-[3rem] flex flex-col justify-between opacity-80 reveal-anim" style="animation-delay: 0.3s;">
+        <div class="relative z-10">
+          <span class="px-3 py-1 bg-zinc-800 text-zinc-500 text-[9px] font-bold uppercase rounded">Under Development</span>
+          <h3 class="text-3xl font-black tracking-tighter mt-6 mb-4 italic uppercase">CREATOR PROTECT</h3>
+          <p class="text-zinc-600 text-sm leading-relaxed">
+              A high-level decoy system. Lure attackers into fabricated honeypots to neutralize hijack attempts on your social profiles. [cite: 5]
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-6 neon-card p-10 rounded-[3rem] flex flex-col justify-between opacity-80 reveal-anim" style="animation-delay: 0.4s;">
+        <div class="relative z-10">
+          <span class="px-3 py-1 bg-zinc-800 text-zinc-500 text-[9px] font-bold uppercase rounded">In Testing</span>
+          <h3 class="text-3xl font-black tracking-tighter mt-6 mb-4 italic uppercase">SECURE UR PHONE</h3>
+          <p class="text-zinc-600 text-sm leading-relaxed">
+              Active anti-theft node. Prevents unauthorized device takeover and secures sensitive data during a loss event. [cite: 5]
+          </p>
         </div>
       </div>
 
     </div>
+
+    <div class="mt-40 border-t border-white/5 pt-20 pb-32 reveal-anim">
+        <div class="max-w-3xl">
+            <h2 class="text-4xl font-black tracking-tighter mb-8 italic uppercase">Code Acquisition</h2>
+            <p class="text-zinc-500 text-lg leading-relaxed mb-10 font-light italic">
+                While all Forge Vertical nodes are available to the global public, the **Full Intellectual Property Rights** and source code for any tool in our ecosystem are available for acquisition. 
+            </p>
+            <a href="mailto:jarrit@forgevertical.com" class="inline-block bg-white text-black px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-blue-600 hover:text-white transition-all">
+                Inquire for Rights Acquisition
+            </a>
+            <p class="mt-6 text-[10px] text-zinc-700 font-bold uppercase tracking-widest">Inquiries: jarrit@forgevertical.com</p>
+        </div>
+    </div>
+
   </main>
 
-  <footer class="py-20 border-t border-white/5 text-center">
+  <footer class="py-10 border-t border-white/5 text-center">
     <img src="logo.png" alt="Fair Discovery" class="h-6 mx-auto mb-6 opacity-30">
-    <p class="text-zinc-800 text-[10px] font-bold uppercase tracking-[0.5em]">© 2026 Fair Discovery // Product of Forge Vertical</p>
+    <p class="text-zinc-800 text-[10px] font-black uppercase tracking-[0.4em]">© 2026 Fair Discovery // Product of Forge Vertical</p>
   </footer>
 
 </body>
