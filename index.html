@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Forensic Tool Repository</title>
+  <title>Fair Discovery | Industry Utility Hub</title>
   <link rel="icon" type="image/png" href="logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -11,14 +11,14 @@
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
     .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
     
-    /* New Color Theme: Cyber Lime & Slate */
-    .theme-accent { color: #bef264; } /* Lime-300 */
+    /* Toxic Green / Cyber Lime Palette */
+    .theme-accent { color: #bef264; }
     .bg-theme-accent { background-color: #bef264; }
     .border-theme-accent { border-color: #bef264; }
 
     .neon-card { 
         position: relative;
-        background: rgba(10, 10, 10, 0.8);
+        background: rgba(10, 10, 10, 0.9);
         border: 1px solid rgba(255,255,255,0.05); 
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         display: flex;
@@ -27,63 +27,63 @@
     }
     .neon-card:hover { 
         border-color: #bef264; 
-        box-shadow: 0 0 30px rgba(190, 242, 100, 0.05);
+        box-shadow: 0 0 40px rgba(190, 242, 100, 0.03);
         transform: translateY(-5px);
     }
-    .scan-line {
-        position: absolute; width: 100%; height: 2px;
-        background: linear-gradient(90deg, transparent, #bef264, transparent);
-        animation: scan 4s linear infinite;
-    }
-    @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
+
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
+    /* Custom Scrollbar for the Cyber-look */
+    ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: #bef264; }
   </style>
 </head>
 <body class="grid-bg min-h-screen">
 
-  <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/80 backdrop-blur-2xl border-b border-white/5">
+  <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/90 backdrop-blur-3xl border-b border-white/5">
     <div class="flex items-center gap-4">
       <img src="logo.png" alt="Logo" class="h-6 w-auto">
       <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
     </div>
-    <div class="hidden md:flex gap-8 items-center">
-        <a href="#store" class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:theme-accent transition">Repository</a>
-        <a href="https://forgevertical.com" target="_blank" class="text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition">Forge Vertical</a>
+    <div class="flex gap-8 items-center">
+        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] theme-accent hover:text-white transition">Support</a>
+        <a href="https://forgevertical.com" target="_blank" class="hidden md:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600 hover:text-white transition">Forge Vertical</a>
     </div>
   </nav>
 
-  <main class="max-w-7xl mx-auto px-6 pt-20 pb-32">
-    <div class="max-w-4xl mb-16 reveal-anim">
-        <h1 class="text-7xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-8 uppercase italic">
-            Direct <span class="theme-accent">Access.</span><br>Ethical Costs.
+  <main class="max-w-7xl mx-auto px-6 pt-24 pb-32">
+    <div class="max-w-4xl mb-20 reveal-anim">
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-10 uppercase italic">
+            Fair Discovery<br><span class="theme-accent text-5xl md:text-7xl">Tools Forged for your Industry.</span>
         </h1>
-        <p class="text-zinc-400 text-xl font-light leading-relaxed max-w-2xl">
-            Professional forensic nodes designed to streamline your security workflow. Distributed directly to bypass marketplace markups.
-        </p>
+        <div class="space-y-6">
+            <p class="text-zinc-300 text-2xl font-light leading-relaxed max-w-3xl">
+                At Fair Discovery, we create tools for a variety of industries, making work easier for thousands of developers and creators.
+            </p>
+            <p class="text-zinc-500 text-lg font-light leading-relaxed max-w-2xl">
+                Tools that solve problems in various arenas, built to be affordable for small to medium-sized businesses.
+            </p>
+        </div>
     </div>
 
-    <div class="mb-12 flex flex-col md:flex-row gap-4 items-center justify-between sticky top-[89px] z-40 bg-black/40 py-4 backdrop-blur-md">
+    <div class="mb-16 flex flex-col md:flex-row gap-6 items-center justify-between sticky top-[95px] z-40 bg-black/60 py-6 backdrop-blur-xl border-y border-white/5 px-4 rounded-3xl">
         <div class="relative w-full md:w-96">
-            <input type="text" id="toolSearch" onkeyup="filterTools()" placeholder="Search keywords (e.g. Bot, OSINT, AI)..." 
+            <input type="text" id="toolSearch" onkeyup="filterTools()" placeholder="Search Repository..." 
                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-theme-accent transition text-zinc-300">
         </div>
         <div class="flex flex-wrap gap-2 justify-center">
-            <button onclick="setCategory('All')" class="cat-btn px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition bg-white/5">All</button>
-            <button onclick="setCategory('Security')" class="cat-btn px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Security</button>
-            <button onclick="setCategory('Forensic')" class="cat-btn px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Forensic</button>
-            <button onclick="setCategory('AI')" class="cat-btn px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">AI</button>
-            <button onclick="setCategory('Business')" class="cat-btn px-5 py-2 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Business</button>
+            <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-theme-accent text-theme-accent text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
+            <button onclick="setCategory('Security')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Security</button>
+            <button onclick="setCategory('Forensic')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Forensic</button>
+            <button onclick="setCategory('AI')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">AI</button>
+            <button onclick="setCategory('Business')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Business</button>
         </div>
     </div>
 
-    <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         </div>
   </main>
 
@@ -96,27 +96,26 @@
             const response = await fetch('products.json');
             allProducts = await response.json();
             renderStore(allProducts);
-        } catch (e) { console.error("Load failed", e); }
+        } catch (e) { console.error("Repository load failed", e); }
     }
 
     function renderStore(products) {
         const grid = document.getElementById('store-grid');
         grid.innerHTML = products.map((tool, index) => `
-            <div class="neon-card p-10 rounded-[3rem] min-h-[480px] reveal-anim" style="animation-delay: ${index * 0.05}s">
-                ${tool.featured ? '<div class="scan-line"></div>' : ''}
+            <div class="neon-card p-12 rounded-[3.5rem] min-h-[500px] reveal-anim" style="animation-delay: ${index * 0.05}s">
                 <div class="relative z-10">
-                    <div class="flex justify-between items-start mb-10">
-                        <img src="${tool.logo}" class="h-10 w-10 object-contain opacity-50" alt="Logo">
-                        <span class="theme-accent font-mono text-2xl font-bold tracking-tighter">$${tool.price}</span>
+                    <div class="flex justify-between items-start mb-12">
+                        <img src="${tool.logo}" class="h-10 w-10 object-contain opacity-40" alt="Logo">
+                        <span class="theme-accent font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>
                     </div>
-                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-tight">${tool.name}</h3>
-                    <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
-                    <div class="flex flex-wrap gap-2 mb-10">
-                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-500 text-[9px] font-bold uppercase rounded-md tracking-tighter">${tag}</span>`).join('')}
+                    <h3 class="text-4xl font-black tracking-tighter mb-6 italic uppercase leading-[0.9]">${tool.name}</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed mb-10 font-light">${tool.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-12">
+                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-600 text-[9px] font-bold uppercase rounded-md tracking-widest">${tag}</span>`).join('')}
                     </div>
                 </div>
                 <div class="relative z-10 mt-auto">
-                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-theme-accent/30 text-theme-accent py-5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-theme-accent hover:text-black transition-all duration-300">
+                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-theme-accent text-theme-accent py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:bg-theme-accent hover:text-black transition-all duration-500">
                         Acquire Node
                     </a>
                 </div>
@@ -136,10 +135,12 @@
 
     function setCategory(cat) {
         currentCategory = cat;
-        // Visual update for buttons
         document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.classList.toggle('border-theme-accent', btn.innerText === cat.toUpperCase());
-            btn.classList.toggle('text-theme-accent', btn.innerText === cat.toUpperCase());
+            const isMatch = btn.innerText === cat.toUpperCase();
+            btn.classList.toggle('border-theme-accent', isMatch);
+            btn.classList.toggle('text-theme-accent', isMatch);
+            btn.classList.toggle('border-white/10', !isMatch);
+            btn.classList.toggle('text-zinc-500', !isMatch);
         });
         filterTools();
     }
