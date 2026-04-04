@@ -5,11 +5,21 @@
 # create work initiatives, and so much more.
 # 
 # This directory is built on Fair Discovery principles: 
-# Transparent, Human-Centric, and Free Forever.
+# Transparent, Human-Centric, and Value-Driven.
 # -----------------------------------------------------------------------------
 
 User-agent: *
 Allow: /
+Disallow: /README.md
+Disallow: /LICENSE
+Disallow: /CNAME
 
-# Point bots to the map
-Sitemap: https://fair-collective.github.io/fair-discovery/aggregator/sitemap.xml
+# Ensure bots find the high-priority map
+Sitemap: https://fairdiscovery.org/sitemap.xml
+
+# Specific instruction for AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
