@@ -2,6 +2,7 @@
   {
     "id": "adguard",
     "name": "Ad-Guard Enterprise",
+    "category": "Security",
     "description": "Industrial-grade bot detection. Verify human engagement across YouTube, TikTok, and Google Ads at the source code level.",
     "price": "100",
     "logo": "logo.png",
