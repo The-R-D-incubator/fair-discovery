@@ -2,21 +2,12 @@
   {
     "id": "adguard",
     "name": "Ad-Guard Enterprise",
-    "description": "Full source code for the bot-detection engine. Verify human engagement across all platforms.",
+    "description": "Industrial-grade bot detection. Verify human engagement across YouTube, TikTok, and Google Ads at the source code level.",
     "price": "100",
     "logo": "logo.png",
-    "tags": ["Security", "JS/PHP", "Forensics"],
+    "tags": ["Security", "Forensics", "Direct-Access"],
     "featured": true,
-    "paypal_url": "YOUR_PAYPAL_ME_LINK_OR_BUTTON_URL"
-  },
-  {
-    "id": "osint-knife",
-    "name": "OSINT Swiss Knife",
-    "description": "Automated digital footprinting suite. Generate subject dossiers in minutes.",
-    "price": "149",
-    "logo": "logo.png",
-    "tags": ["Python", "OSINT", "Automation"],
-    "featured": false,
-    "paypal_url": "YOUR_PAYPAL_URL"
+    "download_url": "https://u.pcloud.link/publink/show?code=XZHrJ65ZABTUo831NT0qa30qdfvDhVqGXgHV",
+    "paypal_url": "https://www.paypal.com/ncp/payment/ST3RZU4J4VCF6"
   }
 ]
