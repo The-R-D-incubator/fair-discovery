@@ -2,17 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Acquisition Complete</title>
+    <title>Acquisition Complete | Fair Discovery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style> body { background: #000; color: #fff; font-family: 'Geist', sans-serif; } </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
-    <div class="text-center p-12 border border-white/10 rounded-[3rem] max-w-md">
-        <h1 class="text-4xl font-black italic uppercase mb-6 tracking-tighter">Acquisition <span class="text-blue-500">Confirmed.</span></h1>
-        <p class="text-zinc-500 mb-10">Thank you for your purchase. Your forensic tool is ready for deployment.</p>
-        <a href="YOUR_PCLOUD_DOWNLOAD_LINK" class="bg-white text-black px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-600 hover:text-white transition-all">
-            Download Source (ZIP)
-        </a>
-    </div>
+<body class="flex items-center justify-center min-h-screen bg-black text-white">
+    <div id="download-container" class="text-center p-12 border border-white/10 rounded-[3rem] bg-zinc-950 max-w-lg opacity-0 transition-opacity duration-500">
+        </div>
+
+    <script>
+        async function handleSuccess() {
+            // 1. Get the 'id' from the URL (e.g., success.html?id=adguard)
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            const container = document.getElementById('download-container');
+
+            if (!productId) {
+                container.innerHTML = `<h1 class="text-red-500">Error: No Product ID Found</h1><p>Please contact support.</p>`;
+                container.style.opacity = 1;
+                return;
+            }
+
+            try {
+                // 2. Fetch the same products.json your store uses
+                const response = await fetch('products.json');
+                const products = await response.json();
+                
+                // 3. Find the specific tool that matches the ID
+                const tool = products.find(p => p.id === productId);
+
+                if (tool) {
+                    container.innerHTML = `
+                        <div class="inline-block px-4 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold uppercase mb-6">Payment Verified</div>
+                        <h1 class="text-4xl font-black italic uppercase mb-6 tracking-tighter">${tool.name} <span class="text-blue-500">Acquired.</span></h1>
+                        <p class="text-zinc-500 mb-10 leading-relaxed">Your transaction for ${tool.name} was successful. Access your source files below.</p>
+                        <a href="${tool.download_url}" class="inline-block bg-white text-black px-12 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-blue-600 hover:text-white transition-all">
+                            Download ${tool.id}.zip
+                        </a>
+                    `;
+                } else {
+                    container.innerHTML = `<h1 class="text-red-500">Product Not Found</h1>`;
+                }
+            } catch (e) {
+                container.innerHTML = `<h1>System Error</h1>`;
+            }
+            container.style.opacity = 1;
+        }
+        window.onload = handleSuccess;
+    </script>
 </body>
 </html>
