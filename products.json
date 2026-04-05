@@ -58,5 +58,17 @@
     "featured": true,
     "download_url": "https://u.pcloud.link/publink/show?code=XZ4Up65Zu9yDG8xk8n7Gt1ijQolsUuiVlwK7",
     "paypal_url": "https://www.paypal.com/ncp/payment/J3L72ET3MEU7S"
+  },
+  {
+    "id": "aivpn-node",
+    "name": "AIVPN Concept Node",
+    "category": "Security",
+    "description": "Foundational concept code for an ethical, AI-driven VPN architecture. Includes the 'Content Scout' logic, server rotation, and UI blueprint.",
+    "price": "50",
+    "logo": "logo.png",
+    "tags": ["VPN", "AI", "Blueprint"],
+    "featured": false,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZLIp65ZzM0cu4tw9VfwpDn1nAoibQjS7IoV",
+    "paypal_url": "https://www.paypal.com/ncp/payment/S6RGTCUWDLA54"
   }
 ]
