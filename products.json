@@ -15,12 +15,24 @@
     "id": "osint-knife",
     "name": "OSINT Swiss Knife",
     "category": "Forensic",
-    "description": "A collection of high-performance Python nodes for automated digital footprinting. Rapid subject reconnaissance and data correlation suite.",
+    "description": "Automated digital footprinting suite. Modular Python nodes for rapid subject reconnaissance and data correlation.",
     "price": "149",
     "logo": "logo.png",
     "tags": ["Python", "OSINT", "Forensics"],
     "featured": false,
-    "download_url": "https://u.pcloud.link/publink/show?code=XZxsp65ZaO6Tc2LBeSFjf2jIV7D5BulTmv1y",
-    "paypal_url": "https://www.paypal.com/ncp/payment/YSEFQMYWZXZ7J"
+    "download_url": "https://u.pcloud.link/publink/show?code=XZpLJ65ZABTUo831NT0qa30qdfvDhVqGXgHV",
+    "paypal_url": "https://www.paypal.com/ncp/payment/9Z5WZU4J4VCF7"
+  },
+  {
+    "id": "stealth-bypass",
+    "name": "Stealth Access Audit",
+    "category": "Security",
+    "description": "Forensic access audit node. Test content-gate vulnerabilities via header emulation and crawler-profile injection.",
+    "price": "199",
+    "logo": "logo.png",
+    "tags": ["Security", "Access-Audit", "Automation"],
+    "featured": false,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ5Ep65ZwQBYVPD3m5mH2YcjytVkxQK7aTQ7",
+    "paypal_url": "https://www.paypal.com/ncp/payment/NWZ5DJH6BMXML"
   }
 ]
