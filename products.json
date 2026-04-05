@@ -46,5 +46,17 @@
     "featured": false,
     "download_url": "https://u.pcloud.link/publink/show?code=XZ7Op65Z9EPYgjbvj7pmojjBmMFXSVRA7XOX",
     "paypal_url": "https://www.paypal.com/ncp/payment/CMW8DRG2K4BVG"
+  },
+  {
+    "id": "hono-guardian",
+    "name": "Hono Guardian Node",
+    "category": "Security",
+    "description": "Edge-native account protection. A Hono-based security proxy with optional AI threat-analysis to guard high-value social media assets.",
+    "price": "249",
+    "logo": "logo.png",
+    "tags": ["Hono.js", "Security", "Edge-Computing"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ4Up65Zu9yDG8xk8n7Gt1ijQolsUuiVlwK7",
+    "paypal_url": "https://www.paypal.com/ncp/payment/J3L72ET3MEU7S"
   }
 ]
