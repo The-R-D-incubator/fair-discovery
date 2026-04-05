@@ -10,5 +10,17 @@
     "featured": true,
     "download_url": "https://u.pcloud.link/publink/show?code=XZHrJ65ZABTUo831NT0qa30qdfvDhVqGXgHV",
     "paypal_url": "https://www.paypal.com/ncp/payment/ST3RZU4J4VCF6"
+  },
+  {
+    "id": "osint-knife",
+    "name": "OSINT Swiss Knife",
+    "category": "Forensic",
+    "description": "A collection of high-performance Python nodes for automated digital footprinting. Rapid subject reconnaissance and data correlation suite.",
+    "price": "149",
+    "logo": "logo.png",
+    "tags": ["Python", "OSINT", "Forensics"],
+    "featured": false,
+    "download_url": "PASTE_YOUR_NEW_PCLOUD_LINK_HERE",
+    "paypal_url": "PASTE_YOUR_NEW_PAYPAL_LINK_HERE"
   }
 ]
