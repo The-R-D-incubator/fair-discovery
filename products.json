@@ -1,5 +1,42 @@
 [
   {
+    "id": "aurora-ai-ip",
+    "name": "Aurora AI (Full Ownership)",
+    "category": "Acquisition",
+    "description": "Full IP rights for Aurora AI: Forensic Vehicle Intelligence. As seen on IndieMaker & SideProjector. High-fidelity generative engine ready for enterprise integration. View live demo via secure GCP instance.",
+    "price": "Open to Offers",
+    "logo": "logo.png",
+    "tags": ["AI", "Forensics", "IP-Acquisition"],
+    "featured": true,
+    "demo_url": "https://aurora-demo.a.run.app", 
+    "download_url": "https://www.sideprojectors.com/project/76989/aurora-ai",
+    "paypal_url": "mailto:jarrit@forgevertical.com?subject=Direct%20Offer:%20Aurora%20AI%20Acquisition"
+  },
+  {
+    "id": "surfshark-partner",
+    "name": "Surfshark VPN",
+    "category": "Partner Infrastructure",
+    "description": "The recommended backbone for Fair Discovery security nodes. 256-bit AES encryption with multi-hop capability. Essential for ethical VPN architecture and secure forensic reconnaissance.",
+    "price": "Affiliate Offer",
+    "logo": "logo.png",
+    "tags": ["VPN", "Privacy", "Infrastructure"],
+    "featured": true,
+    "download_url": "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160",
+    "paypal_url": "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
+  },
+  {
+    "id": "hono-guardian",
+    "name": "Hono Guardian Node",
+    "category": "Security",
+    "description": "Edge-native account protection. A Hono-based security proxy with optional AI threat-analysis to guard high-value social media assets.",
+    "price": "249",
+    "logo": "logo.png",
+    "tags": ["Hono.js", "Security", "Edge-Computing"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ4Up65Zu9yDG8xk8n7Gt1ijQolsUuiVlwK7",
+    "paypal_url": "https://www.paypal.com/ncp/payment/J3L72ET3MEU7S"
+  },
+  {
     "id": "adguard",
     "name": "Ad-Guard Enterprise",
     "category": "Security",
@@ -10,18 +47,6 @@
     "featured": true,
     "download_url": "https://u.pcloud.link/publink/show?code=XZHrJ65ZABTUo831NT0qa30qdfvDhVqGXgHV",
     "paypal_url": "https://www.paypal.com/ncp/payment/ST3RZU4J4VCF6"
-  },
-  {
-    "id": "osint-knife",
-    "name": "OSINT Swiss Knife",
-    "category": "Forensic",
-    "description": "Automated digital footprinting suite. Modular Python nodes for rapid subject reconnaissance and data correlation.",
-    "price": "149",
-    "logo": "logo.png",
-    "tags": ["Python", "OSINT", "Forensics"],
-    "featured": false,
-    "download_url": "https://u.pcloud.link/publink/show?code=XZpLJ65ZABTUo831NT0qa30qdfvDhVqGXgHV",
-    "paypal_url": "https://www.paypal.com/ncp/payment/9Z5WZU4J4VCF7"
   },
   {
     "id": "stealth-bypass",
@@ -36,6 +61,18 @@
     "paypal_url": "https://www.paypal.com/ncp/payment/NWZ5DJH6BMXML"
   },
   {
+    "id": "osint-knife",
+    "name": "OSINT Swiss Knife",
+    "category": "Forensic",
+    "description": "Automated digital footprinting suite. Modular Python nodes for rapid subject reconnaissance and data correlation.",
+    "price": "149",
+    "logo": "logo.png",
+    "tags": ["Python", "OSINT", "Forensics"],
+    "featured": false,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZpLJ65ZABTUo831NT0qa30qdfvDhVqGXgHV",
+    "paypal_url": "https://www.paypal.com/ncp/payment/9Z5WZU4J4VCF7"
+  },
+  {
     "id": "ai-sentinel",
     "name": "AI Content Sentinel",
     "category": "AI",
@@ -46,18 +83,6 @@
     "featured": false,
     "download_url": "https://u.pcloud.link/publink/show?code=XZ7Op65Z9EPYgjbvj7pmojjBmMFXSVRA7XOX",
     "paypal_url": "https://www.paypal.com/ncp/payment/CMW8DRG2K4BVG"
-  },
-  {
-    "id": "hono-guardian",
-    "name": "Hono Guardian Node",
-    "category": "Security",
-    "description": "Edge-native account protection. A Hono-based security proxy with optional AI threat-analysis to guard high-value social media assets.",
-    "price": "249",
-    "logo": "logo.png",
-    "tags": ["Hono.js", "Security", "Edge-Computing"],
-    "featured": true,
-    "download_url": "https://u.pcloud.link/publink/show?code=XZ4Up65Zu9yDG8xk8n7Gt1ijQolsUuiVlwK7",
-    "paypal_url": "https://www.paypal.com/ncp/payment/J3L72ET3MEU7S"
   },
   {
     "id": "aivpn-node",
