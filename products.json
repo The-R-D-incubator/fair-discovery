@@ -34,5 +34,17 @@
     "featured": false,
     "download_url": "https://u.pcloud.link/publink/show?code=XZ5Ep65ZwQBYVPD3m5mH2YcjytVkxQK7aTQ7",
     "paypal_url": "https://www.paypal.com/ncp/payment/NWZ5DJH6BMXML"
+  },
+  {
+    "id": "ai-sentinel",
+    "name": "AI Content Sentinel",
+    "category": "AI",
+    "description": "Forensic-grade content auditor. Scan assets for AI-signature patterns and burstiness markers to ensure search engine compliance.",
+    "price": "129",
+    "logo": "logo.png",
+    "tags": ["AI", "SEO", "Business-Utility"],
+    "featured": false,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ7Op65Z9EPYgjbvj7pmojjBmMFXSVRA7XOX",
+    "paypal_url": "https://www.paypal.com/ncp/payment/CMW8DRG2K4BVG"
   }
 ]
