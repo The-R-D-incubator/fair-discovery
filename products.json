@@ -1,5 +1,18 @@
 [
   {
+    "id": "shadow-merge-tool",
+    "name": "Shadow Merge: Industrial File Hider",
+    "category": "Security",
+    "description": "Raw binary file-hiding utility. Hide sensitive folders or files inside standard images locally. No cloud, no AI—just pure logic. Includes standalone HTML UI for browser-based forging.",
+    "price": "10",
+    "popularity": 110,
+    "image": "merge.jpg",
+    "tags": ["Security", "Privacy", "Zero-AI", "Utility"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZOiL65Z2pRzR6qtwq4VfmVFBzN7Sf9BGsmy",
+    "paypal_url": "https://www.paypal.com/ncp/payment/L9WRNUKLDSGWU"
+  },
+  {
     "id": "vertical-web-builder-shell",
     "name": "Vertical Web Builder: Industrial Shell",
     "category": "Development",
