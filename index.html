@@ -11,70 +11,51 @@
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
     .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
     
-    /* Toxic Green / Cyber Lime Palette */
     .theme-accent { color: #bef264; }
     .bg-theme-accent { background-color: #bef264; }
-    .border-theme-accent { border-color: #bef264; }
-
+    
     .neon-card { 
         position: relative;
-        background: rgba(10, 10, 10, 0.9);
+        background: rgba(10, 10, 10, 0.95);
         border: 1px solid rgba(255,255,255,0.05); 
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        overflow: hidden;
     }
+    
+    /* Image Header for Cards */
+    .card-img-header {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        border-bottom: 1px solid rgba(190, 242, 100, 0.1);
+    }
+    .card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent, rgba(10,10,10,1));
+    }
+
     .neon-card:hover { 
         border-color: #bef264; 
-        box-shadow: 0 0 40px rgba(190, 242, 100, 0.03);
+        box-shadow: 0 0 40px rgba(190, 242, 100, 0.05);
         transform: translateY(-5px);
     }
+
+    .free-tag { color: #39ff14; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
 
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Custom Scrollbar for the Cyber-look */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: #bef264; }
   </style>
 
-<meta name="title" content="Fair Discovery | Professional Tools Forged for Industry">
-<meta name="description" content="At Fair Discovery, we provide affordable, high-performance tools for developers and creators. Browse our repository of Security, Forensic, and AI nodes built for small to medium businesses.">
-<meta name="keywords" content="Ad-Guard, Forensic Tools, OSINT, Developer Utilities, Forge Vertical, Bot Detection, AI Tools">
-<meta name="robots" content="index, follow">
-<meta name="language" content="English">
-<meta name="author" content="Jarrit / Forge Vertical">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "SoftwareApplication",
-  "name": "Fair Discovery Tool Repository",
-  "operatingSystem": "Cross-platform",
-  "applicationCategory": "DeveloperApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "100.00",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Jarrit"
-  }
-}
-</script>
-
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://fairdiscovery.org/">
-<meta property="og:title" content="Fair Discovery | Tools Forged for Industry">
-<meta property="og:description" content="Solving complex problems with affordable, industrial-grade software. Browse the repository.">
-<meta property="og:image" content="https://fairdiscovery.org/logo.png">
-  
-</head>
+  </head>
 <body class="grid-bg min-h-screen">
 
   <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/90 backdrop-blur-3xl border-b border-white/5">
@@ -93,14 +74,9 @@
         <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-10 uppercase italic">
             Fair Discovery<br><span class="theme-accent text-5xl md:text-7xl">Tools Forged for your Industry.</span>
         </h1>
-        <div class="space-y-6">
-            <p class="text-zinc-300 text-2xl font-light leading-relaxed max-w-3xl">
-                At Fair Discovery, we create tools for a variety of industries, making work easier for thousands of developers and creators.
-            </p>
-            <p class="text-zinc-500 text-lg font-light leading-relaxed max-w-2xl">
-                Tools that solve problems in various arenas, built to be affordable for small to medium-sized businesses.
-            </p>
-        </div>
+        <p class="text-zinc-300 text-2xl font-light leading-relaxed max-w-3xl">
+            Sovereign logic and industrial-grade tools for the next generation of creators.
+        </p>
     </div>
 
     <div class="mb-16 flex flex-col md:flex-row gap-6 items-center justify-between sticky top-[95px] z-40 bg-black/60 py-6 backdrop-blur-xl border-y border-white/5 px-4 rounded-3xl">
@@ -111,14 +87,13 @@
         <div class="flex flex-wrap gap-2 justify-center">
             <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-theme-accent text-theme-accent text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
             <button onclick="setCategory('Security')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Security</button>
-            <button onclick="setCategory('Forensic')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Forensic</button>
+            <button onclick="setCategory('Free Zone')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Free Zone</button>
             <button onclick="setCategory('AI')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">AI</button>
             <button onclick="setCategory('Business')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Business</button>
         </div>
     </div>
 
-    <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        </div>
+    <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </main>
 
   <script>
@@ -128,33 +103,47 @@
     async function loadStore() {
         try {
             const response = await fetch('products.json');
-            allProducts = await response.json();
+            const data = await response.json();
+            
+            // Sort by popularity (Highest first) as requested
+            allProducts = data.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+            
             renderStore(allProducts);
         } catch (e) { console.error("Repository load failed", e); }
     }
 
     function renderStore(products) {
         const grid = document.getElementById('store-grid');
-        grid.innerHTML = products.map((tool, index) => `
-            <div class="neon-card p-12 rounded-[3.5rem] min-h-[500px] reveal-anim" style="animation-delay: ${index * 0.05}s">
-                <div class="relative z-10">
-                    <div class="flex justify-between items-start mb-12">
-                        <img src="${tool.logo}" class="h-10 w-10 object-contain opacity-40" alt="Logo">
-                        <span class="theme-accent font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>
-                    </div>
-                    <h3 class="text-4xl font-black tracking-tighter mb-6 italic uppercase leading-[0.9]">${tool.name}</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed mb-10 font-light">${tool.description}</p>
-                    <div class="flex flex-wrap gap-2 mb-12">
-                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-600 text-[9px] font-bold uppercase rounded-md tracking-widest">${tag}</span>`).join('')}
-                    </div>
+        grid.innerHTML = products.map((tool, index) => {
+            const isFree = tool.price.toUpperCase() === 'FREE';
+            const priceDisplay = isFree ? `<span class="free-tag font-mono text-3xl font-bold italic tracking-tighter">FREE</span>` : 
+                                          `<span class="theme-accent font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>`;
+            
+            return `
+            <div class="neon-card rounded-[2.5rem] reveal-anim" style="animation-delay: ${index * 0.05}s">
+                <div class="card-img-header" style="background-image: url('img/${tool.image}')">
+                    <div class="card-overlay"></div>
                 </div>
-                <div class="relative z-10 mt-auto">
-                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-theme-accent text-theme-accent py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] hover:bg-theme-accent hover:text-black transition-all duration-500">
-                        Acquire Node
+
+                <div class="p-10 pt-0 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-8">
+                        <img src="${tool.logo}" class="h-8 w-8 object-contain opacity-40" alt="Logo">
+                        ${priceDisplay}
+                    </div>
+                    
+                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none">${tool.name}</h3>
+                    <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-10 mt-auto">
+                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-600 text-[8px] font-bold uppercase rounded-md tracking-widest">${tag}</span>`).join('')}
+                    </div>
+
+                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-theme-accent text-theme-accent py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-theme-accent hover:text-black transition-all duration-500">
+                        ${isFree ? 'Initialize Download' : 'Acquire Node'}
                     </a>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     function filterTools() {
@@ -173,6 +162,7 @@
             const isMatch = btn.innerText === cat.toUpperCase();
             btn.classList.toggle('border-theme-accent', isMatch);
             btn.classList.toggle('text-theme-accent', isMatch);
+            btn.classList.toggle('bg-white/5', isMatch);
             btn.classList.toggle('border-white/10', !isMatch);
             btn.classList.toggle('text-zinc-500', !isMatch);
         });
