@@ -1,5 +1,18 @@
 [
   {
+    "id": "global-forge-guard",
+    "name": "Global Forge-Guard: Forensic Link Auditor",
+    "category": "Security",
+    "description": "Industrial browser perimeter for freelancers. Real-time link auditing across Fiverr, LinkedIn, and social media. Features an automated global threat-sync with our community-driven forensic database. Stop phishing at the source.",
+    "price": "20",
+    "popularity": 120,
+    "image": "forge-gaurd.jpg",
+    "tags": ["Security", "Forensics", "SaaS-Lite", "Utility"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZRe465ZyC6xjwWBoqmxzKeBgd6Ubucrd5tk",
+    "paypal_url": "https://www.paypal.com/ncp/payment/VW2NURU4VEV9J"
+  },
+  {
     "id": "shadow-merge-tool",
     "name": "Shadow Merge: Industrial File Hider",
     "category": "Security",
@@ -48,7 +61,7 @@
     "image": "LargeTile.scale-100.png",
     "tags": ["AI", "Forensics", "IP-Acquisition"],
     "featured": true,
-    "demo_url": "https://www.aurora_repair.com", 
+    "demo_url": "https://www.aurora_repair.com",
     "download_url": "https://www.sideprojectors.com/project/76989/aurora-ai",
     "paypal_url": "mailto:jarrit@forgevertical.com?subject=Direct%20Offer:%20Aurora%20AI%20Acquisition"
   },
