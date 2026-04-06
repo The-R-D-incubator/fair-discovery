@@ -24,9 +24,9 @@
         overflow: hidden;
     }
     
-    /* Image Header for Cards */
+    /* Dynamic Image Header */
     .card-img-header {
-        height: 200px;
+        height: 220px; /* Slightly taller for more impact */
         background-size: cover;
         background-position: center;
         position: relative;
@@ -40,7 +40,7 @@
 
     .neon-card:hover { 
         border-color: #bef264; 
-        box-shadow: 0 0 40px rgba(190, 242, 100, 0.05);
+        box-shadow: 0 0 40px rgba(190, 242, 100, 0.08);
         transform: translateY(-5px);
     }
 
@@ -54,8 +54,7 @@
     ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: #bef264; }
   </style>
-
-  </head>
+</head>
 <body class="grid-bg min-h-screen">
 
   <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/90 backdrop-blur-3xl border-b border-white/5">
@@ -105,7 +104,7 @@
             const response = await fetch('products.json');
             const data = await response.json();
             
-            // Sort by popularity (Highest first) as requested
+            // Sort by popularity (Highest first)
             allProducts = data.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
             
             renderStore(allProducts);
