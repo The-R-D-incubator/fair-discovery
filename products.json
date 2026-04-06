@@ -1,9 +1,21 @@
 [
   {
+    "id": "Entrepreneurs-Guide",
+    "name": "The Bootstrap Blueprint: Entrepreneur's Guide",
+    "category": "Business",
+    "description": "The pure Dart + Gemini intelligence core. Move from 'idea' to 'revenue' with real-time AI guidance. No UI bloat, just a sovereign engine for the no-money entrepreneur.",
+    "price": "25",
+    "logo": "logo.png",
+    "tags": ["Dart", "Gemini", "Sovereign-AI"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ3lR65Z7UnCp8SWWNQvB5PViT4wyy5C7QgX",
+    "paypal_url": "https://www.paypal.com/ncp/payment/DS9UYXA5SKWH2"
+  },
+  {
     "id": "aurora-ai-ip",
     "name": "Aurora AI (Full Ownership)",
     "category": "Acquisition",
-    "description": "Full IP rights for Aurora AI: Forensic Vehicle Intelligence. As seen on IndieMaker & SideProjector. High-fidelity generative engine ready for enterprise integration. View live demo via secure GCP instance.",
+    "description": "Full IP rights for Aurora AI: Forensic Vehicle Intelligence. As seen on IndieMaker & SideProjector. High-fidelity generative engine ready for enterprise integration.",
     "price": "Open to Offers",
     "logo": "logo.png",
     "tags": ["AI", "Forensics", "IP-Acquisition"],
@@ -11,18 +23,6 @@
     "demo_url": "https://www.aurora_repair.com", 
     "download_url": "https://www.sideprojectors.com/project/76989/aurora-ai",
     "paypal_url": "mailto:jarrit@forgevertical.com?subject=Direct%20Offer:%20Aurora%20AI%20Acquisition"
-  },
-  {
-    "id": "surfshark-partner",
-    "name": "Surfshark VPN",
-    "category": "Partner Infrastructure",
-    "description": "The recommended backbone for Fair Discovery security nodes. 256-bit AES encryption with multi-hop capability. Essential for ethical VPN architecture and secure forensic reconnaissance.",
-    "price": "Affiliate Offer",
-    "logo": "logo.png",
-    "tags": ["VPN", "Privacy", "Infrastructure"],
-    "featured": true,
-    "download_url": "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160",
-    "paypal_url": "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
   },
   {
     "id": "hono-guardian",
@@ -35,6 +35,18 @@
     "featured": true,
     "download_url": "https://u.pcloud.link/publink/show?code=XZ4Up65Zu9yDG8xk8n7Gt1ijQolsUuiVlwK7",
     "paypal_url": "https://www.paypal.com/ncp/payment/J3L72ET3MEU7S"
+  },
+  {
+    "id": "surfshark-partner",
+    "name": "Surfshark VPN",
+    "category": "Partner Infrastructure",
+    "description": "The recommended backbone for Fair Discovery security nodes. 256-bit AES encryption with multi-hop capability. Essential for ethical VPN architecture.",
+    "price": "Affiliate Offer",
+    "logo": "logo.png",
+    "tags": ["VPN", "Privacy", "Infrastructure"],
+    "featured": true,
+    "download_url": "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160",
+    "paypal_url": "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
   },
   {
     "id": "adguard",
@@ -88,7 +100,7 @@
     "id": "aivpn-node",
     "name": "AIVPN Concept Node",
     "category": "Security",
-    "description": "Foundational concept code for an ethical, AI-driven VPN architecture. Includes the 'Content Scout' logic, server rotation, and UI blueprint.",
+    "description": "Foundational concept code for an ethical, AI-driven VPN architecture. Includes the 'Content Scout' logic and server rotation.",
     "price": "50",
     "logo": "logo.png",
     "tags": ["VPN", "AI", "Blueprint"],
