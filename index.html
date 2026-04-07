@@ -244,6 +244,42 @@ function createPulse() {
 
 // Initialize the closer on load
 window.addEventListener('load', createPulse);
+
+    /**
+ * FAIR DISCOVERY | Engine 04: The Suggestor (Ad-Exploit)
+ * Purpose: Contextual Pop-ups based on Lead Origin
+ */
+
+function runSuggestor() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const origin = urlParams.get('ref'); // Syndicator adds ?ref=fiverr or ?ref=ads
+    
+    if (origin) {
+        setTimeout(() => {
+            const ad = document.createElement('div');
+            ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 bg-black border-2 border-canary p-6 rounded-[2rem] z-[300] shadow-[0_0_100px_rgba(250,204,21,0.2)] reveal-anim";
+            
+            let headline = "URGENT SYSTEM AUDIT";
+            let copy = "Our bots detected a session-threat signature matching your origin. Deploy Forge-Guard to lock your account.";
+            
+            if (origin === 'ads') {
+                headline = "AD-SPEND AT RISK";
+                copy = "High-stakes hijacking detected in your sector. Secure your Meta/Google ad manager nodes immediately.";
+            }
+
+            ad.innerHTML = `
+                <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-2">Internal Suggestion</p>
+                <h4 class="text-xl font-black italic uppercase leading-none mb-4">${headline}</h4>
+                <p class="text-xs text-zinc-400 mb-6 leading-relaxed">${copy}</p>
+                <button onclick="this.parentElement.remove()" class="w-full py-3 bg-canary-yellow text-black font-black uppercase text-[10px] tracking-widest rounded-xl hover:bg-white transition">Deploy Node ($20)</button>
+                <button onclick="this.parentElement.remove()" class="w-full mt-2 text-[8px] text-zinc-600 uppercase tracking-tighter">Dismiss Security Alert</button>
+            `;
+            document.body.appendChild(ad);
+        }, 3000); // Wait 3 seconds for them to see the clinical "Pulse" first
+    }
+}
+
+window.addEventListener('load', runSuggestor);
     
   </script>
 </body>
