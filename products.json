@@ -1,5 +1,18 @@
 [
   {
+    "id": "session-shield",
+    "name": "Session-Shield: Link Isolation Node",
+    "category": "Security",
+    "description": "Industrial link-sanitization engine. Neutralize session-hijacking scripts and phishing attempts from Fiverr, LinkedIn, and social media before they touch your browser. Features 200ms headless ping and redirect trace logic.",
+    "price": "8",
+    "popularity": 130,
+    "image": "session-shield.jpg",
+    "tags": ["Security", "Isolation", "Utility", "Anti-Phish"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZjPb65ZLsTSPI1ejhyIYBojTvAxb09ceJ5X",
+    "paypal_url": "https://www.paypal.com/ncp/payment/YNA937235P3CU"
+  },
+  {
     "id": "global-forge-guard",
     "name": "Global Forge-Guard: Forensic Link Auditor",
     "category": "Security",
