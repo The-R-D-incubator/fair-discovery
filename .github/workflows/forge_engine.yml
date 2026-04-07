@@ -1,11 +1,11 @@
-name: FORGE_REVENUE_ENGINE
+name: FORGE_MULTI_BOT_ARMY
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour on the dot
-  workflow_dispatch: # Allows you to trigger it manually
+    - cron: '0 * * * *' # Hourly Strike
+  workflow_dispatch: # Manual Trigger
 
 jobs:
-  run-bots:
+  revenue-operations:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,15 +14,17 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install Dependencies
-        run: pip install requests
-      - name: Run Trend Jacker
+        run: pip install requests feedparser
+      - name: 🔥 Execute Trend-Jacker
         run: python bot/trend_jacker.py
-      - name: Run Signal Scout
+      - name: 📡 Execute Signal Scout
         run: python bot/scout.py
-      - name: Commit Updated Leads
+      - name: 📢 Execute Syndicator
+        run: node bot/syndicator.js
+      - name: 💾 Commit & Sync Intelligence
         run: |
-          git config --local user.email "bot@fairdiscovery.org"
+          git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
-          git add bot/leads/daily_hitlist.csv
-          git commit -m "Automated Lead Sweep [$(date)]" || exit 0
+          git add bot/leads/*.csv bot/current_mission.json
+          git commit -m "Intelligence Sync [$(date)]" || exit 0
           git push
