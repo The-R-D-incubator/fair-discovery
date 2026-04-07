@@ -10,10 +10,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
         body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; }
         .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
-        
         .theme-accent { color: #bef264; }
         .border-theme-accent { border-color: #bef264; }
-
         .success-card { 
             background: rgba(10, 10, 10, 0.8);
             border: 1px solid rgba(255,255,255,0.05); 
@@ -30,6 +28,8 @@
         async function handleSuccess() {
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
+            // PayPal sends 'quantity' if enabled, otherwise default to 1
+            const qty = urlParams.get('quantity') || 1; 
             const container = document.getElementById('download-container');
 
             if (!productId) {
@@ -47,20 +47,33 @@
                 const tool = products.find(p => p.id === productId);
 
                 if (tool) {
+                    // Logic to check if this is a $1.99 per-action tool or a full tool download
+                    const isCreditModel = tool.price === "1.99";
+                    
+                    let mainHeading = `${tool.name} <br><span class="theme-accent text-4xl">Acquired.</span>`;
+                    let subText = `Your transaction was successful. The forensic source files for <span class="text-white font-medium">${tool.name}</span> are now ready for deployment.`;
+                    let buttonText = `Download ${tool.id}.zip`;
+
+                    if (isCreditModel) {
+                        mainHeading = `<span class="theme-accent">${qty} Forensic Credits</span> <br><span class="text-4xl">Authorized.</span>`;
+                        subText = `You have successfully loaded <span class="text-white font-medium">${qty} actions</span> for the <span class="text-white font-medium">${tool.name}</span> node. Proceed to the utility terminal to begin processing.`;
+                        buttonText = `Open ${tool.name} Terminal`;
+                    }
+
                     container.innerHTML = `
                         <div class="inline-block px-4 py-1 rounded-full bg-[#bef264]/10 text-[#bef264] text-[10px] font-bold uppercase tracking-widest mb-8">
                             Payment Verified
                         </div>
                         <h1 class="text-5xl font-black italic uppercase mb-6 tracking-tighter leading-tight">
-                            ${tool.name} <br><span class="theme-accent text-4xl">Acquired.</span>
+                            ${mainHeading}
                         </h1>
                         <p class="text-zinc-400 mb-10 leading-relaxed font-light text-lg">
-                            Your transaction was successful. The forensic source files for <span class="text-white font-medium">${tool.name}</span> are now ready for deployment.
+                            ${subText}
                         </p>
                         
                         <a href="${tool.download_url}" 
                            class="block w-full bg-white text-black py-6 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-[#bef264] transition-all duration-300">
-                            Download ${tool.id}.zip
+                            ${buttonText}
                         </a>
 
                         <p class="mt-8 text-[9px] text-zinc-600 font-bold uppercase tracking-[0.3em]">
