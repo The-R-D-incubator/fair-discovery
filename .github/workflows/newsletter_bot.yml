@@ -1,0 +1,18 @@
+name: Forensic Postman Bot
+on:
+  schedule:
+    - cron: '0 12 * * 1' # Runs every Monday at Noon
+  workflow_dispatch:
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: pip install firebase-admin sendgrid
+      - name: Run Postman
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        run: python .github/scripts/send_newsletter.py
