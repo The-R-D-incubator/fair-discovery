@@ -15,9 +15,10 @@
         background-size: 30px 30px; 
     }
 
-    /* Color Palette */
+    /* Clinical Color Palette */
     .theme-accent { color: #bef264; }
     .canary-yellow { color: #facc15 !important; }
+    .border-canary { border-color: #facc15 !important; }
     .code-purple { color: #c084fc; }
     .code-blue { color: #60a5fa; }
 
@@ -40,16 +41,14 @@
 
     /* High-Fidelity Colorful Footer Logos */
     .footer-logo {
-        height: 28px;
+        height: 32px;
         width: auto;
-        filter: saturate(0.9) contrast(1.1);
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         opacity: 0.8;
     }
     .footer-logo:hover {
-        filter: saturate(1.2) contrast(1.2);
         opacity: 1;
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
 
     .neon-card { 
@@ -127,12 +126,12 @@
       <div class="max-w-7xl mx-auto flex flex-col items-center">
           <div class="flex flex-wrap justify-center items-center gap-12 mb-12">
               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/18/Octicons-mark-github.svg" alt="GitHub" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Cloudflare_logo.svg" alt="Cloudflare" class="footer-logo">
+              <img src="img/githublogo.svg" alt="GitHub" class="footer-logo">
+              <img src="img/cloudflarelogo.svg" alt="Cloudflare" class="footer-logo">
               <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
               <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase" class="footer-logo">
               <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Google_Gemini_logo.svg" alt="Gemini" class="footer-logo">
+              <img src="img/geminilogo.svg" alt="Gemini" class="footer-logo">
           </div>
           <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
       </div>
