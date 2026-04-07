@@ -16,44 +16,40 @@
     }
 
     /* Clinical Color Palette */
-    .theme-accent { color: #bef264; } /* Lime Green */
+    .theme-accent { color: #bef264; }
     .canary-yellow { color: #facc15 !important; }
     .code-purple { color: #c084fc; }
     .code-blue { color: #60a5fa; }
 
-    /* Refined Hero Code Container (Replaces GIF) */
-    .hero-container { position: relative; overflow: hidden; min-height: 500px; display: flex; align-items: center; }
+    /* Non-Intrusive Code Terminal (Replaces GIF) */
+    .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
     
     .code-window {
         position: absolute;
         right: 5%;
-        background: rgba(10, 10, 10, 0.8);
+        background: rgba(10, 10, 10, 0.9);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 2rem;
-        border-radius: 1.5rem;
+        padding: 2.5rem;
+        border-radius: 2rem;
         font-family: 'JetBrains Mono', monospace;
         font-size: 1.1rem;
-        line-height: 1.6;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        box-shadow: 0 0 50px rgba(0,0,0,0.8);
         display: none;
     }
     @media (min-width: 1024px) { .code-window { display: block; } }
 
-    /* High-Visibility Footer Icons */
-    .footer-logo-text {
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        font-size: 0.7rem;
-        transition: all 0.3s ease;
-        padding: 0.5rem 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0.5rem;
+    /* Colorful High-Fidelity Footer Logos */
+    .footer-logo {
+        height: 32px;
+        width: auto;
+        filter: saturate(0.8) contrast(1.1);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        opacity: 0.7;
     }
-    .footer-logo-text:hover {
-        border-color: #facc15;
-        color: #facc15;
-        background: rgba(250, 204, 21, 0.05);
+    .footer-logo:hover {
+        filter: saturate(1.2) contrast(1.2);
+        opacity: 1;
+        transform: translateY(-5px) scale(1.1);
     }
 
     .neon-card { 
@@ -65,7 +61,6 @@
     .neon-card:hover { 
         border-color: #facc15; 
         box-shadow: 0 0 30px rgba(250, 204, 21, 0.05);
-        transform: translateY(-5px);
     }
 
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
@@ -81,6 +76,7 @@
     </div>
     <div class="flex gap-8 items-center">
         <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] canary-yellow hover:text-white transition">Support</a>
+        <a href="https://forgevertical.com" target="_blank" class="hidden md:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition">Forge Vertical</a>
     </div>
   </nav>
 
@@ -98,11 +94,11 @@
     </div>
 
     <div class="code-window reveal-anim" style="animation-delay: 0.4s">
-        <span class="code-purple">if</span> (!tired()) {<br>
-        &nbsp;&nbsp;<span class="code-blue">keepCoding</span>();<br>
+        <span class="code-purple">if</span> (!security_breach) {<br>
+        &nbsp;&nbsp;<span class="code-blue">deployForgeGuard</span>();<br>
         } <span class="code-purple">else</span> {<br>
-        &nbsp;&nbsp;<span class="code-blue">orderCoffee</span>();<br>
-        &nbsp;&nbsp;<span class="code-blue">keepCoding</span>();<br>
+        &nbsp;&nbsp;<span class="code-blue">quarantineLinks</span>();<br>
+        &nbsp;&nbsp;<span class="code-blue">alertAdmin</span>();<br>
         }
     </div>
   </header>
@@ -129,14 +125,14 @@
 
   <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col items-center">
-          <div class="flex flex-wrap justify-center items-center gap-4 mb-12">
-              <div class="footer-logo-text text-blue-400">PayPal</div>
-              <div class="footer-logo-text text-zinc-100">GitHub</div>
-              <div class="footer-logo-text text-orange-400">Firebase</div>
-              <div class="footer-logo-text text-blue-500">Google Cloud</div>
-              <div class="footer-logo-text text-indigo-400">Gemini</div>
-              <div class="footer-logo-text text-orange-500">Cloudflare</div>
-              <div class="footer-logo-text text-orange-600">GitLab</div>
+          <div class="flex flex-wrap justify-center items-center gap-12 mb-12">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/18/Octicons-mark-github.svg" alt="GitHub" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Cloudflare_logo.svg" alt="Cloudflare" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Google_Gemini_logo.svg" alt="Gemini" class="footer-logo">
           </div>
           <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
       </div>
