@@ -22,22 +22,8 @@
     .code-purple { color: #c084fc; }
     .code-blue { color: #60a5fa; }
 
-    /* Industrial Code Terminal Header */
+    /* Layout Containers */
     .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
-    
-    .code-window {
-        position: absolute;
-        right: 5%;
-        background: rgba(10, 10, 10, 0.95);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 2.5rem;
-        border-radius: 2rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.1rem;
-        box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        display: none;
-    }
-    @media (min-width: 1024px) { .code-window { display: block; } }
 
     /* High-Fidelity Colorful Footer Logos */
     .footer-logo {
@@ -80,25 +66,30 @@
   </nav>
 
   <header class="hero-container py-32 px-6">
-    <div class="max-w-7xl mx-auto relative z-10 reveal-anim">
-        <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
-            Fair Discovery<br><span class="canary-yellow">Tools Forged For Industry.</span>
-        </h1>
-        <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-2xl">
-            Building tools that <span class="canary-yellow font-bold">help businesses</span>, 
-            <span class="canary-yellow font-bold">secure files</span>, and 
-            <span class="canary-yellow font-bold">protect ad spend</span>. 
-            Audit our repository and deploy the logic that works for you.
-        </p>
-    </div>
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10 reveal-anim">
+        
+        <div class="lg:w-3/5 text-left">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
+                Fair Discovery<br><span class="canary-yellow">Tools Forged For Industry.</span>
+            </h1>
+            <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-2xl">
+                Building tools that <span class="canary-yellow font-bold">help businesses</span>, 
+                <span class="canary-yellow font-bold">secure files</span>, and 
+                <span class="canary-yellow font-bold">protect ad spend</span>. 
+                Audit our repository and deploy the logic that works for you.
+            </p>
+        </div>
 
-    <div class="code-window reveal-anim" style="animation-delay: 0.4s">
-        <span class="code-purple">if</span> (!perimeter_secure) {<br>
-        &nbsp;&nbsp;<span class="code-blue">deployForgeGuard</span>();<br>
-        } <span class="code-purple">else</span> {<br>
-        &nbsp;&nbsp;<span class="code-blue">quarantineLinks</span>();<br>
-        &nbsp;&nbsp;<span class="code-blue">monitorSync</span>();<br>
-        }
+        <div class="lg:w-2/5 hidden lg:block">
+            <div class="bg-zinc-900/90 backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] font-mono text-sm shadow-2xl">
+                <span class="code-purple">if</span> (!perimeter_secure) {<br>
+                &nbsp;&nbsp;<span class="code-blue">deployForgeGuard</span>();<br>
+                } <span class="code-purple">else</span> {<br>
+                &nbsp;&nbsp;<span class="code-blue">quarantineLinks</span>();<br>
+                &nbsp;&nbsp;<span class="code-blue">monitorSync</span>();<br>
+                }
+            </div>
+        </div>
     </div>
   </header>
 
