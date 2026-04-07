@@ -7,12 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
-        body { font-family: 'Geist', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        body { font-family: 'Geist', sans-serif; background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
         .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
         .success-bg { background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); }
+        #canvas-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 bg-slate-50">
+    <canvas id="canvas-confetti"></canvas>
 
     <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-[2.5rem] glass-card">
         
@@ -33,7 +35,7 @@
                     <p class="text-teal-400 font-bold uppercase">Node Connection Audit:</p>
                     <p class="text-white/60 uppercase">Origin: <span id="user-ip">Detecting...</span></p>
                     <p class="text-white/60 uppercase">Protocol: AES-256 SECURE CHANNEL</p>
-                </div>
+                    <p id="status" class="text-teal-300 font-bold mt-2"></p> </div>
             </div>
 
             <div class="mt-12 pt-8 border-t border-white/10">
@@ -84,15 +86,37 @@
             <div id="paywall" class="hidden text-center">
                 <h3 class="text-2xl font-black italic uppercase mb-2">Node Depleted</h3>
                 <p class="text-slate-400 text-xs mb-8">Authorize further forensic actions.</p>
-                <a href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" class="block w-full py-5 bg-teal-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em]">Top Up Node ($1.99)</a>
+                <a id="paylink" href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" class="block w-full py-5 bg-teal-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em]">Top Up Node ($1.99)</a>
             </div>
         </div>
     </div>
 
     <script>
-        // FETCH USER IP FOR TRANSPARENCY
+        // 1. IP DETECTION
         fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('user-ip').innerText = d.ip);
 
+        // 2. HOLIDAY PROMO BOT ENGINE
+        async function applyGlobalPromo() {
+            try {
+                const response = await fetch('global_promo.json');
+                const promo = await response.json();
+
+                if (promo.multiplier > 1) {
+                    document.getElementById('status').innerText = `PROMO ACTIVE: ${promo.active_holiday} (${promo.reason})`;
+                    const payBtn = document.getElementById('paylink');
+                    if (payBtn) payBtn.innerText = `Top Up Node: ${10 * promo.multiplier} CREDITS ($1.99)`;
+                }
+
+                if (promo.confetti) {
+                    console.log("Confetti Triggered for: " + promo.active_holiday);
+                    startConfetti(); 
+                }
+            } catch (e) {
+                console.log("Promo engine standby.");
+            }
+        }
+
+        // 3. CORE LOGIC
         let credits = localStorage.getItem('sentinel_credits') || 1;
         update();
 
@@ -108,7 +132,6 @@
             if(credits <= 0) return;
             const upZone = document.getElementById('upload-zone');
             const resZone = document.getElementById('results-zone');
-            
             upZone.classList.add('opacity-50', 'pointer-events-none');
             
             setTimeout(() => {
@@ -129,6 +152,44 @@
                 document.getElementById('paywall').classList.remove('hidden');
             }
         }
+
+        // 4. CONFETTI ENGINE (Sovereign Script)
+        function startConfetti() {
+            const canvas = document.getElementById('canvas-confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let particles = [];
+            const colors = ['#bef264', '#ffffff', '#2dd4bf', '#14b8a6'];
+
+            for(let i=0; i<100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 7 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 3 + 2,
+                    angle: Math.random() * 6.28
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0,0,canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, 6.28);
+                    ctx.fill();
+                    p.y += p.speed;
+                    p.x += Math.sin(p.angle) * 2;
+                    if(p.y > canvas.height) p.y = -10;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        window.onload = applyGlobalPromo;
     </script>
 </body>
 </html>
