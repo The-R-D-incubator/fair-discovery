@@ -280,6 +280,34 @@ function runSuggestor() {
 }
 
 window.addEventListener('load', runSuggestor);
+
+    /** * FORGE_SIGNAL | Engine 05: Analytics
+ * Pushes real-time events to the dashboard
+ */
+function pushSignal(eventType, details) {
+    const signal = {
+        timestamp: new Date().toISOString(),
+        event: eventType,
+        details: details,
+        origin: new URLSearchParams(window.location.search).get('ref') || 'organic'
+    };
+    
+    // In a local dev environment, we log to console. 
+    // For a live server, this would POST to your bot/logs.json
+    console.log("📡 SIGNAL_SENT:", signal);
+    
+    // Save to LocalStorage so the Dashboard can read it if opened in the same browser
+    let logs = JSON.parse(localStorage.getItem('forge_logs') || '[]');
+    logs.push(signal);
+    localStorage.setItem('forge_logs', JSON.stringify(logs.slice(-100))); // Keep last 100
+}
+
+// Update your Suggestor to push signals
+// Inside runSuggestor(), add:
+// pushSignal('AD_SHOWN', headline);
+
+// Update your "Acquire Node" buttons to push signals:
+// <a onclick="pushSignal('BUY_CLICK', 'ForgeGuard')" href="...">...</a>
     
   </script>
 </body>
