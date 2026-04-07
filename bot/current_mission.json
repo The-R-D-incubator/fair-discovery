@@ -1,6 +1,8 @@
 {
-    "active_targets": ["Session Hijack", "Ad Spend Breach", "Fiverr Scam"],
-    "last_update": "Initial Boot",
-    "status": "OPERATIONAL",
-    "mission_priority": "MAX_REVENUE"
+    "active_targets": [
+        "PayPal",
+        "Meta Ads"
+    ],
+    "last_update": "Tue Apr  7 10:53:17 2026",
+    "status": "AGGRESSIVE"
 }
