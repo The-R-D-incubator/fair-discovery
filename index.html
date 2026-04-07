@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400;700&display=swap');
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
     
     .grid-bg { 
@@ -16,25 +16,45 @@
     }
 
     /* Clinical Color Palette */
-    .theme-accent { color: #bef264; }
+    .theme-accent { color: #bef264; } /* Lime Green */
     .canary-yellow { color: #facc15 !important; }
-    .border-canary { border-color: #facc15 !important; }
+    .code-purple { color: #c084fc; }
+    .code-blue { color: #60a5fa; }
 
-    /* Hero Animation - Background Removal Logic */
-    .hero-container { position: relative; overflow: hidden; min-height: 500px; }
-    .hero-gif {
+    /* Refined Hero Code Container (Replaces GIF) */
+    .hero-container { position: relative; overflow: hidden; min-height: 500px; display: flex; align-items: center; }
+    
+    .code-window {
         position: absolute;
-        right: -20px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 550px;
-        /* "screen" blend mode removes the white background from the GIF */
-        mix-blend-mode: screen; 
-        opacity: 0.8;
-        pointer-events: none;
-        display: none; 
+        right: 5%;
+        background: rgba(10, 10, 10, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 1.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        display: none;
     }
-    @media (min-width: 1024px) { .hero-gif { display: block; } }
+    @media (min-width: 1024px) { .code-window { display: block; } }
+
+    /* High-Visibility Footer Icons */
+    .footer-logo-text {
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.7rem;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+    }
+    .footer-logo-text:hover {
+        border-color: #facc15;
+        color: #facc15;
+        background: rgba(250, 204, 21, 0.05);
+    }
 
     .neon-card { 
         background: rgba(10, 10, 10, 0.98);
@@ -46,18 +66,6 @@
         border-color: #facc15; 
         box-shadow: 0 0 30px rgba(250, 204, 21, 0.05);
         transform: translateY(-5px);
-    }
-
-    .footer-logo {
-        height: 24px;
-        filter: grayscale(100%);
-        opacity: 0.5;
-        transition: all 0.3s ease;
-    }
-    .footer-logo:hover {
-        filter: grayscale(0%);
-        opacity: 1;
-        transform: scale(1.1);
     }
 
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
@@ -77,18 +85,25 @@
   </nav>
 
   <header class="hero-container py-32 px-6">
-    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbndtOTAxY3JqMHBuMHlzZGxyb3RyeGFuZmRyemRwOTRsZ3plaXpnaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vhVqGkxDYxAaRbOWVp/giphy.gif" alt="Industrial Logic Animation" class="hero-gif">
-    
     <div class="max-w-7xl mx-auto relative z-10 reveal-anim">
         <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
             Fair Discovery<br><span class="canary-yellow">Tools Forged For Industry.</span>
         </h1>
-        <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-3xl">
+        <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-2xl">
             Building tools that <span class="canary-yellow font-bold">help businesses</span>, 
             <span class="canary-yellow font-bold">secure files</span>, and 
             <span class="canary-yellow font-bold">protect ad spend</span>. 
             Audit our repository and deploy the logic that works for you.
         </p>
+    </div>
+
+    <div class="code-window reveal-anim" style="animation-delay: 0.4s">
+        <span class="code-purple">if</span> (!tired()) {<br>
+        &nbsp;&nbsp;<span class="code-blue">keepCoding</span>();<br>
+        } <span class="code-purple">else</span> {<br>
+        &nbsp;&nbsp;<span class="code-blue">orderCoffee</span>();<br>
+        &nbsp;&nbsp;<span class="code-blue">keepCoding</span>();<br>
+        }
     </div>
   </header>
 
@@ -114,14 +129,14 @@
 
   <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col items-center">
-          <div class="flex flex-wrap justify-center items-center gap-10 mb-12">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Google_Gemini_logo.svg" alt="Gemini" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Cloudflare_Logo.svg" alt="Cloudflare" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
+          <div class="flex flex-wrap justify-center items-center gap-4 mb-12">
+              <div class="footer-logo-text text-blue-400">PayPal</div>
+              <div class="footer-logo-text text-zinc-100">GitHub</div>
+              <div class="footer-logo-text text-orange-400">Firebase</div>
+              <div class="footer-logo-text text-blue-500">Google Cloud</div>
+              <div class="footer-logo-text text-indigo-400">Gemini</div>
+              <div class="footer-logo-text text-orange-500">Cloudflare</div>
+              <div class="footer-logo-text text-orange-600">GitLab</div>
           </div>
           <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
       </div>
