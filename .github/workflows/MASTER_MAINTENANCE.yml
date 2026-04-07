@@ -1,0 +1,30 @@
+name: MASTER_MAINTENANCE_COMMAND
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Runs every 6 hours
+  workflow_dispatch:
+
+jobs:
+  integrity-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 1. Repair & Optimize Files
+        run: python .github/scripts/maintenance_sync.py
+        
+      - name: 2. Forge New Intel (UK-Quality)
+        run: python .github/scripts/bot_army_brain.py
+        
+      - name: 3. Sync Sitemap
+        run: python .github/scripts/update_sitemap.py
+        
+      - name: 4. Push Updates
+        run: |
+          git config user.name "Fair-Discovery-Bot"
+          git config user.email "bot@fairdiscovery.org"
+          git add .
+          git commit -m "integrity: automated maintenance & seo optimization" || echo "Stable"
+          git push
