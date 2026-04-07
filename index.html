@@ -15,12 +15,12 @@
         background-size: 30px 30px; 
     }
 
-    /* Color Palette */
+    /* Clinical Color Palette */
     .theme-accent { color: #bef264; }
-    .canary-yellow { color: #facc15 !important; } /* High-contrast Canary Yellow */
+    .canary-yellow { color: #facc15 !important; }
     .border-canary { border-color: #facc15 !important; }
 
-    /* Hero Animation Logic */
+    /* Desktop Hero Animation Logic */
     .hero-container { position: relative; overflow: hidden; min-height: 500px; }
     .hero-gif {
         position: absolute;
@@ -30,7 +30,7 @@
         width: 450px;
         opacity: 0.6;
         pointer-events: none;
-        display: none; /* Hidden on mobile */
+        display: none; 
     }
     @media (min-width: 1024px) { .hero-gif { display: block; } }
 
@@ -46,7 +46,6 @@
         transform: translateY(-5px);
     }
 
-    /* Footer Logo Styling */
     .footer-logo {
         height: 24px;
         filter: grayscale(100%);
@@ -130,18 +129,18 @@
     let allProducts = [];
     let currentCategory = 'All';
 
-    // Correction: Mapping Status Dots as per Industrial Audit
+    // Forensic Status Logic
     function getStatusColor(id) {
         const active = ['global-forge-guard', 'shadow-merge-tool', 'aurora-ai-ip', 'adguard', 'osint-knife', 'ai-content-sentinel'];
         const concept = ['vertical-web-builder-shell', 'Entrepreneurs-Guide', 'hono-guardian', 'stealth-bypass', 'aivpn-node'];
         const raw = ['adam-v1-free'];
         const affiliate = ['surfshark-partner'];
 
-        if (active.includes(id)) return 'bg-green-500'; // Green = Ready
-        if (concept.includes(id)) return 'bg-blue-500';  // Blue = Coded Concept
-        if (raw.includes(id)) return 'bg-yellow-500';   // Yellow = Raw Code
-        if (affiliate.includes(id)) return 'bg-white';  // White = Partner
-        return 'bg-blue-500'; // Default to Blue (Coded) per Image 2 request
+        if (active.includes(id)) return 'bg-green-500'; 
+        if (concept.includes(id)) return 'bg-blue-500';  
+        if (raw.includes(id)) return 'bg-yellow-500';   
+        if (affiliate.includes(id)) return 'bg-white';  
+        return 'bg-blue-500'; 
     }
 
     async function loadStore() {
@@ -177,10 +176,10 @@
                     <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
                     
                     <div class="flex flex-wrap gap-2 mb-10 mt-auto">
-                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-500 text-[10px] font-bold uppercase rounded-md tracking-widest canary-yellow border border-white/5">${tag}</span>`).join('')}
+                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/10 text-[#facc15] text-[10px] font-black uppercase rounded-md tracking-widest border border-white/5">${tag}</span>`).join('')}
                     </div>
 
-                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-canary text-canary-yellow py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-facc15 hover:text-black transition-all duration-500">
+                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-canary text-canary-yellow py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#facc15] hover:text-black transition-all duration-500">
                         ${isFree ? 'Initialize Download' : 'Acquire Node'}
                     </a>
                 </div>
