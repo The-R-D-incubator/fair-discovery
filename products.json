@@ -1,5 +1,18 @@
 [
   {
+    "id": "ghost-ping",
+    "name": "Ghost-Ping: IP Location Verifier",
+    "category": "Security",
+    "description": "Industrial network origin auditor. Verify the true geographical location and ISP signature of any digital handshake. Ghost-Ping reveals spoofed locations and proxy-masks to ensure you are dealing with legitimate prospects.",
+    "price": "15",
+    "popularity": 105,
+    "image": "ghost.jpg",
+    "tags": ["Network", "Security", "Forensics", "IP-Verifier"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ1Ub65ZhPdOUusx8u0pEtqSeLTo2hgyiSK7",
+    "paypal_url": "https://www.paypal.com/ncp/payment/PDWAXF4MSHG4Q"
+  },
+  {
     "id": "contract-scan",
     "name": "Contract-Scan: Predatory Clause Detector",
     "category": "Security",
