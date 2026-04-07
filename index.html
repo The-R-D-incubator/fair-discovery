@@ -44,7 +44,7 @@
   <header class="hero-container py-32 px-6">
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10 reveal-anim">
         <div class="lg:w-3/5 text-left">
-            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic text-white">
                 Fair Discovery<br><span class="canary-yellow">Tools Forged For Industry.</span>
             </h1>
             <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-2xl">
@@ -83,13 +83,12 @@
     <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </main>
 
-  <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto mb-10">
+  <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col items-center">
           <div class="flex flex-wrap justify-center items-center gap-12 mb-12">
               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
               <img src="img/githublogo.svg" alt="GitHub" class="footer-logo">
               <img src="img/cloudflarelogo.svg" alt="Cloudflare" class="footer-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
               <img src="img/geminilogo.svg" alt="Gemini" class="footer-logo">
           </div>
           <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
@@ -100,7 +99,7 @@
     let allProducts = [];
     let currentCategory = 'All';
 
-    // --- ENGINE 05: ANALYTICS PUSH ---
+    // --- ENGINE 05: ANALYTICS ---
     function pushSignal(eventType, details) {
         const signal = {
             timestamp: new Date().toISOString(),
@@ -114,10 +113,9 @@
         localStorage.setItem('forge_logs', JSON.stringify(logs.slice(-100)));
     }
 
-    // --- STORE LOGIC ---
+    // --- STORE CORE ---
     function getStatusColor(id) {
-        const active = ['global-forge-guard', 'shadow-merge-tool', 'aurora-ai-ip', 'adguard'];
-        return active.includes(id) ? 'bg-green-500' : 'bg-blue-500';
+        return ['global-forge-guard', 'shadow-merge-tool', 'aurora-ai-ip'].includes(id) ? 'bg-green-500' : 'bg-blue-500';
     }
 
     async function loadStore() {
@@ -144,7 +142,7 @@
                         <div class="w-3 h-3 rounded-full mt-4 ${getStatusColor(tool.id)}"></div>
                         <span class="canary-yellow font-mono text-3xl font-bold tracking-tighter">${isFree ? 'FREE' : '$'+tool.price}</span>
                     </div>
-                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none hover:canary-yellow transition">${tool.name}</h3>
+                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none text-white">${tool.name}</h3>
                     <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
                     <a href="${tool.paypal_url}" onclick="pushSignal('BUY_CLICK', '${tool.name}')" target="_blank" class="block text-center border border-canary text-canary-yellow py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#facc15] hover:text-black transition-all">
                         Acquire Node
@@ -165,7 +163,7 @@
         filterTools();
     }
 
-    // --- ENGINE 03: CONVERSION PULSE ---
+    // --- ENGINE 03: PULSE ---
     const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Ad-Spend Shield initialized."];
     function createPulse() {
         const pulseBar = document.createElement('div');
@@ -175,30 +173,57 @@
         let i = 0;
         setInterval(() => {
             const text = document.getElementById('pulse-text');
-            text.innerText = `>>> [LIVE STATUS]: ${pulseMessages[i]}`;
-            i = (i + 1) % pulseMessages.length;
+            if(text) {
+                text.innerText = `>>> [LIVE STATUS]: ${pulseMessages[i]}`;
+                i = (i + 1) % pulseMessages.length;
+            }
         }, 4000);
     }
 
-    // --- ENGINE 04: AGGRESSIVE SUGGESTOR ---
+    // --- ENGINE 04: AGGRESSIVE SALES AGENT ---
     function runSuggestor() {
         const origin = new URLSearchParams(window.location.search).get('ref');
-        if (origin) {
-            pushSignal('LEAD_LANDING', origin);
-            setTimeout(() => {
-                const ad = document.createElement('div');
-                ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 bg-black border-2 border-canary p-8 rounded-[2.5rem] z-[300] shadow-[0_0_150px_rgba(250,204,21,0.4)]";
-                const headline = origin === 'ads' ? "AD-REVENUE RISK" : "THREAT DETECTED";
-                ad.innerHTML = `
-                    <div class="text-center">
-                        <h4 class="text-2xl font-black italic uppercase mb-4 text-white">${headline}</h4>
-                        <p class="text-xs text-zinc-400 mb-8 leading-relaxed">Vulnerability found in session. Secure assets immediately.</p>
-                        <button onclick="pushSignal('AD_PURCHASE_INTENT', '${headline}'); this.parentElement.parentElement.remove();" class="block w-full py-4 bg-canary-yellow text-black font-black uppercase text-xs rounded-xl">Deploy Node ($20)</button>
-                    </div>`;
-                document.body.appendChild(ad);
-                pushSignal('AD_SHOWN', headline);
-            }, 3000);
-        }
+        if (!origin) return;
+
+        pushSignal('LEAD_DIAGNOSIS_START', origin);
+
+        setTimeout(() => {
+            const ad = document.createElement('div');
+            ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-black border-2 border-canary p-10 rounded-[3rem] z-[300] shadow-[0_0_150px_rgba(250,204,21,0.5)] reveal-anim";
+            
+            let offer = {
+                title: "SYSTEM AUDIT COMPLETE",
+                problem: "Detecting active session-vulnerability from your current node.",
+                solution: "Deploy Forge-Guard v6.1 to lock your industrial perimeter.",
+                link: "https://paypal.me/YOUR_PAYPAL/20" // Replace with your link
+            };
+
+            if (origin === 'ads') {
+                offer.title = "AD-REVENUE RISK";
+                offer.problem = "Unauthorized Meta/Google Ad Manager access attempt detected.";
+                offer.solution = "Install the Ad-Revenue Shield to neutralize the hijack.";
+            } else if (origin === 'fiverr') {
+                offer.title = "FIVERR SHOP PROTECTION";
+                offer.problem = "Your seller account is flagged for a browser-redirect exploit.";
+                offer.solution = "Initialize the Fiverr-Guard node to secure your income.";
+            }
+
+            ad.innerHTML = `
+                <div class="text-center">
+                    <p class="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-4 italic">Diagnostic Result</p>
+                    <h4 class="text-2xl font-black italic uppercase leading-none mb-6 text-white">${offer.title}</h4>
+                    <div class="bg-white/5 p-4 rounded-2xl mb-8 text-left border border-white/5">
+                        <p class="text-[10px] text-red-500 uppercase font-bold mb-1">Issue:</p>
+                        <p class="text-xs text-zinc-300 mb-4">${offer.problem}</p>
+                        <p class="text-[10px] text-green-500 uppercase font-bold mb-1">Solution:</p>
+                        <p class="text-xs text-zinc-300">${offer.solution}</p>
+                    </div>
+                    <button onclick="pushSignal('AD_PURCHASE_INTENT', '${offer.title}'); window.open('${offer.link}', '_blank'); this.parentElement.parentElement.remove();" class="block w-full py-4 bg-canary-yellow text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Instant Access ($20)</button>
+                    <button onclick="this.parentElement.parentElement.remove()" class="mt-4 text-[9px] text-zinc-600 uppercase tracking-widest hover:text-white">Ignore Risk</button>
+                </div>`;
+            document.body.appendChild(ad);
+            pushSignal('OFFER_PRESENTED', offer.title);
+        }, 2500);
     }
 
     window.onload = () => { loadStore(); createPulse(); runSuggestor(); };
