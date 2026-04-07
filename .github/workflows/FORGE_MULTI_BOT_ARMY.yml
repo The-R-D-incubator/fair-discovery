@@ -1,0 +1,27 @@
+name: FORGE_MULTI_BOT_ARMY
+on:
+  schedule:
+    - cron: '0 12 * * *' # Every day at Noon
+  workflow_dispatch:
+
+jobs:
+  generate-intel:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run Bot Army Brain
+        run: python .github/scripts/bot_army_brain.py
+        
+      - name: Update Sitemap
+        run: python .github/scripts/update_sitemap.py
+        
+      - name: Commit and Push
+        run: |
+          git config user.name "Fair-Discovery-Bot"
+          git config user.email "bot@fairdiscovery.org"
+          git add docs/intel/*.html docs/sitemap_intel.xml
+          git commit -m "bot: auto-forge intel reports and sitemap" || echo "No changes"
+          git push
