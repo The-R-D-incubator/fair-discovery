@@ -3,124 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Death of the Black Box // Fair Discovery Intel</title>
+    <title>The Death of the Black Box // Fair Discovery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
-        body { font-family: 'Geist', sans-serif; background-color: #020617; color: #94a3b8; line-height: 1.6; }
-        .glow-border { border: 1px solid rgba(45, 212, 191, 0.1); box-shadow: 0 0 30px rgba(20, 184, 166, 0.03); }
-        .gradient-text { background: linear-gradient(135deg, #fff 0%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .content-block p { margin-bottom: 1.5rem; }
-        .node-highlight { color: #2dd4bf; font-weight: 900; font-style: italic; }
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;700;900&display=swap');
+        body { font-family: 'Geist', sans-serif; background-color: #fdfdfd; color: #0f172a; }
+        .tech-card { background: white; border: 1px solid #f1f5f9; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .stat-glow { color: #14b8a6; text-shadow: 0 0 20px rgba(20, 184, 166, 0.2); }
+        .manifesto-gradient { background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); }
     </style>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "The Death of the Black Box: Why Modern Software is a Security Liability",
-      "description": "An industrial analysis of proprietary software bloat and the deployment of forensic utility nodes.",
-      "author": {
-        "@type": "Organization",
-        "name": "Fair Discovery"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Fair Discovery Infrastructure"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://fairdiscovery.org/intel/death-of-the-black-box.html"
-      }
-    }
-    </script>
 </head>
-<body class="min-h-screen py-12 px-6 md:py-24">
-    <div class="max-w-3xl mx-auto">
-        <nav class="flex justify-between items-center mb-20">
-            <a href="../index.html" class="text-[10px] font-black uppercase tracking-[0.4em] text-teal-500 hover:text-white transition-all">← Infrastructure Home</a>
-            <span class="text-slate-700 text-[10px] font-black uppercase tracking-widest italic tracking-[0.2em]">Intel Node // 2026-A1</span>
-        </nav>
+<body class="antialiased">
 
-        <header class="mb-16">
-            <span class="px-3 py-1 bg-teal-500/10 text-teal-400 text-[9px] font-black rounded-full border border-teal-500/20 uppercase tracking-[0.2em] mb-6 inline-block">Forensic Manifesto</span>
-            <h1 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-[0.9] mt-4 mb-8 gradient-text">
-                The Death of the <br>Black Box
-            </h1>
-        </header>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="w-3 h-3 bg-teal-500 rounded-full animate-pulse"></div>
+            <span class="font-black uppercase text-[10px] tracking-widest text-slate-900">Fair Discovery Node 18</span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <a href="../index.html" class="hover:text-teal-500 transition-colors">Infrastructure</a>
+            <a href="https://fairdiscovery.org/#store" class="hover:text-teal-500 transition-colors">Repository</a>
+            <a href="../sentinel-scrub.html" class="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-teal-500 transition-all">Audit Now</a>
+        </div>
+    </nav>
 
-        <article class="content-block text-lg text-slate-300 font-light">
-            <h2 class="text-white font-bold text-2xl mb-6 italic uppercase tracking-tight">The Problem: The “Black Box” of Modern Software</h2>
-            
-            <p>
-                We’ve entered a strange era of digital tools. Most modern software is a mystery — hidden behind monthly subscriptions, locked in proprietary clouds, and bloated with features you never asked for. 
-            </p>
-            
-            <p>
-                For security professionals, private investigators, and creators, this “Black Box” model isn’t just annoying; it’s a liability. When you are auditing a content gate or tracing a digital footprint, you don’t need a “platform.” <span class="node-highlight text-white">You need a Node.</span>
-            </p>
+    <header class="max-w-7xl mx-auto px-6 py-24 text-center">
+        <span class="text-teal-500 font-black uppercase text-[11px] tracking-[0.4em] mb-4 block">Deployment Manifesto // 2026</span>
+        <h1 class="text-6xl md:text-8xl font-black italic uppercase tracking-tighter text-slate-900 leading-[0.85] mb-8">
+            The Death of the <br><span class="text-slate-400">Black Box</span>
+        </h1>
+        <p class="max-w-2xl mx-auto text-xl text-slate-500 font-light leading-relaxed">
+            Most modern software is a mystery hidden behind subscriptions. For security professionals, this model isn't just an annoyance; it’s a liability.
+        </p>
+    </header>
 
-            <div class="glow-border bg-slate-900/40 p-8 rounded-[2rem] my-12 italic border-l-4 border-l-teal-500">
-                <h3 class="text-white font-black uppercase text-xs tracking-widest mb-4">The Solution: The Industrial Utility Model</h3>
-                <p class="text-slate-400 text-md mb-0">
-                    At Fair Discovery, we’ve spent the last year forging a repository of high-performance utilities designed for the digital frontier. We call them “Nodes” because they are designed to do one thing with absolute precision. High Performance. Zero Bloat. Total Integrity.
+    <section class="border-y border-slate-100 bg-slate-50/50 py-12 mb-24">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div>
+                <p class="text-4xl font-black text-slate-900 mb-1 stat-glow">99.9%</p>
+                <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest">Metadata Removal</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-slate-900 mb-1 stat-glow">0ms</p>
+                <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest">Edge Latency</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-slate-900 mb-1 stat-glow">+18k</p>
+                <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest">Audits Performed</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-slate-900 mb-1 stat-glow">AES</p>
+                <p class="text-[9px] font-bold uppercase text-slate-400 tracking-widest">256 Encryption</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-16 pb-24">
+        
+        <div class="lg:col-span-2 space-y-12">
+            <div class="prose prose-slate max-w-none">
+                <h3 class="text-2xl font-black uppercase italic mb-6">The Hidden Danger of "Proprietary Clouds"</h3>
+                <p class="text-lg leading-relaxed text-slate-600 mb-8">
+                    We’ve entered a strange era of digital tools. Most modern software is a mystery — hidden behind monthly subscriptions, locked in proprietary clouds, and bloated with features you never asked for. When you are auditing a content gate or tracing a digital footprint, you don’t need a “platform.” <strong>You need a Node.</strong>
+                </p>
+                
+                <div class="p-8 bg-slate-900 rounded-[2.5rem] text-white italic mb-12">
+                    "At Fair Discovery, we’ve spent the last year forging a repository of high-performance utilities designed for the digital frontier. We call them 'Nodes' because they do one thing with absolute precision."
+                </div>
+
+                <h3 class="text-2xl font-black uppercase italic mb-6">High Performance. Zero Bloat.</h3>
+                <p class="text-lg leading-relaxed text-slate-600">
+                    The internet is no longer a playground; it’s industrial infrastructure. Professional-grade tools should be accessible to those who need them—not just those with enterprise budgets. Total integrity means knowing exactly what your tools are doing under the hood.
                 </p>
             </div>
 
-            <h2 class="text-white font-bold text-2xl mb-8 italic uppercase tracking-tight">The 2026 Deployment Grid</h2>
-            
-            <p class="mb-8">
-                Our current repository is now live, featuring core nodes designed for immediate forensic and security deployment. These are not general-purpose apps; they are precision instruments.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                <a href="../sentinel-scrub.html" class="block p-6 rounded-2xl border border-white/5 bg-white/5 hover:border-teal-500/50 transition-all group">
-                    <h4 class="text-teal-400 font-black uppercase text-xs tracking-widest mb-2 group-hover:text-white">Sentinel-Scrub</h4>
-                    <p class="text-[11px] text-slate-500 uppercase leading-relaxed">Document Sanitization: PDF/DOCX deconstruction and tracker removal.</p>
-                </a>
-                <a href="../pixel-purge.html" class="block p-6 rounded-2xl border border-white/5 bg-white/5 hover:border-teal-500/50 transition-all group">
-                    <h4 class="text-teal-400 font-black uppercase text-xs tracking-widest mb-2 group-hover:text-white">Pixel-Purge</h4>
-                    <p class="text-[11px] text-slate-500 uppercase leading-relaxed">Image Privacy: Destructive EXIF stripping for JPEG/PNG metadata.</p>
-                </a>
-                <div class="p-6 rounded-2xl border border-white/5 bg-slate-900/20 opacity-60">
-                    <h4 class="text-slate-400 font-black uppercase text-xs tracking-widest mb-2">Hono Guardian</h4>
-                    <p class="text-[11px] text-slate-600 uppercase">Edge-native protection for high-value creator assets.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="tech-card p-10 rounded-[2.5rem] hover:scale-[1.02] transition-all">
+                    <span class="text-[10px] font-bold text-teal-500 uppercase tracking-widest mb-4 block">Node 01</span>
+                    <h4 class="text-xl font-black mb-2 uppercase">Sentinel-Scrub</h4>
+                    <p class="text-sm text-slate-400 mb-8 leading-relaxed">Document Sanitization: PDF/DOCX deconstruction and tracker removal.</p>
+                    <a href="../sentinel-scrub.html" class="text-[10px] font-black uppercase tracking-widest text-slate-900 border-b-2 border-teal-500 pb-1">Initialize Node →</a>
                 </div>
-                <div class="p-6 rounded-2xl border border-white/5 bg-slate-900/20 opacity-60">
-                    <h4 class="text-slate-400 font-black uppercase text-xs tracking-widest mb-2">OSINT Swiss Knife</h4>
-                    <p class="text-[11px] text-slate-600 uppercase tracking-tighter">Automated footprinting and forensic data correlation.</p>
+                <div class="tech-card p-10 rounded-[2.5rem] hover:scale-[1.02] transition-all">
+                    <span class="text-[10px] font-bold text-teal-500 uppercase tracking-widest mb-4 block">Node 02</span>
+                    <h4 class="text-xl font-black mb-2 uppercase">Pixel-Purge</h4>
+                    <p class="text-sm text-slate-400 mb-8 leading-relaxed">Image Privacy: Destructive EXIF stripping for metadata sovereignty.</p>
+                    <a href="../pixel-purge.html" class="text-[10px] font-black uppercase tracking-widest text-slate-900 border-b-2 border-teal-500 pb-1">Initialize Node →</a>
                 </div>
             </div>
-
-            <h2 class="text-white font-bold text-2xl mb-6 italic uppercase tracking-tight">Why “Fair Discovery”?</h2>
-            <p>
-                The name is a nod to the legal principle, but the mission is technical. We believe that professional-grade tools should be accessible to those who need them — not just those with enterprise-level budgets.
-            </p>
-            <p class="text-white font-black italic text-xl mt-8">
-                The internet is no longer a playground; it’s industrial infrastructure. It’s time our tools reflected that.
-            </p>
-        </article>
-
-        <div class="mt-20 p-12 bg-white rounded-[3.5rem] text-center shadow-2xl shadow-teal-950/20">
-            <h4 class="text-slate-900 font-black uppercase italic mb-2 tracking-tighter text-2xl">Secure the Feed</h4>
-            <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-[0.2em] font-bold">Initialize your Cloud Token. Gain 20 Forensic Credits.</p>
-            
-            <div class="flex flex-col sm:flex-row gap-3">
-                <input type="email" id="sub-email" placeholder="SECURE@EMAIL.COM" class="flex-1 bg-slate-100 border-none rounded-2xl px-8 py-5 text-[11px] text-slate-900 focus:ring-2 focus:ring-teal-500 font-black outline-none uppercase tracking-widest">
-                <button onclick="saveLead()" class="bg-teal-500 text-white px-12 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-teal-200">Initialize</button>
-            </div>
-            <p id="sub-status" class="mt-6 text-[9px] text-teal-600 font-black uppercase tracking-widest"></p>
         </div>
 
-        <footer class="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 opacity-30 text-[8px] font-black uppercase tracking-[0.4em]">
-            <span>FairDiscovery.org // Sovereign Utility</span>
-            <div class="flex gap-6">
-                <span>#CyberSecurity</span>
-                <span>#OSINT</span>
-                <span>#FairDiscovery</span>
+        <aside class="lg:col-span-1">
+            <div class="sticky top-32 p-10 manifesto-gradient rounded-[3rem] text-white shadow-2xl">
+                <h4 class="text-2xl font-black italic uppercase mb-2">Secure <br><span class="text-teal-400">The Feed</span></h4>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-8">Join for 20 bonus credits.</p>
+                
+                <div class="space-y-4">
+                    <input type="email" id="sub-email" placeholder="AGENCY@EMAIL.COM" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-[11px] text-white focus:outline-none focus:border-teal-400 transition-all uppercase font-bold">
+                    <button onclick="saveLead()" class="w-full bg-teal-500 text-white py-4 rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-lg shadow-teal-500/20 hover:bg-white hover:text-slate-900 transition-all">Initialize Token</button>
+                </div>
+                <p id="sub-status" class="mt-6 text-[9px] text-teal-400 font-black uppercase text-center"></p>
+                
+                <div class="mt-12 pt-8 border-t border-white/5 text-center">
+                    <p class="text-[8px] text-slate-500 font-bold uppercase tracking-[0.3em]">HackerOne Standards // AES-256</p>
+                </div>
             </div>
-        </footer>
-    </div>
+        </aside>
+    </main>
+
+    <footer class="bg-slate-50 border-t border-slate-100 py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+        <span class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">FairDiscovery.org // 2026 Unit</span>
+        <div class="flex space-x-6 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+            <a href="#" class="hover:text-teal-500">Privacy</a>
+            <a href="#" class="hover:text-teal-500">Security</a>
+            <a href="#" class="hover:text-teal-500">OSINT</a>
+        </div>
+    </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -142,19 +140,16 @@
             const emailInput = document.getElementById('sub-email');
             const status = document.getElementById('sub-status');
             const email = emailInput.value.toLowerCase().trim();
-
             if (!email.includes('@')) { status.innerText = "INVALID SECURE SIGNATURE"; return; }
-            status.innerText = "ESTABLISHING SECURE HANDSHAKE...";
-
+            status.innerText = "SYNCING TOKEN...";
             try {
                 const userRef = doc(db, "users", email);
                 const userSnap = await getDoc(userRef);
-
                 if (userSnap.exists()) {
-                    status.innerText = "NODE SYNCED: BALANCE RESTORED.";
+                    status.innerText = "NODE RECONNECTED. BALANCE RESTORED.";
                 } else {
                     await setDoc(userRef, { email: email, credits: 20, joined: serverTimestamp() });
-                    await addDoc(collection(db, "leads"), { email: email, source: "Manifesto-Full" });
+                    await addDoc(collection(db, "leads"), { email: email, source: "Elite-Manifesto" });
                     status.innerText = "TOKEN AUTHORIZED: 20 CREDITS GRANTED.";
                 }
                 emailInput.value = "";
