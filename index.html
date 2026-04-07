@@ -15,12 +15,14 @@
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
     .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
     .canary-yellow { color: #facc15 !important; }
+    .bg-canary { background-color: #facc15 !important; }
     .border-canary { border-color: #facc15 !important; }
-    .code-purple { color: #c084fc; }
-    .code-blue { color: #60a5fa; }
     .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
-    .footer-logo { height: 32px !important; width: auto !important; transition: all 0.4s ease; opacity: 0.8; }
-    .footer-logo:hover { opacity: 1; transform: scale(1.1); }
+    
+    /* Corrected Footer Logo Styles */
+    .footer-logo { height: 28px !important; width: auto !important; transition: all 0.4s ease; opacity: 0.6; filter: grayscale(100%); }
+    .footer-logo:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+
     .neon-card { background: rgba(10, 10, 10, 0.98); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
     .neon-card:hover { border-color: #facc15; box-shadow: 0 0 30px rgba(250, 204, 21, 0.05); }
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
@@ -34,9 +36,8 @@
       <img src="logo.png" alt="Logo" class="h-6 w-auto">
       <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
     </div>
-    <div class="flex gap-4 md:gap-8 items-center">
+    <div class="flex gap-4 items-center text-white">
         <a href="#custom-forge" class="text-[10px] font-black uppercase tracking-widest border border-canary px-4 py-2 rounded-lg canary-yellow hover:bg-canary-yellow hover:text-black transition-all">Need something custom?</a>
-        <a href="mailto:jarrit@forgevertical.com" class="hidden sm:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition">Support</a>
     </div>
   </nav>
 
@@ -84,23 +85,37 @@
 
   <section id="custom-forge" class="max-w-4xl mx-auto px-6 py-32 reveal-anim">
     <div class="bg-zinc-950 border border-white/5 rounded-[3rem] p-12 text-center shadow-2xl">
-        <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-4">The Custom Forge</h2>
-        <p class="text-zinc-400 mb-10 text-lg">Need a specific script or industrial bypass? Describe your requirements below. Once forged, we will add your private node to the repository for secure checkout.</p>
+        <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-4 text-white">The Custom Forge</h2>
+        <p class="text-zinc-400 mb-10 text-lg text-white">Describe the industrial script or bypass you need. Direct-to-inbox transmission.</p>
         
-        <form action="https://formspree.io/f/YOUR_ID" method="POST" class="space-y-4" onsubmit="pushSignal('CUSTOM_REQUEST_SENT', 'Form Submitted')">
-            <input type="email" name="email" placeholder="Your Email" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition">
-            <textarea name="message" placeholder="Describe the script logic or automation you need..." required rows="4" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition"></textarea>
-            <button type="submit" class="w-full py-5 bg-canary-yellow text-black font-black uppercase text-xs tracking-[0.3em] rounded-2xl hover:scale-[1.02] transition-transform">Initialize Custom Request</button>
+        <form id="contact-form" class="space-y-4">
+            <input type="email" id="form-email" placeholder="Business Email" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition text-white">
+            <textarea id="form-msg" placeholder="Describe your logic..." required rows="4" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition text-white"></textarea>
+            
+            <button type="submit" class="w-full py-5 bg-canary text-black font-black uppercase text-xs tracking-[0.3em] rounded-2xl hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(250,204,21,0.3)]">
+                Initialize Custom Request
+            </button>
         </form>
+
+        <div class="mt-12 flex flex-wrap justify-center gap-6 opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
+            <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">LinkedIn</a>
+            <a href="https://www.facebook.com/profile.php?id=61574702919399" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Facebook</a>
+            <a href="https://x.com/AgAnubisKr" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">X (Twitter)</a>
+            <a href="https://www.fiverr.com/jarrithosking" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Fiverr</a>
+            <a href="https://app.daily.dev/jarrithosking" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Daily.dev</a>
+        </div>
     </div>
   </section>
 
   <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col items-center">
-          <div class="flex flex-wrap justify-center items-center gap-12 mb-12">
+          <div class="flex flex-wrap justify-center items-center gap-10 mb-12">
               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
-              <img src="img/githublogo.svg" alt="GitHub" class="footer-logo">
-              <img src="img/cloudflarelogo.svg" alt="Cloudflare" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Cloudflare_Logo.svg" alt="Cloudflare" class="footer-logo">
               <img src="img/geminilogo.svg" alt="Gemini" class="footer-logo">
           </div>
           <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
@@ -169,7 +184,7 @@
     }
 
     function createPulse() {
-        const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Custom script forged for user in US."];
+        const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Custom script forged for user."];
         const pulseBar = document.createElement('div');
         pulseBar.className = "fixed bottom-0 left-0 right-0 bg-black border-t border-canary p-2 z-[200] flex justify-center items-center";
         pulseBar.innerHTML = `<p id="pulse-text" class="text-[9px] font-black uppercase tracking-[0.4em] canary-yellow italic"></p>`;
@@ -198,7 +213,7 @@
             let offer = {
                 title: "SYSTEM AUDIT",
                 problem: "Detecting active session-vulnerability from your current node.",
-                solution: "Deploy Forge-Guard v6.6 to lock your industrial perimeter.",
+                solution: "Deploy Forge-Guard v6.8 to lock your industrial perimeter.",
                 link: "https://paypal.me/YOUR_PAYPAL/20"
             };
 
@@ -213,10 +228,10 @@
                     <p class="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-4 italic">Diagnostic Result</p>
                     <h4 class="text-2xl font-black italic uppercase leading-none mb-6 text-white">${offer.title}</h4>
                     <div class="bg-white/5 p-4 rounded-2xl mb-8 text-left border border-white/5">
-                        <p class="text-xs text-zinc-300 mb-4"><span class="text-red-500 font-bold uppercase">Issue:</span> ${offer.problem}</p>
-                        <p class="text-xs text-zinc-300"><span class="text-green-500 font-bold uppercase">Solution:</span> ${offer.solution}</p>
+                        <p class="text-xs text-zinc-300 mb-4 font-black"><span class="text-red-500 font-black uppercase">Issue:</span> ${offer.problem}</p>
+                        <p class="text-xs text-zinc-300 font-black"><span class="text-green-500 font-black uppercase">Solution:</span> ${offer.solution}</p>
                     </div>
-                    <button onclick="pushSignal('AD_PURCHASE_INTENT', '${offer.title}'); window.open('${offer.link}', '_blank'); closeAlert();" class="block w-full py-4 bg-canary-yellow text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Instant Access ($20)</button>
+                    <button onclick="pushSignal('AD_PURCHASE_INTENT', '${offer.title}'); window.open('${offer.link}', '_blank'); closeAlert();" class="block w-full py-4 bg-canary text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Instant Access ($20)</button>
                     <div class="mt-6 flex flex-col gap-2">
                         <button onclick="closeAlert()" class="text-[9px] text-zinc-500 uppercase tracking-widest hover:text-white transition">Dismiss (ESC)</button>
                         <button onclick="permanentlyDisableAlert()" class="text-[8px] text-zinc-700 uppercase tracking-tighter hover:text-red-500 transition underline">Don't show this again</button>
@@ -239,6 +254,25 @@
         pushSignal('AD_BANNED_BY_USER', 'Silence requested');
         closeAlert();
     }
+
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('form-email').value;
+        const message = document.getElementById('form-msg').value;
+        pushSignal('CUSTOM_FORGE_INIT', email);
+        
+        try {
+            // Target your sovereign Python script
+            const res = await fetch('http://YOUR-SERVER-IP:5000/forge-request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `email=${email}&message=${message}`
+            });
+            if(res.ok) alert("Request Transmitted to The Forge.");
+        } catch(e) { 
+            window.location.href = `mailto:jarrit@forgevertical.com?subject=Custom Forge Request&body=${message}`;
+        }
+    });
 
     window.onload = () => { loadStore(); createPulse(); runSuggestor(); };
   </script>
