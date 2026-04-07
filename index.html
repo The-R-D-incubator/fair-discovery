@@ -210,6 +210,41 @@
     }
 
     window.onload = loadStore;
+
+   /**
+ * FAIR DISCOVERY | Engine 03: Conversion Pulse
+ * Purpose: Real-time Social Proof Ticker
+ */
+
+const pulseMessages = [
+    "Global Forge-Guard signature updated 2 mins ago.",
+    "New deployment active in Western Europe.",
+    "Fiverr Phishing attempt neutralized for user in UK.",
+    "Ad-Spend Shield initialized by Tier-1 lead.",
+    "Shadow-Merge Logic successfully deployed."
+];
+
+function createPulse() {
+    const pulseBar = document.createElement('div');
+    pulseBar.className = "fixed bottom-0 left-0 right-0 bg-zinc-950 border-t border-canary p-2 z-[200] flex justify-center items-center overflow-hidden";
+    pulseBar.innerHTML = `<p id="pulse-text" class="text-[9px] font-black uppercase tracking-[0.4em] canary-yellow italic"></p>`;
+    document.body.appendChild(pulseBar);
+
+    let i = 0;
+    setInterval(() => {
+        const text = document.getElementById('pulse-text');
+        text.style.opacity = 0;
+        setTimeout(() => {
+            text.innerText = `>>> [LIVE STATUS]: ${pulseMessages[i]}`;
+            text.style.opacity = 1;
+            i = (i + 1) % pulseMessages.length;
+        }, 500);
+    }, 5000);
+}
+
+// Initialize the closer on load
+window.addEventListener('load', createPulse);
+    
   </script>
 </body>
 </html>
