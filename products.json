@@ -1,5 +1,18 @@
 [
   {
+    "id": "contract-scan",
+    "name": "Contract-Scan: Predatory Clause Detector",
+    "category": "Security",
+    "description": "Industrial-grade legal intelligence. Scan PDF contracts for predatory clauses, IP grabs, and indemnity traps using local-first heuristic analysis. Deconstruct legal jargon into actionable risk alerts before you sign. Own your rights.",
+    "price": "20",
+    "popularity": 140,
+    "image": "doc-scan.jpg",
+    "tags": ["Legal", "Privacy", "Utility", "IP-Protection"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZn6b65ZPxA0tSVUPg44pVVzDMM3czUPVhV0",
+    "paypal_url": "https://www.paypal.com/ncp/payment/JVSTWBSL5CSNG"
+  },
+  {
     "id": "pixel-purge",
     "name": "Pixel-Purge: Metadata Forensic Scrubber",
     "category": "Security",
