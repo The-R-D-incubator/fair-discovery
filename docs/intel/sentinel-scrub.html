@@ -35,7 +35,8 @@
                     <p class="text-teal-400 font-bold uppercase">Node Connection Audit:</p>
                     <p class="text-white/60 uppercase">Origin: <span id="user-ip">Detecting...</span></p>
                     <p class="text-white/60 uppercase">Protocol: AES-256 SECURE CHANNEL</p>
-                    <p id="status" class="text-teal-300 font-bold mt-2"></p> </div>
+                    <p id="status" class="text-teal-300 font-bold mt-2"></p> 
+                </div>
             </div>
 
             <div class="mt-12 pt-8 border-t border-white/10">
@@ -63,13 +64,13 @@
                 <input type="file" id="fileInput" class="hidden" onchange="runAudit()">
             </div>
 
-            <div id="results-zone" class="hidden space-y-6 animate-in fade-in zoom-in duration-500">
+            <div id="results-zone" class="hidden space-y-6">
                 <div class="p-6 success-bg border border-teal-100 rounded-3xl">
                     <div class="flex items-center space-x-3 mb-4">
                         <span class="w-6 h-6 rounded-full bg-teal-500 text-white flex items-center justify-center text-[10px]">✓</span>
                         <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">Sanitization Complete</h3>
                     </div>
-                    <ul class="text-[10px] font-bold text-slate-500 space-y-2 uppercase">
+                    <ul class="text-[10px] font-bold text-slate-500 space-y-2 uppercase text-left">
                         <li>• Hidden Tracking Pixels: <span class="text-teal-600">REMOVED</span></li>
                         <li>• Malicious Macro Payloads: <span class="text-teal-600">NEUTRALIZED</span></li>
                         <li>• External Call-back Scripts: <span class="text-teal-600">CLEANED</span></li>
@@ -80,16 +81,62 @@
                     Download Sanitized Copy
                 </a>
 
+                <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100">
+                    <p class="text-[9px] text-slate-400 font-bold uppercase mb-4 tracking-widest">Subscribe for 20 Bonus Credits</p>
+                    <div class="flex gap-2">
+                        <input type="email" id="sub-email" placeholder="EMAIL@AGENCY.COM" class="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2 text-[10px] focus:outline-none focus:border-teal-500">
+                        <button onclick="saveLead()" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">Join</button>
+                    </div>
+                    <p id="sub-status" class="mt-2 text-[8px] text-teal-600 font-bold uppercase"></p>
+                </div>
+
                 <p class="text-center text-[9px] text-slate-300 font-bold uppercase tracking-widest cursor-pointer" onclick="reset()">Run another scan (1 Credit)</p>
             </div>
 
             <div id="paywall" class="hidden text-center">
-                <h3 class="text-2xl font-black italic uppercase mb-2">Node Depleted</h3>
+                <h3 class="text-2xl font-black italic uppercase mb-2 text-slate-800">Node Depleted</h3>
                 <p class="text-slate-400 text-xs mb-8">Authorize further forensic actions.</p>
-                <a id="paylink" href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" class="block w-full py-5 bg-teal-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em]">Top Up Node ($1.99)</a>
+                <a id="paylink" href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" target="_blank" class="block w-full py-5 bg-teal-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em] shadow-lg shadow-teal-100 mb-4">
+                    Top Up Node ($1.99)
+                </a>
+                <button onclick="applyGlobalPromo()" class="text-[9px] text-slate-300 uppercase tracking-widest font-black hover:text-teal-500 transition-all">Check for Holiday Discounts</button>
             </div>
         </div>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyqBa1_vjKePLo6apd_TrDojLgsQgngFY",
+            authDomain: "fair-discovery.firebaseapp.com",
+            projectId: "fair-discovery",
+            storageBucket: "fair-discovery.firebasestorage.app",
+            messagingSenderId: "827220975047",
+            appId: "1:827220975047:web:6b399c410c41f9b5100de2",
+            measurementId: "G-C6Z3VMB0ND"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.saveLead = async function() {
+            const emailInput = document.getElementById('sub-email');
+            const status = document.getElementById('sub-status');
+            const email = emailInput.value;
+            if (!email.includes('@')) { status.innerText = "INVALID SECURE SIGNATURE"; return; }
+            status.innerText = "ENCRYPTING LEAD...";
+            try {
+                await addDoc(collection(db, "leads"), { email: email, tool: "Sentinel-Scrub", timestamp: serverTimestamp() });
+                credits = parseInt(localStorage.getItem('sentinel_credits') || 0) + 20;
+                localStorage.setItem('sentinel_credits', credits);
+                update();
+                status.innerText = "SUCCESS: 20 BONUS CREDITS GRANTED.";
+                emailInput.value = "";
+            } catch (e) { status.innerText = "VAULT ERROR: RETRY LATER"; }
+        }
+    </script>
 
     <script>
         // 1. IP DETECTION
@@ -100,20 +147,13 @@
             try {
                 const response = await fetch('global_promo.json');
                 const promo = await response.json();
-
                 if (promo.multiplier > 1) {
                     document.getElementById('status').innerText = `PROMO ACTIVE: ${promo.active_holiday} (${promo.reason})`;
                     const payBtn = document.getElementById('paylink');
                     if (payBtn) payBtn.innerText = `Top Up Node: ${10 * promo.multiplier} CREDITS ($1.99)`;
                 }
-
-                if (promo.confetti) {
-                    console.log("Confetti Triggered for: " + promo.active_holiday);
-                    startConfetti(); 
-                }
-            } catch (e) {
-                console.log("Promo engine standby.");
-            }
+                if (promo.confetti) startConfetti();
+            } catch (e) { console.log("Promo engine standby."); }
         }
 
         // 3. CORE LOGIC
@@ -125,6 +165,9 @@
             if(credits <= 0 && document.getElementById('results-zone').classList.contains('hidden')) {
                 document.getElementById('upload-zone').classList.add('hidden');
                 document.getElementById('paywall').classList.remove('hidden');
+            } else {
+                document.getElementById('upload-zone').classList.remove('hidden');
+                document.getElementById('paywall').classList.add('hidden');
             }
         }
 
@@ -133,7 +176,6 @@
             const upZone = document.getElementById('upload-zone');
             const resZone = document.getElementById('results-zone');
             upZone.classList.add('opacity-50', 'pointer-events-none');
-            
             setTimeout(() => {
                 credits--;
                 localStorage.setItem('sentinel_credits', credits);
@@ -144,24 +186,17 @@
         }
 
         function reset() {
-            if(credits > 0) {
-                document.getElementById('results-zone').classList.add('hidden');
-                document.getElementById('upload-zone').classList.remove('hidden', 'opacity-50', 'pointer-events-none');
-            } else {
-                document.getElementById('results-zone').classList.add('hidden');
-                document.getElementById('paywall').classList.remove('hidden');
-            }
+            document.getElementById('results-zone').classList.add('hidden');
+            update();
         }
 
-        // 4. CONFETTI ENGINE (Sovereign Script)
         function startConfetti() {
             const canvas = document.getElementById('canvas-confetti');
             const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             let particles = [];
-            const colors = ['#bef264', '#ffffff', '#2dd4bf', '#14b8a6'];
-
+            const colors = ['#bef264', '#000000', '#2dd4bf', '#14b8a6'];
             for(let i=0; i<100; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
@@ -172,26 +207,18 @@
                     angle: Math.random() * 6.28
                 });
             }
-
             function draw() {
                 ctx.clearRect(0,0,canvas.width, canvas.height);
                 particles.forEach(p => {
-                    ctx.fillStyle = p.color;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, 6.28);
-                    ctx.fill();
-                    p.y += p.speed;
-                    p.x += Math.sin(p.angle) * 2;
+                    ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, 6.28); ctx.fill();
+                    p.y += p.speed; p.x += Math.sin(p.angle) * 2;
                     if(p.y > canvas.height) p.y = -10;
                 });
                 requestAnimationFrame(draw);
             }
             draw();
         }
-
         window.onload = applyGlobalPromo;
     </script>
-    
 </body>
-    
 </html>
