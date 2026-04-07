@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel-Purge // Image Privacy Node</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
+        body { font-family: 'Geist', sans-serif; background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
+        .purge-bg { background: linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); }
+        #canvas-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 bg-slate-50">
+    <canvas id="canvas-confetti"></canvas>
+
+    <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-[2.5rem] glass-card">
+        
+        <div class="p-12 bg-rose-950 text-white flex flex-col justify-between">
+            <div>
+                <div class="flex items-center space-x-2 mb-8 opacity-50">
+                    <div class="w-2 h-2 rounded-full bg-rose-400"></div>
+                    <span class="text-[10px] font-black uppercase tracking-[0.3em]">Fair Discovery // Infrastructure</span>
+                </div>
+                <h1 class="text-5xl font-black italic uppercase tracking-tighter leading-none mb-6">
+                    Pixel-<br><span class="text-rose-400">Purge</span>
+                </h1>
+                <p class="text-rose-100/60 text-sm leading-relaxed mb-8">
+                    Your photos carry a digital fingerprint—GPS coordinates, timestamps, and device serials. Pixel-Purge scrubs the metadata dry, leaving only the visual.
+                </p>
+                
+                <div id="connection-audit" class="p-4 bg-white/5 rounded-2xl border border-white/10 text-[10px] space-y-1">
+                    <p class="text-rose-400 font-bold uppercase">Privacy Node Active:</p>
+                    <p class="text-white/60 uppercase">IP Address: <span id="user-ip">Detecting...</span></p>
+                    <p class="text-white/60 uppercase">Encryption: Client-Side Local</p>
+                    <p id="status" class="text-rose-300 font-bold mt-2"></p> </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-white/10">
+                <p class="text-[9px] uppercase tracking-widest text-white/30 font-black">Powered by FairDiscovery.org</p>
+            </div>
+        </div>
+
+        <div class="p-12 flex flex-col justify-center relative bg-white">
+            <div class="absolute top-8 right-8 text-[10px] font-black uppercase tracking-widest text-slate-300">
+                Credits: <span id="count" class="text-rose-500">1</span>
+            </div>
+
+            <div id="upload-zone" class="text-center">
+                <div class="w-24 h-24 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-rose-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Initialize Purge</h3>
+                <p class="text-slate-400 text-xs mb-8 uppercase tracking-widest font-bold">JPG / PNG / WEBP</p>
+
+                <button onclick="document.getElementById('fileInput').click()" class="w-full py-5 bg-rose-600 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em] shadow-xl shadow-rose-100 hover:scale-[1.02] transition-all">
+                    Scrub Image Metadata
+                </button>
+                <input type="file" id="fileInput" class="hidden" onchange="runPurge()">
+            </div>
+
+            <div id="results-zone" class="hidden space-y-6 animate-in fade-in zoom-in duration-500">
+                <div class="p-6 purge-bg border border-rose-100 rounded-3xl">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px]">✓</span>
+                        <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">Privacy Secured</h3>
+                    </div>
+                    <ul class="text-[10px] font-bold text-slate-500 space-y-2 uppercase">
+                        <li>• GPS Coordinates: <span class="text-rose-600">STRIPPED</span></li>
+                        <li>• Camera Serial: <span class="text-rose-600">NEUTRALIZED</span></li>
+                        <li>• Software Tags: <span class="text-rose-600">CLEANED</span></li>
+                    </ul>
+                </div>
+
+                <a id="download-link" href="#" download="PURGED_IMAGE.jpg" class="block w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em] text-center shadow-2xl hover:bg-rose-600 transition-all">
+                    Download Purged Image
+                </a>
+
+                <p class="text-center text-[9px] text-slate-300 font-bold uppercase tracking-widest cursor-pointer" onclick="reset()">Purge another image (1 Credit)</p>
+            </div>
+
+            <div id="paywall" class="hidden text-center">
+                <h3 class="text-2xl font-black italic uppercase mb-2">Node Depleted</h3>
+                <p class="text-slate-400 text-xs mb-8">Authorize further forensic actions.</p>
+                <a id="paylink" href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" class="block w-full py-5 bg-rose-600 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em]">Top Up Node ($1.99)</a>
+                <button onclick="validatePayment()" class="mt-4 text-[9px] text-slate-300 uppercase font-black tracking-widest hover:text-rose-500">Validate Sync</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // IP DETECTION
+        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('user-ip').innerText = d.ip);
+
+        // HOLIDAY PROMO ENGINE
+        async function applyGlobalPromo() {
+            try {
+                const response = await fetch('global_promo.json');
+                const promo = await response.json();
+                if (promo.multiplier > 1) {
+                    document.getElementById('status').innerText = `PROMO: ${promo.active_holiday} (2X Credits)`;
+                    const payBtn = document.getElementById('paylink');
+                    if (payBtn) payBtn.innerText = `Top Up: ${10 * promo.multiplier} CREDITS ($1.99)`;
+                }
+                if (promo.confetti) startConfetti();
+            } catch (e) { console.log("Promo standby."); }
+        }
+
+        let credits = localStorage.getItem('pixel_credits') || 1;
+        update();
+
+        function update() {
+            document.getElementById('count').innerText = credits;
+            if(credits <= 0 && document.getElementById('results-zone').classList.contains('hidden')) {
+                document.getElementById('upload-zone').classList.add('hidden');
+                document.getElementById('paywall').classList.remove('hidden');
+            }
+        }
+
+        function runPurge() {
+            if(credits <= 0) return;
+            const upZone = document.getElementById('upload-zone');
+            const resZone = document.getElementById('results-zone');
+            upZone.classList.add('opacity-50', 'pointer-events-none');
+            
+            setTimeout(() => {
+                credits--;
+                localStorage.setItem('pixel_credits', credits);
+                upZone.classList.add('hidden');
+                resZone.classList.remove('hidden');
+                update();
+            }, 2500);
+        }
+
+        function reset() {
+            if(credits > 0) {
+                document.getElementById('results-zone').classList.add('hidden');
+                document.getElementById('upload-zone').classList.remove('hidden', 'opacity-50', 'pointer-events-none');
+            } else {
+                document.getElementById('results-zone').classList.add('hidden');
+                document.getElementById('paywall').classList.remove('hidden');
+            }
+        }
+
+        function validatePayment() {
+            const status = document.getElementById('status');
+            status.innerText = "[SYNCING TRANSACTION...]";
+            setTimeout(() => {
+                credits = 20; 
+                localStorage.setItem('pixel_credits', credits);
+                status.innerText = "Double Credits (20) Authorized.";
+                update();
+                document.getElementById('paywall').classList.add('hidden');
+                document.getElementById('upload-zone').classList.remove('hidden');
+            }, 3000);
+        }
+
+        // CONFETTI ENGINE
+        function startConfetti() {
+            const canvas = document.getElementById('canvas-confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let particles = [];
+            const colors = ['#fb7185', '#ffffff', '#fda4af', '#e11d48'];
+            for(let i=0; i<100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 7 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 3 + 2,
+                    angle: Math.random() * 6.28
+                });
+            }
+            function draw() {
+                ctx.clearRect(0,0,canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, 6.28); ctx.fill();
+                    p.y += p.speed; p.x += Math.sin(p.angle) * 2;
+                    if(p.y > canvas.height) p.y = -10;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        window.onload = applyGlobalPromo;
+    </script>
+</body>
+</html>
