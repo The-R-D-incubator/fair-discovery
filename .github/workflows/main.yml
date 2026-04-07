@@ -1,0 +1,38 @@
+name: FORGE_COMMAND_OPS
+on:
+  schedule:
+    - cron: '0 */6 * * *' 
+  workflow_dispatch: # This creates the "Run" button
+
+jobs:
+  forge-mission:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run IP Rotator & Scout
+        run: |
+          python bot/ip_rotator.py
+          python bot/scout.py
+
+      - name: Run Neil Patel SEO Stacker
+        run: python bot/seo_stacker.py
+
+      - name: Commit & Push New Intel
+        run: |
+          git config --local user.email "forge-bot@fairdiscovery.org"
+          git config --local user.name "Forge-Bot-v7"
+          git add bot/leads/*.csv intel/*.html
+          git commit -m "Forge Update: New Whales & SEO Intel Stacked [v7.1]" || echo "No changes detected"
+          git push
