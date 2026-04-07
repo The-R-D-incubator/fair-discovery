@@ -2,78 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FORGE_COMMAND | Revenue Analytics</title>
+    <title>FORGE_COMMAND | Real-Time Engine Audit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: #facc15; font-family: 'JetBrains Mono', monospace; }
-        .stat-card { background: rgba(20, 20, 20, 0.8); border: 1px solid #333; }
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        body { background: #000; color: #facc15; font-family: 'JetBrains Mono', monospace; }
+        .grid-line { border-color: rgba(250, 204, 21, 0.1); }
+        .log-entry:nth-child(even) { background: rgba(255,255,255,0.02); }
     </style>
 </head>
-<body class="p-10">
+<body class="p-8">
     <div class="max-w-7xl mx-auto">
-        <header class="flex justify-between items-end mb-12 border-b border-zinc-800 pb-6">
-            <div>
-                <h1 class="text-4xl font-black italic uppercase tracking-tighter">Forge Command</h1>
-                <p class="text-zinc-500 text-xs mt-2 uppercase tracking-[0.3em]">Operational Status: <span class="text-green-500 pulse">Active</span></p>
-            </div>
+        <div class="flex justify-between items-start mb-12">
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase">Forge_Control v5.6</h1>
             <div class="text-right">
-                <p class="text-zinc-500 text-[10px] uppercase">Global Traffic Loop</p>
-                <p class="text-2xl font-bold">2,482 <span class="text-xs text-zinc-600">Scans/hr</span></p>
-            </div>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            <div class="stat-card p-6 rounded-2xl">
-                <p class="text-zinc-500 text-[10px] uppercase mb-2">High-Stakes Leads</p>
-                <p class="text-3xl font-black">128</p>
-            </div>
-            <div class="stat-card p-6 rounded-2xl border-canary">
-                <p class="text-zinc-500 text-[10px] uppercase mb-2">Syndicator Reach</p>
-                <p class="text-3xl font-black text-white">42.1K</p>
-            </div>
-            <div class="stat-card p-6 rounded-2xl">
-                <p class="text-zinc-500 text-[10px] uppercase mb-2">Conversion Conversion</p>
-                <p class="text-3xl font-black">4.2%</p>
-            </div>
-            <div class="stat-card p-6 rounded-2xl">
-                <p class="text-zinc-500 text-[10px] uppercase mb-2">Revenue Node Sales</p>
-                <p class="text-3xl font-black text-green-500">$2,560</p>
+                <button onclick="clearLogs()" class="text-[10px] border border-red-500 text-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-black transition">Wipe Session Logs</button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <div class="stat-card p-8 rounded-[2rem]">
-                <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
-                    <span class="w-2 h-2 bg-canary-yellow rounded-full"></span> 
-                    ACTIVE SCRAPE LOGIC
-                </h3>
-                <div class="space-y-4 text-xs">
-                    <div class="flex justify-between p-3 bg-white/5 rounded-lg border-l-2 border-blue-500">
-                        <span class="text-zinc-400">[X_API]</span>
-                        <span>Monitoring: "Ad Manager Breach"</span>
-                        <span class="text-green-500">FOUND</span>
-                    </div>
-                    <div class="flex justify-between p-3 bg-white/5 rounded-lg border-l-2 border-orange-500">
-                        <span class="text-zinc-400">[REDDIT_API]</span>
-                        <span>Monitoring: "Fiverr Security"</span>
-                        <span class="text-green-500">MATCHED</span>
-                    </div>
-                    <div class="flex justify-between p-3 bg-white/5 rounded-lg border-l-2 border-purple-500">
-                        <span class="text-zinc-400">[RSS_GLOBAL]</span>
-                        <span>Scanning for: "Session Theft"</span>
-                        <span class="text-zinc-600">IDLE</span>
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="border grid-line p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase">Ads Displayed</p>
+                <p id="stat-ads" class="text-4xl font-black">0</p>
             </div>
+            <div class="border grid-line p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase">Clicks/Interest</p>
+                <p id="stat-clicks" class="text-4xl font-black text-white">0</p>
+            </div>
+            <div class="border grid-line p-6 rounded-2xl bg-white/5">
+                <p class="text-zinc-500 text-[10px] uppercase">Conversion Rate</p>
+                <p id="stat-conv" class="text-4xl font-black text-green-500">0%</p>
+            </div>
+        </div>
 
-            <div class="stat-card p-8 rounded-[2rem]">
-                <h3 class="text-lg font-bold mb-6">LIVE LEAD GENERATION</h3>
-                <canvas id="revenueChart" class="w-full h-32 bg-zinc-900/50 rounded-xl mb-4"></canvas>
-                <p class="text-[10px] text-zinc-500 uppercase italic">Revenue signals projected across 24-hour cycle</p>
+        <div class="border grid-line rounded-[2rem] overflow-hidden">
+            <div class="bg-zinc-900 px-6 py-3 border-b grid-line flex justify-between">
+                <span class="text-xs font-bold uppercase tracking-widest">Global Activity Stream</span>
+                <span class="text-[10px] text-zinc-500">AUTO-REFRESH: ON</span>
+            </div>
+            <div id="log-container" class="h-96 overflow-y-auto p-4 text-[11px] font-mono space-y-1">
+                <p class="text-zinc-700">Waiting for bot signals...</p>
             </div>
         </div>
     </div>
+
+    <script>
+        function updateDashboard() {
+            const logs = JSON.parse(localStorage.getItem('forge_logs') || '[]');
+            const container = document.getElementById('log-container');
+            
+            // Calculate Stats
+            const ads = logs.filter(l => l.event === 'AD_SHOWN').length;
+            const clicks = logs.filter(l => l.event === 'BUY_CLICK').length;
+            const conv = ads > 0 ? ((clicks / ads) * 100).toFixed(1) : 0;
+
+            document.getElementById('stat-ads').innerText = ads;
+            document.getElementById('stat-clicks').innerText = clicks;
+            document.getElementById('stat-conv').innerText = conv + "%";
+
+            // Render Logs
+            if (logs.length > 0) {
+                container.innerHTML = logs.reverse().map(l => `
+                    <div class="log-entry p-2 flex justify-between">
+                        <span class="text-zinc-500">[${l.timestamp.split('T')[1].split('.')[0]}]</span>
+                        <span class="font-bold text-white">${l.event}</span>
+                        <span class="text-blue-400">ORIGIN: ${l.origin}</span>
+                        <span class="text-zinc-400">${l.details}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function clearLogs() {
+            localStorage.removeItem('forge_logs');
+            updateDashboard();
+        }
+
+        setInterval(updateDashboard, 2000);
+        updateDashboard();
+    </script>
 </body>
 </html>
