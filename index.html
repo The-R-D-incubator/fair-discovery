@@ -17,50 +17,46 @@
 
     /* Color Palette */
     .theme-accent { color: #bef264; }
-    .bg-theme-accent { background-color: #bef264; }
-    .canary-highlight { color: #facc15 !important; } /* Canary Yellow for high-contrast visibility */
+    .canary-yellow { color: #facc15 !important; } /* High-contrast Canary Yellow */
     .border-canary { border-color: #facc15 !important; }
 
-    /* Hero Animation Container */
-    .hero-container { position: relative; overflow: hidden; }
+    /* Hero Animation Logic */
+    .hero-container { position: relative; overflow: hidden; min-height: 500px; }
     .hero-gif {
         position: absolute;
-        right: -50px;
+        right: 0;
         top: 50%;
         transform: translateY(-50%);
-        width: 500px;
-        opacity: 0.4;
+        width: 450px;
+        opacity: 0.6;
         pointer-events: none;
-        display: none; /* Hidden by default for mobile */
+        display: none; /* Hidden on mobile */
     }
     @media (min-width: 1024px) { .hero-gif { display: block; } }
 
-    /* UI Logic Adjustment */
-    .search-dock { z-index: 100; transition: all 0.4s ease; }
-    
     .neon-card { 
-        background: rgba(10, 10, 10, 0.95);
+        background: rgba(10, 10, 10, 0.98);
         border: 1px solid rgba(255,255,255,0.05); 
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
     
     .neon-card:hover { 
-        border-color: #bef264; 
-        box-shadow: 0 0 40px rgba(190, 242, 100, 0.08);
+        border-color: #facc15; 
+        box-shadow: 0 0 30px rgba(250, 204, 21, 0.05);
         transform: translateY(-5px);
     }
 
-    /* Footer Tech Icons */
-    .footer-logo-placeholder {
+    /* Footer Logo Styling */
+    .footer-logo {
+        height: 24px;
         filter: grayscale(100%);
-        opacity: 0.4;
+        opacity: 0.5;
         transition: all 0.3s ease;
-        border: 1px dashed rgba(255,255,255,0.2);
     }
-    .footer-logo-placeholder:hover {
+    .footer-logo:hover {
         filter: grayscale(0%);
         opacity: 1;
-        border-color: #facc15;
+        transform: scale(1.1);
     }
 
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
@@ -75,38 +71,38 @@
       <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
     </div>
     <div class="flex gap-8 items-center">
-        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] theme-accent hover:canary-highlight transition">Support</a>
+        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] canary-yellow hover:text-white transition">Support</a>
     </div>
   </nav>
 
   <header class="hero-container py-32 px-6">
-    <img src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/coder.gif" alt="Coding Animation" class="hero-gif">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eXF4JnB0PU1mYm8mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/3o7TKSjP6S7fBn1fGM/giphy.gif" alt="Coding Logic" class="hero-gif">
     
     <div class="max-w-7xl mx-auto relative z-10 reveal-anim">
         <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
-            Fair Discovery<br><span class="theme-accent">Tools Forged For Industry.</span>
+            Fair Discovery<br><span class="canary-yellow">Tools Forged For Industry.</span>
         </h1>
         <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-3xl">
-            Building tools that <span class="canary-highlight font-bold">help businesses</span>, 
-            <span class="canary-highlight font-bold">secure files</span>, and 
-            <span class="canary-highlight font-bold">protect ad spend</span>. 
+            Building tools that <span class="canary-yellow font-bold">help businesses</span>, 
+            <span class="canary-yellow font-bold">secure files</span>, and 
+            <span class="canary-yellow font-bold">protect ad spend</span>. 
             Audit our repository and deploy the logic that works for you.
         </p>
     </div>
   </header>
 
-  <div class="max-w-7xl mx-auto w-full px-6 -mt-10 mb-16 relative search-dock">
-    <div class="bg-black/90 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-4 flex flex-col md:flex-row gap-6 items-center justify-between">
+  <div class="max-w-7xl mx-auto w-full px-6 -mt-10 mb-16 relative z-[100]">
+    <div class="bg-black/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-4 flex flex-col md:flex-row gap-6 items-center justify-between shadow-2xl">
         <div class="relative w-full md:w-96">
             <input type="text" id="toolSearch" onkeyup="filterTools()" placeholder="Search Repository..." 
                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-canary transition text-zinc-300">
         </div>
         <div class="flex flex-wrap gap-2 justify-center">
-            <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-theme-accent text-theme-accent text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
-            <button onclick="setCategory('Security')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:text-canary-highlight transition">Security</button>
-            <button onclick="setCategory('Free Zone')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:text-canary-highlight transition">Free Zone</button>
-            <button onclick="setCategory('AI')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:text-canary-highlight transition">AI</button>
-            <button onclick="setCategory('Business')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:text-canary-highlight transition">Business</button>
+            <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-canary text-canary-yellow text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
+            <button onclick="setCategory('Security')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">Security</button>
+            <button onclick="setCategory('Free Zone')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">Free Zone</button>
+            <button onclick="setCategory('AI')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">AI</button>
+            <button onclick="setCategory('Business')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">Business</button>
         </div>
     </div>
   </div>
@@ -115,16 +111,16 @@
     <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </main>
 
-  <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6">
+  <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col items-center">
-          <div class="flex flex-wrap justify-center gap-8 mb-12">
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">PayPal</div>
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">GitHub</div>
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">Firebase</div>
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">GCP</div>
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">Gemini</div>
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">Cloudflare</div>
-              <div class="footer-logo-placeholder px-4 py-2 border rounded font-bold text-[10px] uppercase">GitLab</div>
+          <div class="flex flex-wrap justify-center items-center gap-10 mb-12">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Firebase_Logo.svg" alt="Firebase" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Google_Gemini_logo.svg" alt="Gemini" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Cloudflare_Logo.svg" alt="Cloudflare" class="footer-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
           </div>
           <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
       </div>
@@ -134,18 +130,18 @@
     let allProducts = [];
     let currentCategory = 'All';
 
-    // Forensic Status Logic for color dots
+    // Correction: Mapping Status Dots as per Industrial Audit
     function getStatusColor(id) {
         const active = ['global-forge-guard', 'shadow-merge-tool', 'aurora-ai-ip', 'adguard', 'osint-knife', 'ai-content-sentinel'];
         const concept = ['vertical-web-builder-shell', 'Entrepreneurs-Guide', 'hono-guardian', 'stealth-bypass', 'aivpn-node'];
         const raw = ['adam-v1-free'];
         const affiliate = ['surfshark-partner'];
 
-        if (active.includes(id)) return 'bg-green-500';
-        if (concept.includes(id)) return 'bg-blue-500';
-        if (raw.includes(id)) return 'bg-yellow-500';
-        if (affiliate.includes(id)) return 'bg-white';
-        return 'bg-zinc-500';
+        if (active.includes(id)) return 'bg-green-500'; // Green = Ready
+        if (concept.includes(id)) return 'bg-blue-500';  // Blue = Coded Concept
+        if (raw.includes(id)) return 'bg-yellow-500';   // Yellow = Raw Code
+        if (affiliate.includes(id)) return 'bg-white';  // White = Partner
+        return 'bg-blue-500'; // Default to Blue (Coded) per Image 2 request
     }
 
     async function loadStore() {
@@ -162,8 +158,8 @@
         grid.innerHTML = products.map((tool, index) => {
             const isFree = tool.price.toUpperCase() === 'FREE';
             const statusColor = getStatusColor(tool.id);
-            const priceDisplay = isFree ? `<span class="canary-highlight font-mono text-3xl font-bold italic tracking-tighter">FREE</span>` : 
-                                          `<span class="canary-highlight font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>`;
+            const priceDisplay = isFree ? `<span class="canary-yellow font-mono text-3xl font-bold italic tracking-tighter">FREE</span>` : 
+                                          `<span class="canary-yellow font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>`;
             
             return `
             <div class="neon-card rounded-[2.5rem] flex flex-col overflow-hidden reveal-anim" style="animation-delay: ${index * 0.05}s">
@@ -173,18 +169,18 @@
 
                 <div class="p-10 pt-0 flex flex-col flex-grow relative">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-3 h-3 rounded-full mt-4 ${statusColor} shadow-[0_0_10px_rgba(255,255,255,0.2)]"></div>
+                        <div class="w-3 h-3 rounded-full mt-4 ${statusColor} shadow-[0_0_15px_rgba(255,255,255,0.1)]"></div>
                         ${priceDisplay}
                     </div>
                     
-                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none">${tool.name}</h3>
+                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none hover:canary-yellow transition">${tool.name}</h3>
                     <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
                     
                     <div class="flex flex-wrap gap-2 mb-10 mt-auto">
-                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-600 text-[8px] font-bold uppercase rounded-md tracking-widest">${tag}</span>`).join('')}
+                        ${tool.tags.map(tag => `<span class="px-3 py-1 bg-white/5 text-zinc-500 text-[10px] font-bold uppercase rounded-md tracking-widest canary-yellow border border-white/5">${tag}</span>`).join('')}
                     </div>
 
-                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-theme-accent text-theme-accent py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-theme-accent hover:text-black transition-all duration-500">
+                    <a href="${tool.paypal_url}" target="_blank" class="block text-center border border-canary text-canary-yellow py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-facc15 hover:text-black transition-all duration-500">
                         ${isFree ? 'Initialize Download' : 'Acquire Node'}
                     </a>
                 </div>
@@ -207,8 +203,7 @@
         document.querySelectorAll('.cat-btn').forEach(btn => {
             const isMatch = btn.innerText === cat.toUpperCase();
             btn.classList.toggle('border-canary', isMatch);
-            btn.classList.toggle('text-canary-highlight', isMatch);
-            btn.classList.toggle('bg-white/5', isMatch);
+            btn.classList.toggle('text-canary-yellow', isMatch);
         });
         filterTools();
     }
