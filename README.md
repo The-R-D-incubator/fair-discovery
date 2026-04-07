@@ -1,5 +1,13 @@
 Fair Discovery
 
+About:
+
+I am a Solopreneur building tools that help in business or protecting
+your assets. I build a variety of tools in the store that have many
+different purposes.
+
+Some are paid tools, some once of sales and other totally FREE.
+
 For any queries please feel free to contact us:
 
 Email: jarrit@forgevertical.com
