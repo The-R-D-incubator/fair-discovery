@@ -8,76 +8,126 @@
         body { background: #000; color: #facc15; font-family: 'JetBrains Mono', monospace; }
         .grid-line { border-color: rgba(250, 204, 21, 0.1); }
         .log-entry:nth-child(even) { background: rgba(255,255,255,0.02); }
+        .status-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     </style>
 </head>
 <body class="p-8">
     <div class="max-w-7xl mx-auto">
+        
         <div class="flex justify-between items-start mb-12">
-            <h1 class="text-4xl font-black italic tracking-tighter uppercase">Forge_Control v5.6</h1>
+            <div>
+                <h1 class="text-4xl font-black italic tracking-tighter uppercase">Forge_Control v6.2</h1>
+                <p class="text-[10px] text-zinc-500 uppercase tracking-[0.4em] mt-2">
+                    System Status: <span id="mission-status" class="status-pulse text-green-500 font-bold">Initalizing...</span>
+                </p>
+            </div>
             <div class="text-right">
-                <button onclick="clearLogs()" class="text-[10px] border border-red-500 text-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-black transition">Wipe Session Logs</button>
+                <button onclick="clearLogs()" class="text-[10px] border border-red-500 text-red-500 px-4 py-2 rounded-xl hover:bg-red-500 hover:text-black transition uppercase font-bold">Wipe Local Session</button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             <div class="border grid-line p-6 rounded-2xl">
-                <p class="text-zinc-500 text-[10px] uppercase">Ads Displayed</p>
-                <p id="stat-ads" class="text-4xl font-black">0</p>
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">High-Stakes Whales Found</p>
+                <p id="stat-whales" class="text-4xl font-black text-white">0</p>
+                <p id="active-mission" class="text-[8px] text-zinc-600 mt-2 uppercase italic tracking-tighter">Mission: Pending</p>
             </div>
             <div class="border grid-line p-6 rounded-2xl">
-                <p class="text-zinc-500 text-[10px] uppercase">Clicks/Interest</p>
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">Ads Displayed</p>
+                <p id="stat-ads" class="text-4xl font-black text-white">0</p>
+            </div>
+            <div class="border grid-line p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">Clicks/Interest</p>
                 <p id="stat-clicks" class="text-4xl font-black text-white">0</p>
             </div>
-            <div class="border grid-line p-6 rounded-2xl bg-white/5">
-                <p class="text-zinc-500 text-[10px] uppercase">Conversion Rate</p>
+            <div class="border grid-line p-6 rounded-2xl bg-white/5 border-canary">
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">Conversion Rate</p>
                 <p id="stat-conv" class="text-4xl font-black text-green-500">0%</p>
             </div>
         </div>
 
-        <div class="border grid-line rounded-[2rem] overflow-hidden">
-            <div class="bg-zinc-900 px-6 py-3 border-b grid-line flex justify-between">
-                <span class="text-xs font-bold uppercase tracking-widest">Global Activity Stream</span>
-                <span class="text-[10px] text-zinc-500">AUTO-REFRESH: ON</span>
+        <div class="border grid-line rounded-[2.5rem] overflow-hidden shadow-2xl">
+            <div class="bg-zinc-900 px-8 py-4 border-b grid-line flex justify-between items-center">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em]">Global Forensic Activity Stream</span>
+                <span class="flex items-center gap-2 text-[9px] text-zinc-500">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 status-pulse"></span> LIVE_DATA_SYNC
+                </span>
             </div>
-            <div id="log-container" class="h-96 overflow-y-auto p-4 text-[11px] font-mono space-y-1">
-                <p class="text-zinc-700">Waiting for bot signals...</p>
+            <div id="log-container" class="h-[500px] overflow-y-auto p-6 text-[11px] font-mono space-y-2">
+                <p class="text-zinc-700 italic">Listening for bot signatures and lead signals...</p>
             </div>
         </div>
     </div>
 
     <script>
+        // --- DATA FETCH: MISSION & WHALES ---
+        async function fetchBotIntelligence() {
+            try {
+                // Fetch the mission set by Trend-Jacker
+                const mRes = await fetch('../current_mission.json');
+                if (mRes.ok) {
+                    const mission = await mRes.json();
+                    document.getElementById('mission-status').innerText = mission.status || "ACTIVE";
+                    document.getElementById('active-mission').innerText = `Mission: ${mission.active_targets.join(' | ')}`;
+                }
+
+                // Fetch Whale CSV for real count
+                const wRes = await fetch('./leads/priority_whales.csv');
+                if (wRes.ok) {
+                    const text = await wRes.text();
+                    const lines = text.trim().split('\n');
+                    // Subtract 1 for the header
+                    const count = lines.length > 1 ? lines.length - 1 : 0;
+                    document.getElementById('stat-whales').innerText = count;
+                }
+            } catch (e) {
+                console.warn("Dashboard sync pending: Waiting for GitHub File generation.");
+            }
+        }
+
+        // --- CORE ANALYTICS ---
         function updateDashboard() {
             const logs = JSON.parse(localStorage.getItem('forge_logs') || '[]');
             const container = document.getElementById('log-container');
             
-            // Calculate Stats
+            // Stats Calculation
             const ads = logs.filter(l => l.event === 'AD_SHOWN').length;
-            const clicks = logs.filter(l => l.event === 'BUY_CLICK').length;
+            const clicks = logs.filter(l => l.event === 'BUY_CLICK' || l.event === 'AD_PURCHASE_INTENT').length;
             const conv = ads > 0 ? ((clicks / ads) * 100).toFixed(1) : 0;
 
             document.getElementById('stat-ads').innerText = ads;
             document.getElementById('stat-clicks').innerText = clicks;
             document.getElementById('stat-conv').innerText = conv + "%";
 
-            // Render Logs
+            // Render Activity Logs
             if (logs.length > 0) {
-                container.innerHTML = logs.reverse().map(l => `
-                    <div class="log-entry p-2 flex justify-between">
-                        <span class="text-zinc-500">[${l.timestamp.split('T')[1].split('.')[0]}]</span>
-                        <span class="font-bold text-white">${l.event}</span>
-                        <span class="text-blue-400">ORIGIN: ${l.origin}</span>
-                        <span class="text-zinc-400">${l.details}</span>
+                container.innerHTML = logs.slice().reverse().map(l => `
+                    <div class="log-entry p-3 rounded-lg flex justify-between items-center border border-transparent hover:border-zinc-800 transition">
+                        <div class="flex items-center gap-4">
+                            <span class="text-zinc-600 text-[9px]">[${l.timestamp.split('T')[1].split('.')[0]}]</span>
+                            <span class="font-bold text-white uppercase tracking-tighter">${l.event}</span>
+                        </div>
+                        <div class="flex gap-6 items-center">
+                            <span class="text-blue-500 text-[10px] font-bold">REF: ${l.origin}</span>
+                            <span class="text-zinc-400 italic">${l.details}</span>
+                        </div>
                     </div>
                 `).join('');
             }
+            
+            fetchBotIntelligence();
         }
 
         function clearLogs() {
-            localStorage.removeItem('forge_logs');
-            updateDashboard();
+            if(confirm("Confirm: Wipe all current session data?")) {
+                localStorage.removeItem('forge_logs');
+                updateDashboard();
+            }
         }
 
-        setInterval(updateDashboard, 2000);
+        // Update loop every 3 seconds for performance
+        setInterval(updateDashboard, 3000);
         updateDashboard();
     </script>
 </body>
