@@ -1,0 +1,36 @@
+name: FORGE_COMMAND_OPS
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Runs every 6 hours
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  intelligence-gathering:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Execute IP Rotator & Scout
+        run: |
+          python bot/ip_rotator.py
+          python bot/scout.py
+
+      - name: Execute SEO Content Stacker
+        run: python bot/seo_stacker.py
+
+      - name: Commit Intelligence & Intel Pages
+        run: |
+          git config --local user.email "bot@fairdiscovery.org"
+          git config --local user.name "Forge-Bot-v7"
+          git add bot/leads/daily_hitlist.csv intel/*.html
+          git commit -m "Forge Intelligence Update: New Whales & SEO Stacked [v7.1]" || echo "No changes detected"
+          git push
