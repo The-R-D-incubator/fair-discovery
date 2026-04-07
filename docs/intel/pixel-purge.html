@@ -12,7 +12,7 @@
         .purge-bg { background: linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); }
         #canvas-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
     </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "name": "Fair Discovery Forensic Node"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "name": "Fair Discovery Forensic Node"}</script>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 bg-slate-50">
     <canvas id="canvas-confetti"></canvas>
@@ -83,10 +83,10 @@
                 </a>
 
                 <div class="p-6 bg-rose-50 rounded-3xl border border-rose-100">
-                    <p class="text-[9px] text-rose-400 font-black uppercase mb-4 tracking-widest">Subscribe for 20 Bonus Credits</p>
+                    <p class="text-[9px] text-rose-400 font-black uppercase mb-4 tracking-widest">Sync Cloud Token / Subscribe for 20 Bonus Credits</p>
                     <div class="flex gap-2">
-                        <input type="email" id="sub-email" placeholder="EMAIL@AGENCY.COM" class="flex-1 bg-white border border-rose-200 rounded-xl px-4 py-2 text-[10px] focus:outline-none focus:border-rose-500">
-                        <button onclick="saveLead()" class="bg-rose-950 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">Join</button>
+                        <input type="email" id="sub-email" placeholder="EMAIL@AGENCY.COM" class="flex-1 bg-white border border-rose-200 rounded-xl px-4 py-2 text-[10px] focus:outline-none focus:border-rose-500 uppercase font-bold">
+                        <button onclick="saveLead()" class="bg-rose-950 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">Sync Node</button>
                     </div>
                     <p id="sub-status" class="mt-2 text-[8px] text-rose-600 font-bold uppercase"></p>
                 </div>
@@ -107,7 +107,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAyqBa1_vjKePLo6apd_TrDojLgsQgngFY",
@@ -122,20 +122,56 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // CLOUD SYNC LOGIC
         window.saveLead = async function() {
             const emailInput = document.getElementById('sub-email');
             const status = document.getElementById('sub-status');
-            const email = emailInput.value;
+            const email = emailInput.value.toLowerCase().trim();
+
             if (!email.includes('@')) { status.innerText = "INVALID SECURE SIGNATURE"; return; }
-            status.innerText = "ENCRYPTING LEAD...";
+            status.innerText = "SYNCING WITH CLOUD VAULT...";
+
             try {
-                await addDoc(collection(db, "leads"), { email: email, tool: "Pixel-Purge", timestamp: serverTimestamp() });
-                let credits = parseInt(localStorage.getItem('pixel_credits') || 0) + 20;
+                const userRef = doc(db, "users", email);
+                const userSnap = await getDoc(userRef);
+
+                let cloudCredits;
+
+                if (userSnap.exists()) {
+                    // RETURNING USER: Load existing balance
+                    cloudCredits = userSnap.data().credits;
+                    status.innerText = "NODE RECONNECTED. BALANCE RESTORED.";
+                } else {
+                    // NEW USER: Initializing record + 20 credit gift
+                    cloudCredits = 20;
+                    await setDoc(userRef, {
+                        email: email,
+                        credits: cloudCredits,
+                        last_sync: serverTimestamp()
+                    });
+                    // Still log for the broadcast bot
+                    await addDoc(collection(db, "leads"), { email: email, tool: "Pixel-Purge", source: "Token-Sync" });
+                    status.innerText = "20 BONUS CREDITS LOADED TO TOKEN.";
+                }
+
+                // Update runtime and local storage
+                credits = cloudCredits;
                 localStorage.setItem('pixel_credits', credits);
                 update();
-                status.innerText = "SUCCESS: 20 BONUS CREDITS GRANTED.";
                 emailInput.value = "";
-            } catch (e) { status.innerText = "VAULT ERROR: RETRY LATER"; }
+            } catch (e) { 
+                console.error(e);
+                status.innerText = "VAULT OFFLINE. LOCAL MODE ACTIVE."; 
+            }
+        }
+
+        // DEDUCT FROM CLOUD ON USE (Maintenance Sync)
+        window.syncUsageToCloud = async function(newBalance) {
+            const lastEmail = document.getElementById('sub-email').value || "anonymous"; 
+            if(lastEmail.includes('@')) {
+                const userRef = doc(db, "users", lastEmail.toLowerCase().trim());
+                await setDoc(userRef, { credits: newBalance }, { merge: true });
+            }
         }
     </script>
 
@@ -163,12 +199,16 @@
 
         function update() {
             document.getElementById('count').innerText = credits;
-            if(credits <= 0 && document.getElementById('results-zone').classList.contains('hidden')) {
-                document.getElementById('upload-zone').classList.add('hidden');
-                document.getElementById('paywall').classList.remove('hidden');
-            } else {
-                document.getElementById('upload-zone').classList.remove('hidden');
-                document.getElementById('paywall').classList.add('hidden');
+            const upZone = document.getElementById('upload-zone');
+            const payZone = document.getElementById('paywall');
+            const resZone = document.getElementById('results-zone');
+
+            if(credits <= 0 && resZone.classList.contains('hidden')) {
+                upZone.classList.add('hidden');
+                payZone.classList.remove('hidden');
+            } else if (credits > 0) {
+                payZone.classList.add('hidden');
+                if(resZone.classList.contains('hidden')) upZone.classList.remove('hidden');
             }
         }
 
@@ -177,9 +217,14 @@
             const upZone = document.getElementById('upload-zone');
             const resZone = document.getElementById('results-zone');
             upZone.classList.add('opacity-50', 'pointer-events-none');
+            
             setTimeout(() => {
                 credits--;
                 localStorage.setItem('pixel_credits', credits);
+                
+                // Trigger cloud sync if window.syncUsageToCloud exists
+                if(typeof window.syncUsageToCloud === 'function') window.syncUsageToCloud(credits);
+
                 upZone.classList.add('hidden');
                 resZone.classList.remove('hidden');
                 update();
