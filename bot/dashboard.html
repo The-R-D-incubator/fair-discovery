@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FORGE_COMMAND | Revenue Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: #facc15; font-family: 'JetBrains Mono', monospace; }
+        .stat-card { background: rgba(20, 20, 20, 0.8); border: 1px solid #333; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body class="p-10">
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-end mb-12 border-b border-zinc-800 pb-6">
+            <div>
+                <h1 class="text-4xl font-black italic uppercase tracking-tighter">Forge Command</h1>
+                <p class="text-zinc-500 text-xs mt-2 uppercase tracking-[0.3em]">Operational Status: <span class="text-green-500 pulse">Active</span></p>
+            </div>
+            <div class="text-right">
+                <p class="text-zinc-500 text-[10px] uppercase">Global Traffic Loop</p>
+                <p class="text-2xl font-bold">2,482 <span class="text-xs text-zinc-600">Scans/hr</span></p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="stat-card p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">High-Stakes Leads</p>
+                <p class="text-3xl font-black">128</p>
+            </div>
+            <div class="stat-card p-6 rounded-2xl border-canary">
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">Syndicator Reach</p>
+                <p class="text-3xl font-black text-white">42.1K</p>
+            </div>
+            <div class="stat-card p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">Conversion Conversion</p>
+                <p class="text-3xl font-black">4.2%</p>
+            </div>
+            <div class="stat-card p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase mb-2">Revenue Node Sales</p>
+                <p class="text-3xl font-black text-green-500">$2,560</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div class="stat-card p-8 rounded-[2rem]">
+                <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-canary-yellow rounded-full"></span> 
+                    ACTIVE SCRAPE LOGIC
+                </h3>
+                <div class="space-y-4 text-xs">
+                    <div class="flex justify-between p-3 bg-white/5 rounded-lg border-l-2 border-blue-500">
+                        <span class="text-zinc-400">[X_API]</span>
+                        <span>Monitoring: "Ad Manager Breach"</span>
+                        <span class="text-green-500">FOUND</span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-white/5 rounded-lg border-l-2 border-orange-500">
+                        <span class="text-zinc-400">[REDDIT_API]</span>
+                        <span>Monitoring: "Fiverr Security"</span>
+                        <span class="text-green-500">MATCHED</span>
+                    </div>
+                    <div class="flex justify-between p-3 bg-white/5 rounded-lg border-l-2 border-purple-500">
+                        <span class="text-zinc-400">[RSS_GLOBAL]</span>
+                        <span>Scanning for: "Session Theft"</span>
+                        <span class="text-zinc-600">IDLE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card p-8 rounded-[2rem]">
+                <h3 class="text-lg font-bold mb-6">LIVE LEAD GENERATION</h3>
+                <canvas id="revenueChart" class="w-full h-32 bg-zinc-900/50 rounded-xl mb-4"></canvas>
+                <p class="text-[10px] text-zinc-500 uppercase italic">Revenue signals projected across 24-hour cycle</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
