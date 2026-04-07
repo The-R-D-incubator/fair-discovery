@@ -9,11 +9,32 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
-    .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
     
-    .theme-accent { color: #bef264; }
+    /* Industrial Background: Grid + Custom Hero Image */
+    .grid-bg { 
+        background-image: radial-gradient(#1a1a1a 1px, transparent 1px); 
+        background-size: 30px 30px; 
+    }
+    
+    .hero-custom {
+        background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('hero-industrial.jpg'); /* Replace with your background image */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Color Definitions */
+    .theme-accent { color: #bef264; } /* The Lime/Green */
     .bg-theme-accent { background-color: #bef264; }
-    
+    .canary-highlight { color: #facc15; } /* Canary Yellow for text emphasis */
+    .border-canary { border-color: #facc15; }
+
+    /* Search Bar Adjustment - Higher Z-Index and Layout */
+    .search-dock {
+        transition: all 0.5s ease;
+        z-index: 100;
+    }
+
     .neon-card { 
         position: relative;
         background: rgba(10, 10, 10, 0.95);
@@ -24,7 +45,6 @@
         overflow: hidden;
     }
     
-    /* Dynamic Image Header */
     .card-img-header {
         height: 220px; 
         background-size: cover;
@@ -32,6 +52,7 @@
         position: relative;
         border-bottom: 1px solid rgba(190, 242, 100, 0.1);
     }
+    
     .card-overlay {
         position: absolute;
         inset: 0;
@@ -40,73 +61,158 @@
 
     .neon-card:hover { 
         border-color: #bef264; 
-        box-shadow: 0 0 40px rgba(190, 242, 100, 0.08);
+        box-shadow: 0 0 40px rgba(190, 242, 100, 0.1);
         transform: translateY(-5px);
     }
 
-    .free-tag { color: #39ff14; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
+    /* Modal Styling */
+    .modal-overlay {
+        background: rgba(0,0,0,0.9);
+        backdrop-filter: blur(10px);
+    }
 
+    /* Reveal Animations */
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #bef264; }
+    /* Footer Logo Grayscale to Color */
+    .footer-logo {
+        filter: grayscale(100%);
+        opacity: 0.5;
+        transition: all 0.3s ease;
+    }
+    .footer-logo:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);
+    }
   </style>
 </head>
-<body class="grid-bg min-h-screen">
+<body class="grid-bg min-h-screen flex flex-col">
 
-  <nav class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/90 backdrop-blur-3xl border-b border-white/5">
+  <nav class="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center sticky top-0 z-50 bg-black/90 backdrop-blur-3xl border-b border-white/5">
     <div class="flex items-center gap-4">
       <img src="logo.png" alt="Logo" class="h-6 w-auto">
       <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
     </div>
     <div class="flex gap-8 items-center">
-        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] theme-accent hover:text-white transition">Support</a>
+        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] theme-accent hover:canary-highlight transition">Support</a>
         <a href="https://forgevertical.com" target="_blank" class="hidden md:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600 hover:text-white transition">Forge Vertical</a>
     </div>
   </nav>
 
-  <main class="max-w-7xl mx-auto px-6 pt-24 pb-32">
-    <div class="max-w-4xl mb-20 reveal-anim">
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.85] mb-10 uppercase italic">
-            Fair Discovery<br><span class="theme-accent text-5xl md:text-7xl">Tools Forged for your Industry.</span>
+  <header class="hero-custom py-32 px-6">
+    <div class="max-w-7xl mx-auto reveal-anim">
+        <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic">
+            Fair Discovery<br><span class="theme-accent">Tools Forged For Industry.</span>
         </h1>
-        <p class="text-zinc-300 text-2xl font-light leading-relaxed max-w-3xl">
-            Sovereign logic and industrial-grade tools for the next generation of creators.
+        <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-4xl">
+            Building tools that <span class="canary-highlight font-bold">help businesses</span>, 
+            <span class="canary-highlight font-bold">secure your files</span>, and 
+            <span class="canary-highlight font-bold">protect your ad spend</span>. 
+            Find the tools that work for you or explore our free repository.
         </p>
     </div>
+  </header>
 
-    <div class="mb-16 flex flex-col md:flex-row gap-6 items-center justify-between sticky top-[95px] z-40 bg-black/60 py-6 backdrop-blur-xl border-y border-white/5 px-4 rounded-3xl">
+  <div class="max-w-7xl mx-auto w-full px-6 -mt-12 mb-16 relative z-50">
+    <div class="bg-black/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-4 flex flex-col md:flex-row gap-6 items-center justify-between shadow-2xl">
         <div class="relative w-full md:w-96">
             <input type="text" id="toolSearch" onkeyup="filterTools()" placeholder="Search Repository..." 
-                   class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-theme-accent transition text-zinc-300">
+                   class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-canary-highlight transition text-zinc-300">
         </div>
         <div class="flex flex-wrap gap-2 justify-center">
             <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-theme-accent text-theme-accent text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
-            <button onclick="setCategory('Security')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Security</button>
-            <button onclick="setCategory('Free Zone')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Free Zone</button>
-            <button onclick="setCategory('AI')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">AI</button>
-            <button onclick="setCategory('Business')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-theme-accent transition">Business</button>
+            <button onclick="setCategory('Security')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary-highlight transition">Security</button>
+            <button onclick="setCategory('Free Zone')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary-highlight transition">Free Zone</button>
+            <button onclick="setCategory('AI')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary-highlight transition">AI</button>
+            <button onclick="setCategory('Business')" class="cat-btn px-6 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary-highlight transition">Business</button>
         </div>
     </div>
+  </div>
 
+  <main class="max-w-7xl mx-auto px-6 pb-32 flex-grow">
     <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </main>
+
+  <div class="fixed bottom-10 right-10 z-50">
+      <button onclick="toggleModal('legend-modal')" class="bg-zinc-900 border border-white/10 p-4 rounded-full shadow-2xl hover:border-canary-highlight transition">
+          <span class="text-xs font-bold uppercase tracking-widest canary-highlight">Status Legend</span>
+      </button>
+  </div>
+
+  <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6">
+      <div class="max-w-7xl mx-auto flex flex-col items-center">
+          <div class="flex flex-wrap justify-center gap-10 mb-12">
+              <img src="paypal-logo.png" alt="PayPal" class="footer-logo h-6">
+              <img src="github-logo.png" alt="GitHub" class="footer-logo h-6">
+              <img src="firebase-logo.png" alt="Firebase" class="footer-logo h-6">
+              <img src="gcp-logo.png" alt="GCP" class="footer-logo h-6">
+              <img src="gemini-logo.png" alt="Gemini" class="footer-logo h-6">
+              <img src="cloudflare-logo.png" alt="Cloudflare" class="footer-logo h-6">
+              <img src="gitlab-logo.png" alt="GitLab" class="footer-logo h-6">
+          </div>
+          <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
+      </div>
+  </footer>
+
+  <div id="legend-modal" class="modal-overlay fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
+      <div class="bg-zinc-900 border border-white/10 max-w-md w-full rounded-[3rem] p-10 relative">
+          <button onclick="toggleModal('legend-modal')" class="absolute top-6 right-6 text-zinc-500 hover:text-white">&times;</button>
+          <h4 class="text-2xl font-black uppercase italic mb-8 canary-highlight">Deployment Status</h4>
+          <ul class="space-y-6">
+              <li class="flex items-center gap-4">
+                  <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                  <div><p class="text-sm font-bold uppercase">Active Tool</p><p class="text-xs text-zinc-500">Production ready for immediate deployment.</p></div>
+              </li>
+              <li class="flex items-center gap-4">
+                  <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                  <div><p class="text-sm font-bold uppercase">Concept Build</p><p class="text-xs text-zinc-500">Coded but requires local tweaking/testing.</p></div>
+              </li>
+              <li class="flex items-center gap-4">
+                  <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div><p class="text-sm font-bold uppercase">Raw Code</p><p class="text-xs text-zinc-500">Unprocessed logic for advanced forging.</p></div>
+              </li>
+              <li class="flex items-center gap-4">
+                  <div class="w-3 h-3 rounded-full bg-white"></div>
+                  <div><p class="text-sm font-bold uppercase">Affiliate Node</p><p class="text-xs text-zinc-500">Verified third-party infrastructure.</p></div>
+              </li>
+          </ul>
+      </div>
+  </div>
+
+  <div id="cookie-banner" class="fixed bottom-6 left-6 right-6 md:left-auto md:max-w-md bg-zinc-900 border border-canary p-6 rounded-3xl shadow-2xl z-[100] reveal-anim" style="animation-delay: 2s">
+      <div class="flex gap-4">
+          <div class="text-2xl">🤖</div>
+          <div>
+              <p class="text-xs font-bold uppercase tracking-widest canary-highlight mb-1">Bot Intelligence</p>
+              <p class="text-xs text-zinc-300 leading-relaxed mb-4">I recommend starting with <span class="font-bold">Forge-Guard</span> to secure your browser perimeter before exploring raw code nodes.</p>
+              <div class="flex gap-4">
+                  <button onclick="closeBanner()" class="text-[10px] font-black uppercase tracking-widest theme-accent">Acknowledge</button>
+                  <button onclick="closeBanner()" class="text-[10px] font-black uppercase tracking-widest text-zinc-500">Dismiss</button>
+              </div>
+          </div>
+      </div>
+  </div>
 
   <script>
     let allProducts = [];
     let currentCategory = 'All';
 
+    // Helper: Determine Status Color
+    function getStatusColor(price, tags) {
+        if (price.toUpperCase() === 'FREE') return 'bg-yellow-500'; // Raw code
+        if (tags.includes('Affiliate')) return 'bg-white';
+        if (tags.includes('Alpha') || tags.includes('Blueprint')) return 'bg-blue-500';
+        return 'bg-green-500'; // Default Active
+    }
+
     async function loadStore() {
         try {
+            // Simulated JSON data for testing - replace with your fetch
             const response = await fetch('products.json');
             const data = await response.json();
-            
-            // Sort by popularity (Highest first)
             allProducts = data.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
-            
             renderStore(allProducts);
         } catch (e) { console.error("Repository load failed", e); }
     }
@@ -115,8 +221,9 @@
         const grid = document.getElementById('store-grid');
         grid.innerHTML = products.map((tool, index) => {
             const isFree = tool.price.toUpperCase() === 'FREE';
-            const priceDisplay = isFree ? `<span class="free-tag font-mono text-3xl font-bold italic tracking-tighter">FREE</span>` : 
-                                          `<span class="theme-accent font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>`;
+            const statusColor = getStatusColor(tool.price, tool.tags);
+            const priceDisplay = isFree ? `<span class="canary-highlight font-mono text-3xl font-bold italic tracking-tighter">FREE</span>` : 
+                                          `<span class="canary-highlight font-mono text-3xl font-bold tracking-tighter">$${tool.price}</span>`;
             
             return `
             <div class="neon-card rounded-[2.5rem] reveal-anim" style="animation-delay: ${index * 0.05}s">
@@ -124,12 +231,13 @@
                     <div class="card-overlay"></div>
                 </div>
 
-                <div class="p-10 pt-0 flex flex-col flex-grow">
-                    <div class="flex justify-end items-start mb-8">
+                <div class="p-10 pt-0 flex flex-col flex-grow relative">
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="w-3 h-3 rounded-full mt-4 ${statusColor} shadow-lg cursor-help" title="Check Status Legend"></div>
                         ${priceDisplay}
                     </div>
                     
-                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none">${tool.name}</h3>
+                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none hover:canary-highlight transition cursor-default">${tool.name}</h3>
                     <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
                     
                     <div class="flex flex-wrap gap-2 mb-10 mt-auto">
@@ -142,6 +250,14 @@
                 </div>
             </div>
         `}).join('');
+    }
+
+    function toggleModal(id) {
+        document.getElementById(id).classList.toggle('hidden');
+    }
+
+    function closeBanner() {
+        document.getElementById('cookie-banner').style.display = 'none';
     }
 
     function filterTools() {
@@ -158,8 +274,8 @@
         currentCategory = cat;
         document.querySelectorAll('.cat-btn').forEach(btn => {
             const isMatch = btn.innerText === cat.toUpperCase();
-            btn.classList.toggle('border-theme-accent', isMatch);
-            btn.classList.toggle('text-theme-accent', isMatch);
+            btn.classList.toggle('border-canary', isMatch);
+            btn.classList.toggle('text-canary-highlight', isMatch);
             btn.classList.toggle('bg-white/5', isMatch);
             btn.classList.toggle('border-white/10', !isMatch);
             btn.classList.toggle('text-zinc-500', !isMatch);
