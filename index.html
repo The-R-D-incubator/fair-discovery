@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta name="description" content="Industrial tools to protect ad spend, secure browsers, and stop session hijacking. The guide to building a secure web for entrepreneurs.">
-<meta name="keywords" content="protect ad spend, recover ads manager, secure fiverr account, session hijack fix, industrial vpn node, build secure website, hacked help, malware quarantine">
-<link rel="canonical" href="https://fairdiscovery.org/">
+  <meta name="description" content="Industrial tools to protect ad spend, secure browsers, and stop session hijacking. The guide to building a secure web for entrepreneurs.">
+  <meta name="keywords" content="protect ad spend, recover ads manager, secure fiverr account, session hijack fix, industrial vpn node, build secure website, hacked help, malware quarantine">
+  <link rel="canonical" href="https://fairdiscovery.org/">
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,20 +14,13 @@
     @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400;700&display=swap');
     body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
     .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
-
-    /* Industrial Palette */
     .canary-yellow { color: #facc15 !important; }
     .border-canary { border-color: #facc15 !important; }
     .code-purple { color: #c084fc; }
     .code-blue { color: #60a5fa; }
-
     .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
-    .footer-logo { height: 32px; width: auto; transition: all 0.4s ease; opacity: 0.8; }
-    .footer-logo:hover { opacity: 1; transform: scale(1.1); }
-
     .neon-card { background: rgba(10, 10, 10, 0.98); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
     .neon-card:hover { border-color: #facc15; box-shadow: 0 0 30px rgba(250, 204, 21, 0.05); }
-
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
@@ -104,7 +96,6 @@
     let allProducts = [];
     let currentCategory = 'All';
 
-    // --- ENGINE 05: ANALYTICS ---
     function pushSignal(eventType, details) {
         const signal = {
             timestamp: new Date().toISOString(),
@@ -112,15 +103,9 @@
             details: details,
             origin: new URLSearchParams(window.location.search).get('ref') || 'organic'
         };
-        console.log("📡 SIGNAL_SENT:", signal);
         let logs = JSON.parse(localStorage.getItem('forge_logs') || '[]');
         logs.push(signal);
         localStorage.setItem('forge_logs', JSON.stringify(logs.slice(-100)));
-    }
-
-    // --- STORE CORE ---
-    function getStatusColor(id) {
-        return ['global-forge-guard', 'shadow-merge-tool', 'aurora-ai-ip'].includes(id) ? 'bg-green-500' : 'bg-blue-500';
     }
 
     async function loadStore() {
@@ -144,7 +129,7 @@
                 </div>
                 <div class="p-10 pt-0 flex flex-col flex-grow relative">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-3 h-3 rounded-full mt-4 ${getStatusColor(tool.id)}"></div>
+                        <div class="w-3 h-3 rounded-full mt-4 bg-green-500"></div>
                         <span class="canary-yellow font-mono text-3xl font-bold tracking-tighter">${isFree ? 'FREE' : '$'+tool.price}</span>
                     </div>
                     <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none text-white">${tool.name}</h3>
@@ -168,9 +153,8 @@
         filterTools();
     }
 
-    // --- ENGINE 03: PULSE ---
-    const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Ad-Spend Shield initialized."];
     function createPulse() {
+        const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Ad-Spend Shield initialized."];
         const pulseBar = document.createElement('div');
         pulseBar.className = "fixed bottom-0 left-0 right-0 bg-black border-t border-canary p-2 z-[200] flex justify-center items-center";
         pulseBar.innerHTML = `<p id="pulse-text" class="text-[9px] font-black uppercase tracking-[0.4em] canary-yellow italic"></p>`;
@@ -185,22 +169,22 @@
         }, 4000);
     }
 
-    // --- ENGINE 04: AGGRESSIVE SALES AGENT ---
     function runSuggestor() {
+        if (localStorage.getItem('forge_hide_ads') === 'true') return;
         const origin = new URLSearchParams(window.location.search).get('ref');
         if (!origin) return;
 
         pushSignal('LEAD_DIAGNOSIS_START', origin);
-
         setTimeout(() => {
             const ad = document.createElement('div');
+            ad.id = "industrial-alert";
             ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-black border-2 border-canary p-10 rounded-[3rem] z-[300] shadow-[0_0_150px_rgba(250,204,21,0.5)] reveal-anim";
             
             let offer = {
                 title: "SYSTEM AUDIT COMPLETE",
                 problem: "Detecting active session-vulnerability from your current node.",
                 solution: "Deploy Forge-Guard v6.1 to lock your industrial perimeter.",
-                link: "https://paypal.me/YOUR_PAYPAL/20" // Replace with your link
+                link: "https://paypal.me/YOUR_PAYPAL/20"
             };
 
             if (origin === 'ads') {
@@ -218,17 +202,33 @@
                     <p class="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-4 italic">Diagnostic Result</p>
                     <h4 class="text-2xl font-black italic uppercase leading-none mb-6 text-white">${offer.title}</h4>
                     <div class="bg-white/5 p-4 rounded-2xl mb-8 text-left border border-white/5">
-                        <p class="text-[10px] text-red-500 uppercase font-bold mb-1">Issue:</p>
-                        <p class="text-xs text-zinc-300 mb-4">${offer.problem}</p>
-                        <p class="text-[10px] text-green-500 uppercase font-bold mb-1">Solution:</p>
-                        <p class="text-xs text-zinc-300">${offer.solution}</p>
+                        <p class="text-xs text-zinc-300 mb-4"><span class="text-red-500 font-bold uppercase">Issue:</span> ${offer.problem}</p>
+                        <p class="text-xs text-zinc-300"><span class="text-green-500 font-bold uppercase">Solution:</span> ${offer.solution}</p>
                     </div>
-                    <button onclick="pushSignal('AD_PURCHASE_INTENT', '${offer.title}'); window.open('${offer.link}', '_blank'); this.parentElement.parentElement.remove();" class="block w-full py-4 bg-canary-yellow text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Instant Access ($20)</button>
-                    <button onclick="this.parentElement.parentElement.remove()" class="mt-4 text-[9px] text-zinc-600 uppercase tracking-widest hover:text-white">Ignore Risk</button>
+                    <button onclick="pushSignal('AD_PURCHASE_INTENT', '${offer.title}'); window.open('${offer.link}', '_blank'); closeAlert();" class="block w-full py-4 bg-canary-yellow text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Instant Access ($20)</button>
+                    <div class="mt-6 flex flex-col gap-2">
+                        <button onclick="closeAlert()" class="text-[9px] text-zinc-500 uppercase tracking-widest hover:text-white transition">Dismiss (ESC)</button>
+                        <button onclick="permanentlyDisableAlert()" class="text-[8px] text-zinc-700 uppercase tracking-tighter hover:text-red-500 transition underline">Don't show this again</button>
+                    </div>
                 </div>`;
             document.body.appendChild(ad);
             pushSignal('OFFER_PRESENTED', offer.title);
+            document.addEventListener('keydown', handleEsc);
         }, 2500);
+    }
+
+    function closeAlert() {
+        const ad = document.getElementById('industrial-alert');
+        if (ad) ad.remove();
+        document.removeEventListener('keydown', handleEsc);
+    }
+
+    function handleEsc(e) { if (e.key === "Escape") closeAlert(); }
+
+    function permanentlyDisableAlert() {
+        localStorage.setItem('forge_hide_ads', 'true');
+        pushSignal('AD_BANNED_BY_USER', 'Silence requested');
+        closeAlert();
     }
 
     window.onload = () => { loadStore(); createPulse(); runSuggestor(); };
