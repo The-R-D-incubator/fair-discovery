@@ -15,19 +15,19 @@
         background-size: 30px 30px; 
     }
 
-    /* Clinical Color Palette */
+    /* Color Palette */
     .theme-accent { color: #bef264; }
     .canary-yellow { color: #facc15 !important; }
     .code-purple { color: #c084fc; }
     .code-blue { color: #60a5fa; }
 
-    /* Non-Intrusive Code Terminal (Replaces GIF) */
+    /* Industrial Code Terminal Header */
     .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
     
     .code-window {
         position: absolute;
         right: 5%;
-        background: rgba(10, 10, 10, 0.9);
+        background: rgba(10, 10, 10, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 2.5rem;
         border-radius: 2rem;
@@ -38,18 +38,18 @@
     }
     @media (min-width: 1024px) { .code-window { display: block; } }
 
-    /* Colorful High-Fidelity Footer Logos */
+    /* High-Fidelity Colorful Footer Logos */
     .footer-logo {
-        height: 32px;
+        height: 28px;
         width: auto;
-        filter: saturate(0.8) contrast(1.1);
+        filter: saturate(0.9) contrast(1.1);
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        opacity: 0.7;
+        opacity: 0.8;
     }
     .footer-logo:hover {
         filter: saturate(1.2) contrast(1.2);
         opacity: 1;
-        transform: translateY(-5px) scale(1.1);
+        transform: scale(1.05);
     }
 
     .neon-card { 
@@ -94,11 +94,11 @@
     </div>
 
     <div class="code-window reveal-anim" style="animation-delay: 0.4s">
-        <span class="code-purple">if</span> (!security_breach) {<br>
+        <span class="code-purple">if</span> (!perimeter_secure) {<br>
         &nbsp;&nbsp;<span class="code-blue">deployForgeGuard</span>();<br>
         } <span class="code-purple">else</span> {<br>
         &nbsp;&nbsp;<span class="code-blue">quarantineLinks</span>();<br>
-        &nbsp;&nbsp;<span class="code-blue">alertAdmin</span>();<br>
+        &nbsp;&nbsp;<span class="code-blue">monitorSync</span>();<br>
         }
     </div>
   </header>
