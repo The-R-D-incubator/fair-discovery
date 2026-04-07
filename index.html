@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta name="description" content="Industrial tools to protect ad spend, secure browsers, and stop session hijacking. Custom script forging for entrepreneurs.">
-  <meta name="keywords" content="custom python scripts, protect ad spend, recover ads manager, secure fiverr account, session hijack fix, industrial vpn node, build secure website">
+  <meta name="keywords" content="protect ad spend, recover ads manager, secure fiverr account, session hijack fix, industrial vpn node, build secure website">
   <link rel="canonical" href="https://fairdiscovery.org/">
   
   <meta charset="UTF-8" />
@@ -19,7 +19,6 @@
     .border-canary { border-color: #facc15 !important; }
     .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
     
-    /* Corrected Footer Logo Styles */
     .footer-logo { height: 28px !important; width: auto !important; transition: all 0.4s ease; opacity: 0.6; filter: grayscale(100%); }
     .footer-logo:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
 
@@ -36,7 +35,7 @@
       <img src="logo.png" alt="Logo" class="h-6 w-auto">
       <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
     </div>
-    <div class="flex gap-4 items-center text-white">
+    <div class="flex gap-4 items-center">
         <a href="#custom-forge" class="text-[10px] font-black uppercase tracking-widest border border-canary px-4 py-2 rounded-lg canary-yellow hover:bg-canary-yellow hover:text-black transition-all">Need something custom?</a>
     </div>
   </nav>
@@ -53,14 +52,11 @@
                 <span class="canary-yellow font-bold">protect ad spend</span>. 
             </p>
         </div>
-        <div class="lg:w-2/5 hidden lg:block">
-            <div class="bg-zinc-900/90 backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] font-mono text-sm shadow-2xl">
-                <span class="code-purple">if</span> (custom_logic_required) {<br>
-                &nbsp;&nbsp;<span class="code-blue">contactTheForge</span>();<br>
-                } <span class="code-purple">else</span> {<br>
-                &nbsp;&nbsp;<span class="code-blue">browseRepository</span>();<br>
-                }
+        <div class="lg:w-2/5 flex flex-col items-center">
+            <div class="bg-zinc-900/90 backdrop-blur-3xl border border-white/10 p-2 rounded-[2.5rem] shadow-2xl overflow-hidden w-64 h-64 flex items-center justify-center">
+                <img src="img/tenor-2021-12-02-07-33-59-utc.gif" alt="System Visual" class="w-full h-full object-cover rounded-[2rem]">
             </div>
+            <p class="mt-4 font-mono text-[10px] uppercase tracking-[0.5em] text-zinc-500">Code source</p>
         </div>
     </div>
   </header>
@@ -69,12 +65,13 @@
     <div class="bg-black/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-4 flex flex-col md:flex-row gap-6 items-center justify-between shadow-2xl">
         <div class="relative w-full md:w-96">
             <input type="text" id="toolSearch" onkeyup="filterTools()" placeholder="Search Repository..." 
-                   class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-canary transition text-zinc-300">
+                   class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-canary transition text-white">
         </div>
         <div class="flex flex-wrap gap-2 justify-center">
             <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-canary text-canary-yellow text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
             <button onclick="setCategory('Security')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">Security</button>
             <button onclick="setCategory('AI')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">AI</button>
+            <button onclick="setCategory('Free Zone')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">Free Zone</button>
         </div>
     </div>
   </div>
@@ -85,24 +82,18 @@
 
   <section id="custom-forge" class="max-w-4xl mx-auto px-6 py-32 reveal-anim">
     <div class="bg-zinc-950 border border-white/5 rounded-[3rem] p-12 text-center shadow-2xl">
-        <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-4 text-white">The Custom Forge</h2>
-        <p class="text-zinc-400 mb-10 text-lg text-white">Describe the industrial script or bypass you need. Direct-to-inbox transmission.</p>
-        
+        <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-4">The Custom Forge</h2>
         <form id="contact-form" class="space-y-4">
             <input type="email" id="form-email" placeholder="Business Email" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition text-white">
             <textarea id="form-msg" placeholder="Describe your logic..." required rows="4" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition text-white"></textarea>
-            
             <button type="submit" class="w-full py-5 bg-canary text-black font-black uppercase text-xs tracking-[0.3em] rounded-2xl hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(250,204,21,0.3)]">
                 Initialize Custom Request
             </button>
         </form>
-
-        <div class="mt-12 flex flex-wrap justify-center gap-6 opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
-            <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">LinkedIn</a>
-            <a href="https://www.facebook.com/profile.php?id=61574702919399" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Facebook</a>
-            <a href="https://x.com/AgAnubisKr" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">X (Twitter)</a>
-            <a href="https://www.fiverr.com/jarrithosking" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Fiverr</a>
-            <a href="https://app.daily.dev/jarrithosking" target="_blank" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Daily.dev</a>
+        <div class="mt-12 flex flex-wrap justify-center gap-6 opacity-80">
+            <a href="https://www.linkedin.com/in/jarrit-hosking-44243a332/" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">LinkedIn</a>
+            <a href="https://x.com/AgAnubisKr" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">X</a>
+            <a href="https://www.fiverr.com/jarrithosking" class="text-[10px] uppercase font-bold text-zinc-500 hover:text-white transition">Fiverr</a>
         </div>
     </div>
   </section>
@@ -116,9 +107,9 @@
               <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/GitLab_logo.svg" alt="GitLab" class="footer-logo">
               <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="GCP" class="footer-logo">
               <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Cloudflare_Logo.svg" alt="Cloudflare" class="footer-logo">
-              <img src="img/geminilogo.svg" alt="Gemini" class="footer-logo">
           </div>
-          <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
+          <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em] mb-4">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
+          <p class="text-zinc-800 text-[8px] uppercase tracking-[0.2em]">All Rights Reserved. Professional Grade Utility Hub.</p>
       </div>
   </footer>
 
@@ -138,13 +129,26 @@
         localStorage.setItem('forge_logs', JSON.stringify(logs.slice(-100)));
     }
 
+    // --- COLOR SYSTEM RESTORED ---
+    function getStatusColor(id) {
+        const green = ['global-forge-guard', 'shadow-merge-tool', 'aurora-ai-ip', 'adguard'];
+        const blue = ['vertical-web-builder-shell', 'hono-guardian', 'osint-knife'];
+        const yellow = ['adam-v1-free'];
+        const white = ['surfshark-partner'];
+
+        if (green.includes(id)) return 'bg-green-500';
+        if (blue.includes(id)) return 'bg-blue-500';
+        if (yellow.includes(id)) return 'bg-yellow-500';
+        if (white.includes(id)) return 'bg-white';
+        return 'bg-zinc-500';
+    }
+
     async function loadStore() {
         try {
             const response = await fetch('products.json');
             const data = await response.json();
             allProducts = data;
             renderStore(allProducts);
-            pushSignal('PAGE_LOAD', 'Storefront Initialized');
         } catch (e) { console.error("Load failed", e); }
     }
 
@@ -152,6 +156,7 @@
         const grid = document.getElementById('store-grid');
         grid.innerHTML = products.map((tool, index) => {
             const isFree = tool.price.toUpperCase() === 'FREE';
+            const color = getStatusColor(tool.id);
             return `
             <div class="neon-card rounded-[2.5rem] flex flex-col overflow-hidden reveal-anim" style="animation-delay: ${index * 0.05}s">
                 <div class="h-[220px] bg-cover bg-center relative" style="background-image: url('img/${tool.image}')">
@@ -159,7 +164,7 @@
                 </div>
                 <div class="p-10 pt-0 flex flex-col flex-grow relative">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-3 h-3 rounded-full mt-4 bg-green-500"></div>
+                        <div class="w-3 h-3 rounded-full mt-4 ${color} shadow-[0_0_10px_rgba(255,255,255,0.2)]"></div>
                         <span class="canary-yellow font-mono text-3xl font-bold tracking-tighter">${isFree ? 'FREE' : '$'+tool.price}</span>
                     </div>
                     <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none text-white">${tool.name}</h3>
@@ -174,107 +179,41 @@
 
     function filterTools() {
         const query = document.getElementById('toolSearch').value.toLowerCase();
-        const filtered = allProducts.filter(p => (p.name.toLowerCase().includes(query)) && (currentCategory === 'All' || p.category === currentCategory));
+        const filtered = allProducts.filter(p => (p.name.toLowerCase().includes(query) || p.category === currentCategory) && (currentCategory === 'All' || p.category === currentCategory));
         renderStore(filtered);
     }
 
     function setCategory(cat) {
         currentCategory = cat;
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.classList.toggle('border-canary', btn.innerText === cat.toUpperCase());
+            btn.classList.toggle('text-canary-yellow', btn.innerText === cat.toUpperCase());
+        });
         filterTools();
-    }
-
-    function createPulse() {
-        const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Custom script forged for user."];
-        const pulseBar = document.createElement('div');
-        pulseBar.className = "fixed bottom-0 left-0 right-0 bg-black border-t border-canary p-2 z-[200] flex justify-center items-center";
-        pulseBar.innerHTML = `<p id="pulse-text" class="text-[9px] font-black uppercase tracking-[0.4em] canary-yellow italic"></p>`;
-        document.body.appendChild(pulseBar);
-        let i = 0;
-        setInterval(() => {
-            const text = document.getElementById('pulse-text');
-            if(text) {
-                text.innerText = `>>> [LIVE STATUS]: ${pulseMessages[i]}`;
-                i = (i + 1) % pulseMessages.length;
-            }
-        }, 4000);
     }
 
     function runSuggestor() {
         if (localStorage.getItem('forge_hide_ads') === 'true') return;
         const origin = new URLSearchParams(window.location.search).get('ref');
         if (!origin) return;
-
-        pushSignal('LEAD_DIAGNOSIS_START', origin);
         setTimeout(() => {
             const ad = document.createElement('div');
             ad.id = "industrial-alert";
             ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-black border-2 border-canary p-10 rounded-[3rem] z-[300] shadow-[0_0_150px_rgba(250,204,21,0.5)] reveal-anim";
-            
-            let offer = {
-                title: "SYSTEM AUDIT",
-                problem: "Detecting active session-vulnerability from your current node.",
-                solution: "Deploy Forge-Guard v6.8 to lock your industrial perimeter.",
-                link: "https://paypal.me/YOUR_PAYPAL/20"
-            };
-
-            if (origin === 'ads') {
-                offer.title = "AD-REVENUE RISK";
-                offer.problem = "Unauthorized Meta/Google Ad Manager access attempt detected.";
-                offer.solution = "Install the Ad-Revenue Shield to neutralize hijack.";
-            }
-
             ad.innerHTML = `
                 <div class="text-center">
-                    <p class="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-4 italic">Diagnostic Result</p>
-                    <h4 class="text-2xl font-black italic uppercase leading-none mb-6 text-white">${offer.title}</h4>
-                    <div class="bg-white/5 p-4 rounded-2xl mb-8 text-left border border-white/5">
-                        <p class="text-xs text-zinc-300 mb-4 font-black"><span class="text-red-500 font-black uppercase">Issue:</span> ${offer.problem}</p>
-                        <p class="text-xs text-zinc-300 font-black"><span class="text-green-500 font-black uppercase">Solution:</span> ${offer.solution}</p>
-                    </div>
-                    <button onclick="pushSignal('AD_PURCHASE_INTENT', '${offer.title}'); window.open('${offer.link}', '_blank'); closeAlert();" class="block w-full py-4 bg-canary text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Instant Access ($20)</button>
-                    <div class="mt-6 flex flex-col gap-2">
-                        <button onclick="closeAlert()" class="text-[9px] text-zinc-500 uppercase tracking-widest hover:text-white transition">Dismiss (ESC)</button>
-                        <button onclick="permanentlyDisableAlert()" class="text-[8px] text-zinc-700 uppercase tracking-tighter hover:text-red-500 transition underline">Don't show this again</button>
-                    </div>
+                    <h4 class="text-2xl font-black italic uppercase mb-6 text-white">System Audit</h4>
+                    <button onclick="window.open('https://paypal.me/YOUR_PAYPAL/20', '_blank'); closeAlert();" class="block w-full py-4 bg-canary text-black font-black uppercase text-xs rounded-xl hover:scale-105 transition-transform">Get Access ($20)</button>
+                    <button onclick="closeAlert()" class="mt-4 text-[9px] text-zinc-500 uppercase tracking-widest">Dismiss (ESC)</button>
                 </div>`;
             document.body.appendChild(ad);
-            pushSignal('OFFER_PRESENTED', offer.title);
-            document.addEventListener('keydown', handleEsc);
+            document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeAlert(); });
         }, 2500);
     }
 
-    function closeAlert() {
-        const ad = document.getElementById('industrial-alert');
-        if (ad) ad.remove();
-        document.removeEventListener('keydown', handleEsc);
-    }
-    function handleEsc(e) { if (e.key === "Escape") closeAlert(); }
-    function permanentlyDisableAlert() {
-        localStorage.setItem('forge_hide_ads', 'true');
-        pushSignal('AD_BANNED_BY_USER', 'Silence requested');
-        closeAlert();
-    }
+    function closeAlert() { document.getElementById('industrial-alert')?.remove(); }
 
-    document.getElementById('contact-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('form-email').value;
-        const message = document.getElementById('form-msg').value;
-        pushSignal('CUSTOM_FORGE_INIT', email);
-        
-        try {
-            // Target your sovereign Python script
-            const res = await fetch('http://YOUR-SERVER-IP:5000/forge-request', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `email=${email}&message=${message}`
-            });
-            if(res.ok) alert("Request Transmitted to The Forge.");
-        } catch(e) { 
-            window.location.href = `mailto:jarrit@forgevertical.com?subject=Custom Forge Request&body=${message}`;
-        }
-    });
-
-    window.onload = () => { loadStore(); createPulse(); runSuggestor(); };
+    window.onload = () => { loadStore(); runSuggestor(); };
   </script>
 </body>
 </html>
