@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="Industrial tools to protect ad spend, secure browsers, and stop session hijacking. The guide to building a secure web for entrepreneurs.">
-  <meta name="keywords" content="protect ad spend, recover ads manager, secure fiverr account, session hijack fix, industrial vpn node, build secure website, hacked help, malware quarantine">
+  <meta name="description" content="Industrial tools to protect ad spend, secure browsers, and stop session hijacking. Custom script forging for entrepreneurs.">
+  <meta name="keywords" content="custom python scripts, protect ad spend, recover ads manager, secure fiverr account, session hijack fix, industrial vpn node, build secure website">
   <link rel="canonical" href="https://fairdiscovery.org/">
   
   <meta charset="UTF-8" />
@@ -12,13 +12,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400;700&display=swap');
-    body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
+    body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
     .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
     .canary-yellow { color: #facc15 !important; }
     .border-canary { border-color: #facc15 !important; }
     .code-purple { color: #c084fc; }
     .code-blue { color: #60a5fa; }
     .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
+    .footer-logo { height: 32px !important; width: auto !important; transition: all 0.4s ease; opacity: 0.8; }
+    .footer-logo:hover { opacity: 1; transform: scale(1.1); }
     .neon-card { background: rgba(10, 10, 10, 0.98); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
     .neon-card:hover { border-color: #facc15; box-shadow: 0 0 30px rgba(250, 204, 21, 0.05); }
     .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
@@ -32,9 +34,9 @@
       <img src="logo.png" alt="Logo" class="h-6 w-auto">
       <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
     </div>
-    <div class="flex gap-8 items-center">
-        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] canary-yellow hover:text-white transition">Support</a>
-        <a href="https://forgevertical.com" target="_blank" class="hidden md:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition">Forge Vertical</a>
+    <div class="flex gap-4 md:gap-8 items-center">
+        <a href="#custom-forge" class="text-[10px] font-black uppercase tracking-widest border border-canary px-4 py-2 rounded-lg canary-yellow hover:bg-canary-yellow hover:text-black transition-all">Need something custom?</a>
+        <a href="mailto:jarrit@forgevertical.com" class="hidden sm:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition">Support</a>
     </div>
   </nav>
 
@@ -52,10 +54,10 @@
         </div>
         <div class="lg:w-2/5 hidden lg:block">
             <div class="bg-zinc-900/90 backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] font-mono text-sm shadow-2xl">
-                <span class="code-purple">if</span> (!perimeter_secure) {<br>
-                &nbsp;&nbsp;<span class="code-blue">deployForgeGuard</span>();<br>
+                <span class="code-purple">if</span> (custom_logic_required) {<br>
+                &nbsp;&nbsp;<span class="code-blue">contactTheForge</span>();<br>
                 } <span class="code-purple">else</span> {<br>
-                &nbsp;&nbsp;<span class="code-blue">quarantineLinks</span>();<br>
+                &nbsp;&nbsp;<span class="code-blue">browseRepository</span>();<br>
                 }
             </div>
         </div>
@@ -76,9 +78,22 @@
     </div>
   </div>
 
-  <main class="max-w-7xl mx-auto px-6 pb-32 flex-grow">
+  <main class="max-w-7xl mx-auto px-6 pb-20 flex-grow">
     <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </main>
+
+  <section id="custom-forge" class="max-w-4xl mx-auto px-6 py-32 reveal-anim">
+    <div class="bg-zinc-950 border border-white/5 rounded-[3rem] p-12 text-center shadow-2xl">
+        <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-4">The Custom Forge</h2>
+        <p class="text-zinc-400 mb-10 text-lg">Need a specific script or industrial bypass? Describe your requirements below. Once forged, we will add your private node to the repository for secure checkout.</p>
+        
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" class="space-y-4" onsubmit="pushSignal('CUSTOM_REQUEST_SENT', 'Form Submitted')">
+            <input type="email" name="email" placeholder="Your Email" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition">
+            <textarea name="message" placeholder="Describe the script logic or automation you need..." required rows="4" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:border-canary outline-none transition"></textarea>
+            <button type="submit" class="w-full py-5 bg-canary-yellow text-black font-black uppercase text-xs tracking-[0.3em] rounded-2xl hover:scale-[1.02] transition-transform">Initialize Custom Request</button>
+        </form>
+    </div>
+  </section>
 
   <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col items-center">
@@ -154,7 +169,7 @@
     }
 
     function createPulse() {
-        const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Ad-Spend Shield initialized."];
+        const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Custom script forged for user in US."];
         const pulseBar = document.createElement('div');
         pulseBar.className = "fixed bottom-0 left-0 right-0 bg-black border-t border-canary p-2 z-[200] flex justify-center items-center";
         pulseBar.innerHTML = `<p id="pulse-text" class="text-[9px] font-black uppercase tracking-[0.4em] canary-yellow italic"></p>`;
@@ -181,20 +196,16 @@
             ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-black border-2 border-canary p-10 rounded-[3rem] z-[300] shadow-[0_0_150px_rgba(250,204,21,0.5)] reveal-anim";
             
             let offer = {
-                title: "SYSTEM AUDIT COMPLETE",
+                title: "SYSTEM AUDIT",
                 problem: "Detecting active session-vulnerability from your current node.",
-                solution: "Deploy Forge-Guard v6.1 to lock your industrial perimeter.",
+                solution: "Deploy Forge-Guard v6.6 to lock your industrial perimeter.",
                 link: "https://paypal.me/YOUR_PAYPAL/20"
             };
 
             if (origin === 'ads') {
                 offer.title = "AD-REVENUE RISK";
                 offer.problem = "Unauthorized Meta/Google Ad Manager access attempt detected.";
-                offer.solution = "Install the Ad-Revenue Shield to neutralize the hijack.";
-            } else if (origin === 'fiverr') {
-                offer.title = "FIVERR SHOP PROTECTION";
-                offer.problem = "Your seller account is flagged for a browser-redirect exploit.";
-                offer.solution = "Initialize the Fiverr-Guard node to secure your income.";
+                offer.solution = "Install the Ad-Revenue Shield to neutralize hijack.";
             }
 
             ad.innerHTML = `
@@ -222,9 +233,7 @@
         if (ad) ad.remove();
         document.removeEventListener('keydown', handleEsc);
     }
-
     function handleEsc(e) { if (e.key === "Escape") closeAlert(); }
-
     function permanentlyDisableAlert() {
         localStorage.setItem('forge_hide_ads', 'true');
         pushSignal('AD_BANNED_BY_USER', 'Silence requested');
