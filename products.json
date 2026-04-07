@@ -1,12 +1,25 @@
 [
   {
+    "id": "pixel-purge",
+    "name": "Pixel-Purge: Metadata Forensic Scrubber",
+    "category": "Security",
+    "description": "Industrial-grade privacy utility. Instantly strip GPS coordinates, device IDs, and EXIF metadata from project uploads. Re-forge your images pixel-by-pixel to eliminate hidden digital fingerprints. Local-first deployment.",
+    "price": "5",
+    "popularity": 135,
+    "image": "pixel-purge.jpg",
+    "tags": ["Privacy", "Forensics", "Utility", "EXIF-Scrubber"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZ2xb65Zi5F1Qj2rup5NaMuV4HYBi7JzOcGX",
+    "paypal_url": "https://www.paypal.com/ncp/payment/N5WF9QS6GW78S"
+  },
+  {
     "id": "session-shield",
     "name": "Session-Shield: Link Isolation Node",
     "category": "Security",
     "description": "Industrial link-sanitization engine. Neutralize session-hijacking scripts and phishing attempts from Fiverr, LinkedIn, and social media before they touch your browser. Features 200ms headless ping and redirect trace logic.",
     "price": "8",
     "popularity": 130,
-    "image": "session-shield.jpg",
+    "image": "session_shield.jpg",
     "tags": ["Security", "Isolation", "Utility", "Anti-Phish"],
     "featured": true,
     "download_url": "https://u.pcloud.link/publink/show?code=XZjPb65ZLsTSPI1ejhyIYBojTvAxb09ceJ5X",
