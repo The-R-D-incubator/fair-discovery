@@ -1,12 +1,14 @@
 name: FORGE_COMMAND_OPS
 on:
   schedule:
-    - cron: '0 */6 * * *' # Runs every 6 hours
-  workflow_dispatch: # Allows manual trigger
+    - cron: '0 */6 * * *' 
+  workflow_dispatch: # Allows you to click "Run" manually
 
 jobs:
-  intelligence-gathering:
+  forge-mission:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,18 +21,18 @@ jobs:
       - name: Install Dependencies
         run: pip install requests
 
-      - name: Execute IP Rotator & Scout
+      - name: Run IP Rotator & Scout
         run: |
           python bot/ip_rotator.py
           python bot/scout.py
 
-      - name: Execute SEO Content Stacker
+      - name: Run Neil Patel SEO Stacker
         run: python bot/seo_stacker.py
 
-      - name: Commit Intelligence & Intel Pages
+      - name: Commit & Push New Intel
         run: |
-          git config --local user.email "bot@fairdiscovery.org"
+          git config --local user.email "forge-bot@fairdiscovery.org"
           git config --local user.name "Forge-Bot-v7"
-          git add bot/leads/daily_hitlist.csv intel/*.html
-          git commit -m "Forge Intelligence Update: New Whales & SEO Stacked [v7.1]" || echo "No changes detected"
+          git add bot/leads/*.csv intel/*.html
+          git commit -m "Forge Update: New Whales & SEO Intel Stacked [v7.1]" || echo "No changes detected"
           git push
