@@ -3,7 +3,7 @@ import random
 from datetime import datetime
 
 def forge_intel_report():
-    # Expanded Library: High-Value Tech Sovereignty & Privacy
+    # Content Library: High-Conversion Tech Sovereignty & Privacy
     briefings = [
         {
             "title": "Linux vs. Windows: The Kernel of Truth",
@@ -12,35 +12,34 @@ def forge_intel_report():
             "insight": "Start with a bootable Mint or Fedora drive. Experience what it feels like to not be 'indexed' by your own hardware."
         },
         {
-            "title": "iPhone Hardening: The Lockdown Myth",
-            "tag": "MOBILE FORENSICS",
-            "content": "Apple’s 'Privacy' marketing is the best in the business, but 'Lockdown Mode' is only the first step. iCloud backups remain the single largest leak-point for forensic investigators to bypass device encryption.",
-            "insight": "Disable cloud-sync for sensitive notes and use local, encrypted backups to maintain a true 'Air-Gap'."
-        },
-        {
             "title": "Signal vs. WhatsApp: The Metadata War",
             "tag": "SECURE COMMS",
-            "content": "WhatsApp encrypts the message, but Meta owns the metadata. They know *who* you talked to, *when*, and for *how long*. Signal is the only consumer-grade node that treats metadata as toxic waste—it simply doesn't store it.",
+            "content": "WhatsApp encrypts the message, but Meta owns the metadata. They know who you talked to, when, and for how long. Signal treats metadata as toxic waste—it simply doesn't store it.",
             "insight": "If the platform knows your contact list, you are the product. Signal's sealed-sender protocol is the industry benchmark."
+        },
+        {
+            "title": "iPhone Hardening: The Lockdown Myth",
+            "tag": "MOBILE FORENSICS",
+            "content": "Apple’s marketing is elite, but 'Lockdown Mode' is only the first step. iCloud backups remain the single largest leak-point for forensic investigators to bypass device encryption.",
+            "insight": "Disable cloud-sync for sensitive notes and use local, encrypted backups to maintain a true 'Air-Gap'."
         },
         {
             "title": "TikTok: The Packet-Sniffer in Your Pocket",
             "tag": "APP AUDIT",
-            "content": "TikTok’s in-app browser is a keylogger. Every keystroke made while viewing an external link inside the app is visible to the parent node. It is the most efficient data-harvesting tool ever deployed at scale.",
+            "content": "TikTok’s in-app browser is a keylogger. Every keystroke made while viewing an external link inside the app is visible to the parent node. It is the most efficient data-harvesting tool ever deployed.",
             "insight": "Never use in-app browsers. Always break the sandbox and open links in a hardened, external browser."
         },
         {
-            "title": "YouTube & Google: The Behavioral Ghost",
+            "title": "Google: The Behavioral Ghost",
             "tag": "SHADOW PROFILING",
-            "content": "Google doesn't need your name to know who you are. Your watch history, dwell time, and scroll speed create a 'Behavioral Fingerprint' that is more accurate than a DNA test for target-marketing.",
+            "content": "Google doesn't need your name to know who you are. Your watch history, dwell time, and scroll speed create a 'Behavioral Fingerprint' more accurate than a DNA test for target-marketing.",
             "insight": "Use front-ends like FreeTube or NewPipe to consume content without feeding the behavioral engine."
         }
     ]
 
-    # ... [Rest of the social topics from the previous update go here as well] ...
-
     os.makedirs("docs/intel", exist_ok=True)
     report = random.choice(briefings)
+    # Clean filename logic for SEO stability
     filename = report['title'].lower().replace(" ", "-").replace(":", "").replace("/", "-").replace("'", "") + ".html"
     path = f"docs/intel/{filename}"
     
@@ -122,3 +121,6 @@ def forge_intel_report():
     
     with open(path, 'w') as f:
         f.write(html_content)
+
+if __name__ == "__main__":
+    forge_intel_report()
