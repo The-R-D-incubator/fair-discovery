@@ -16,12 +16,38 @@ def forge_intel_report():
             "tag": "THREAT INTEL",
             "content": "Sophisticated macro-injections are now bypassing traditional sandbox environments by delaying execution until the third 'Save' event. It's a game of digital patience.",
             "insight": "Sanitization must be proactive, not reactive. Scrub every layer before the first open."
+        },
+        {
+            "title": "LinkedIn: Connections vs. Scrapers",
+            "tag": "SOCIAL FORENSICS",
+            "content": "Your professional network is a goldmine for corporate scrapers and social engineers. If your 'Connections' list is public, you aren't networking; you're providing a blueprint of your organization's hierarchy.",
+            "insight": "Hide your connections list in privacy settings to neutralize 'relationship-mapping' bots."
+        },
+        {
+            "title": "Instagram: The EXIF Location Trap",
+            "tag": "GEO-PRIVACY",
+            "content": "Every aesthetic post carries a hidden payload: GPS coordinates accurate to within 3 meters. Sharing your 'HQ' isn't a feature; it's a vulnerability that persists long after the post button is pressed.",
+            "insight": "Use a dedicated metadata scrubber to strip location tags before the upload handshake."
+        },
+        {
+            "title": "Google: The 'My Activity' Audit",
+            "tag": "DATA SOVEREIGNTY",
+            "content": "Google’s memory is long, but it can be edited. Manual deletion is a chore, but automated 'Auto-Delete' cycles are often too infrequent to prevent real-time behavioral profiling.",
+            "insight": "Set your auto-delete to the 3-month minimum, but perform manual 'Security Checkups' monthly."
+        },
+        {
+            "title": "Twitter/X: DM Drip-Tracking",
+            "tag": "LINK ANALYSIS",
+            "content": "Drip-tracking in DM links is the new frontier for deanonymization. Clicking a 'friendly' link in a message can tether your handle to your true IP address via invisible redirect chains.",
+            "insight": "Never click direct-access links; copy the URL and use a neutral, sandboxed browser node."
         }
     ]
 
     os.makedirs("docs/intel", exist_ok=True)
     report = random.choice(briefings)
-    filename = report['title'].lower().replace(" ", "-").replace(":", "") + ".html"
+    # Clean filename logic
+    filename = report['title'].lower().replace(" ", "-").replace(":", "").replace("'", "").replace("/", "") + ".html"
+    path = f"docs/intel/{filename}"
     
     html_content = f"""
 <!DOCTYPE html>
@@ -97,3 +123,6 @@ def forge_intel_report():
     
     with open(path, 'w') as f:
         f.write(html_content)
+
+if __name__ == "__main__":
+    forge_intel_report()
