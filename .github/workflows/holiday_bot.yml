@@ -11,17 +11,29 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
       - name: Check Calendar & Update JSON
         run: |
-          # This is where the Python/Node logic checks the holiday API
-          # For now, it updates the JSON to say "Easter Prep" or "Independence Day"
-          # Then it commits the change back to the repo
+          # The bot executes the brain script we created in .github/scripts/
           python3 .github/scripts/check_holidays.py
+
       - name: Commit Changes
         run: |
-          git config font.family "Geist"
+          # Standard Git Identity for the Bot
           git config user.name "Fair-Discovery-Bot"
           git config user.email "bot@fairdiscovery.org"
+          
+          # Stage the updated promo file
           git add global_promo.json
-          git commit -m "bot: global holiday sync" || echo "No changes"
+          
+          # Commit and push back to main
+          git commit -m "bot: global holiday sync [automated]" || echo "No changes detected today"
           git push
