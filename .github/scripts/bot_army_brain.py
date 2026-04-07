@@ -3,50 +3,45 @@ import random
 from datetime import datetime
 
 def forge_intel_report():
-    # Content Library: Conservative, Witty, and Forensic
+    # Expanded Library: High-Value Tech Sovereignty & Privacy
     briefings = [
         {
-            "title": "UK Node: Encryption Standard Shift",
-            "tag": "REGULATORY ALERT",
-            "content": "London-based forensic teams are reporting a shift in default encryption layers for corporate discovery. While the 'Standard' remains robust, the implementation is sloppy. Metadata is bleeding through the cracks.",
-            "insight": "Expect increased scrutiny on cross-border data transfers during the upcoming audit cycle."
+            "title": "Linux vs. Windows: The Kernel of Truth",
+            "tag": "SYSTEM SOVEREIGNTY",
+            "content": "Windows isn't an OS; it's a telemetry suite that happens to run apps. Switching to a hardened Linux kernel isn't about being a 'hacker'—it's about owning your own CPU cycles and ensuring your file system isn't a glass house.",
+            "insight": "Start with a bootable Mint or Fedora drive. Experience what it feels like to not be 'indexed' by your own hardware."
         },
         {
-            "title": "The Silent Listener: Macro-Injection Trends",
-            "tag": "THREAT INTEL",
-            "content": "Sophisticated macro-injections are now bypassing traditional sandbox environments by delaying execution until the third 'Save' event. It's a game of digital patience.",
-            "insight": "Sanitization must be proactive, not reactive. Scrub every layer before the first open."
+            "title": "iPhone Hardening: The Lockdown Myth",
+            "tag": "MOBILE FORENSICS",
+            "content": "Apple’s 'Privacy' marketing is the best in the business, but 'Lockdown Mode' is only the first step. iCloud backups remain the single largest leak-point for forensic investigators to bypass device encryption.",
+            "insight": "Disable cloud-sync for sensitive notes and use local, encrypted backups to maintain a true 'Air-Gap'."
         },
         {
-            "title": "LinkedIn: Connections vs. Scrapers",
-            "tag": "SOCIAL FORENSICS",
-            "content": "Your professional network is a goldmine for corporate scrapers and social engineers. If your 'Connections' list is public, you aren't networking; you're providing a blueprint of your organization's hierarchy.",
-            "insight": "Hide your connections list in privacy settings to neutralize 'relationship-mapping' bots."
+            "title": "Signal vs. WhatsApp: The Metadata War",
+            "tag": "SECURE COMMS",
+            "content": "WhatsApp encrypts the message, but Meta owns the metadata. They know *who* you talked to, *when*, and for *how long*. Signal is the only consumer-grade node that treats metadata as toxic waste—it simply doesn't store it.",
+            "insight": "If the platform knows your contact list, you are the product. Signal's sealed-sender protocol is the industry benchmark."
         },
         {
-            "title": "Instagram: The EXIF Location Trap",
-            "tag": "GEO-PRIVACY",
-            "content": "Every aesthetic post carries a hidden payload: GPS coordinates accurate to within 3 meters. Sharing your 'HQ' isn't a feature; it's a vulnerability that persists long after the post button is pressed.",
-            "insight": "Use a dedicated metadata scrubber to strip location tags before the upload handshake."
+            "title": "TikTok: The Packet-Sniffer in Your Pocket",
+            "tag": "APP AUDIT",
+            "content": "TikTok’s in-app browser is a keylogger. Every keystroke made while viewing an external link inside the app is visible to the parent node. It is the most efficient data-harvesting tool ever deployed at scale.",
+            "insight": "Never use in-app browsers. Always break the sandbox and open links in a hardened, external browser."
         },
         {
-            "title": "Google: The 'My Activity' Audit",
-            "tag": "DATA SOVEREIGNTY",
-            "content": "Google’s memory is long, but it can be edited. Manual deletion is a chore, but automated 'Auto-Delete' cycles are often too infrequent to prevent real-time behavioral profiling.",
-            "insight": "Set your auto-delete to the 3-month minimum, but perform manual 'Security Checkups' monthly."
-        },
-        {
-            "title": "Twitter/X: DM Drip-Tracking",
-            "tag": "LINK ANALYSIS",
-            "content": "Drip-tracking in DM links is the new frontier for deanonymization. Clicking a 'friendly' link in a message can tether your handle to your true IP address via invisible redirect chains.",
-            "insight": "Never click direct-access links; copy the URL and use a neutral, sandboxed browser node."
+            "title": "YouTube & Google: The Behavioral Ghost",
+            "tag": "SHADOW PROFILING",
+            "content": "Google doesn't need your name to know who you are. Your watch history, dwell time, and scroll speed create a 'Behavioral Fingerprint' that is more accurate than a DNA test for target-marketing.",
+            "insight": "Use front-ends like FreeTube or NewPipe to consume content without feeding the behavioral engine."
         }
     ]
 
+    # ... [Rest of the social topics from the previous update go here as well] ...
+
     os.makedirs("docs/intel", exist_ok=True)
     report = random.choice(briefings)
-    # Clean filename logic
-    filename = report['title'].lower().replace(" ", "-").replace(":", "").replace("'", "").replace("/", "") + ".html"
+    filename = report['title'].lower().replace(" ", "-").replace(":", "").replace("/", "-").replace("'", "") + ".html"
     path = f"docs/intel/{filename}"
     
     html_content = f"""
@@ -54,40 +49,44 @@ def forge_intel_report():
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{report['title']} // Fair Discovery</title>
+    <title>{report['title']} // Fair Discovery Intel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;900&display=swap');
         body {{ font-family: 'Geist', sans-serif; background-color: #0f172a; color: #94a3b8; }}
+        .node-card {{ background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(45, 212, 191, 0.1); }}
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
-    <div class="max-w-xl w-full p-12 bg-slate-900 border border-white/5 rounded-[2.5rem] shadow-2xl">
-        <a href="../index.html" class="text-[10px] font-black uppercase tracking-widest text-teal-500 hover:text-white transition-all">← Secure Node</a>
+<body class="min-h-screen flex items-center justify-center p-6 bg-slate-950">
+    <div class="max-w-xl w-full p-12 node-card rounded-[2.5rem] shadow-2xl">
+        <div class="flex justify-between items-center mb-10">
+            <a href="../index.html" class="text-[10px] font-black uppercase tracking-widest text-teal-500 hover:text-white transition-all">← Secure Node</a>
+            <span class="text-slate-600 text-[10px] font-bold uppercase tracking-widest italic">Node: FD-18</span>
+        </div>
         
-        <div class="mt-8 mb-8">
+        <div class="mb-8">
             <span class="text-teal-400 text-[10px] font-black uppercase tracking-widest border-b border-teal-500/30 pb-1">{report['tag']}</span>
             <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter leading-none mt-4">{report['title']}</h1>
         </div>
 
-        <p class="text-lg text-slate-300 leading-relaxed mb-6 font-light">{report['content']}</p>
+        <p class="text-lg text-slate-200 leading-relaxed mb-6 font-light">{report['content']}</p>
         
-        <div class="p-6 bg-black/20 rounded-2xl border border-white/5 mb-8">
-            <p class="text-xs italic text-teal-500/80">"Forensic Insight: {report['insight']}"</p>
+        <div class="p-6 bg-teal-500/5 rounded-2xl border border-teal-500/10 mb-8">
+            <p class="text-xs italic text-teal-400">"Professional Action: {report['insight']}"</p>
         </div>
 
         <div class="pt-8 border-t border-white/5">
-            <p class="text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] mb-4">Secure the Intel Feed</p>
-            <div class="flex gap-2">
-                <input type="email" id="sub-email" placeholder="EMAIL@AGENCY.COM" class="flex-1 bg-black border border-white/10 rounded-xl px-4 py-3 text-[10px] text-teal-400 focus:outline-none focus:border-teal-500">
-                <button onclick="saveLead()" class="bg-teal-500 text-black px-6 py-3 rounded-xl font-black uppercase text-[10px]">Join</button>
+            <p class="text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] mb-4 text-center">Join the Intel Network for Exclusive Tools</p>
+            <div class="flex flex-col gap-3">
+                <input type="email" id="sub-email" placeholder="SECURE@EMAIL.COM" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-[10px] text-teal-400 focus:outline-none focus:border-teal-500 text-center">
+                <button onclick="saveLead()" class="bg-teal-500 text-black py-3 rounded-xl font-black uppercase text-[10px] hover:bg-white transition-all">Join & Get 20 Credits</button>
             </div>
-            <p id="sub-status" class="mt-4 text-[9px] text-teal-500 font-bold uppercase"></p>
+            <p id="sub-status" class="mt-4 text-[9px] text-teal-500 font-bold uppercase text-center"></p>
         </div>
 
         <div class="mt-12 pt-8 flex justify-between items-center opacity-20 text-[8px] font-black uppercase tracking-widest">
-            <span>ID: {datetime.now().strftime("%Y%m%d")}-INTEL</span>
-            <span>Powered by FairDiscovery.org</span>
+            <span>ID: {datetime.now().strftime("%Y%m%d")}-ALPHA</span>
+            <span>FairDiscovery.org // Forensic Unit</span>
         </div>
     </div>
 
@@ -113,8 +112,8 @@ def forge_intel_report():
             if(!email.includes('@')) {{ status.innerText = "INVALID SIGNATURE"; return; }}
             try {{
                 await addDoc(collection(db, "leads"), {{ email: email, source: "Intel-Report", timestamp: serverTimestamp() }});
-                status.innerText = "LEAD SECURED.";
-            }} catch(e) {{ status.innerText = "VAULT ERROR."; }}
+                status.innerText = "ACCESS GRANTED. CHECK STORAGE.";
+            }} catch(e) {{ status.innerText = "VAULT OFFLINE."; }}
         }}
     </script>
 </body>
@@ -123,6 +122,3 @@ def forge_intel_report():
     
     with open(path, 'w') as f:
         f.write(html_content)
-
-if __name__ == "__main__":
-    forge_intel_report()
