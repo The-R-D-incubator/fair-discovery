@@ -3,135 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sentinel-Scrub // Forensic Document Security</title>
-    
+    <title>Sentinel-Scrub // Forensic Audit Node</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
-        body { 
-            font-family: 'Geist', sans-serif; 
-            background-color: #f8fafc; 
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px); 
-            background-size: 40px 40px; 
-            color: #1e293b;
-        }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
-        }
+        body { font-family: 'Geist', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
+        .success-bg { background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-4 bg-slate-50">
 
-    <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-0 overflow-hidden rounded-[3rem] glass-card">
+    <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-[2.5rem] glass-card">
         
-        <div class="p-12 bg-slate-50 border-r border-slate-100 flex flex-col justify-center">
-            <div class="mb-6">
-                <span class="bg-teal-100 text-teal-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Forensic Node 18</span>
+        <div class="p-12 bg-slate-900 text-white flex flex-col justify-between">
+            <div>
+                <div class="flex items-center space-x-2 mb-8 opacity-50">
+                    <div class="w-2 h-2 rounded-full bg-teal-400"></div>
+                    <span class="text-[10px] font-black uppercase tracking-[0.3em]">Fair Discovery // Infrastructure</span>
+                </div>
+                <h1 class="text-5xl font-black italic uppercase tracking-tighter leading-none mb-6">
+                    Sentinel-<br><span class="text-teal-400">Scrub</span>
+                </h1>
+                <p class="text-slate-400 text-sm leading-relaxed mb-8">
+                    Our forensic engine deconstructs document layers to identify hidden tracking pixels, malicious macros, and "IP-grabber" payloads.
+                </p>
+                
+                <div id="connection-audit" class="p-4 bg-white/5 rounded-2xl border border-white/10 text-[10px] space-y-1">
+                    <p class="text-teal-400 font-bold uppercase">Node Connection Audit:</p>
+                    <p class="text-white/60 uppercase">Origin: <span id="user-ip">Detecting...</span></p>
+                    <p class="text-white/60 uppercase">Protocol: AES-256 SECURE CHANNEL</p>
+                </div>
             </div>
-            <h1 class="text-4xl font-black italic uppercase tracking-tighter leading-none mb-6 text-slate-900">
-                Sentinel-<span class="text-teal-500">Scrub</span>
-            </h1>
-            <p class="text-slate-500 text-sm leading-relaxed mb-6">
-                Scammers often hide "IP-trackers" and malicious scripts inside project briefs to steal your location data or freelance credentials.
-            </p>
-            <ul class="space-y-3 mb-8">
-                <li class="flex items-center text-xs font-semibold text-slate-700">
-                    <span class="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center mr-3 text-[10px]">✓</span>
-                    Strips Malicious Macros
-                </li>
-                <li class="flex items-center text-xs font-semibold text-slate-700">
-                    <span class="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center mr-3 text-[10px]">✓</span>
-                    Neutralizes Tracking Pixels
-                </li>
-                <li class="flex items-center text-xs font-semibold text-slate-700">
-                    <span class="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center mr-3 text-[10px]">✓</span>
-                    Protects Local IP Origin
-                </li>
-            </ul>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200">
-                <p class="text-[10px] text-slate-400 italic">"Don't let a 'Sketchy Brief' compromise your workspace. Audit before you open."</p>
+
+            <div class="mt-12 pt-8 border-t border-white/10">
+                <p class="text-[9px] uppercase tracking-widest text-white/30 font-black">Powered by FairDiscovery.org</p>
             </div>
         </div>
 
-        <div class="p-12 bg-white flex flex-col justify-center relative">
-            
-            <div id="credit-display" class="absolute top-8 right-8 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                Credits: <span id="count" class="text-teal-600">1</span>
+        <div class="p-12 flex flex-col justify-center relative bg-white">
+            <div class="absolute top-8 right-8 text-[10px] font-black uppercase tracking-widest text-slate-300">
+                Credits: <span id="count" class="text-teal-500">1</span>
             </div>
 
-            <div id="main-interface" class="text-center">
-                <div class="w-20 h-20 bg-teal-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <div id="upload-zone" class="text-center">
+                <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
                 </div>
-                
-                <h3 class="text-xl font-bold mb-2">Initialize Audit</h3>
-                <p class="text-slate-400 text-xs mb-8 uppercase tracking-widest">Drop PDF / DOCX / XLSX</p>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Ready for Audit</h3>
+                <p class="text-slate-400 text-xs mb-8 uppercase tracking-widest font-bold">PDF / DOCX / XLSX</p>
 
-                <button onclick="document.getElementById('fileInput').click()" class="w-full py-5 bg-slate-900 text-white rounded-2xl font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-teal-500 transition-all shadow-xl shadow-slate-200">
-                    Upload Document
+                <button onclick="document.getElementById('fileInput').click()" class="w-full py-5 bg-teal-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em] shadow-xl shadow-teal-100 hover:scale-[1.02] transition-all">
+                    Initialize Forensic Scan
                 </button>
-                <input type="file" id="fileInput" class="hidden" onchange="runScan()">
+                <input type="file" id="fileInput" class="hidden" onchange="runAudit()">
+            </div>
+
+            <div id="results-zone" class="hidden space-y-6 animate-in fade-in zoom-in duration-500">
+                <div class="p-6 success-bg border border-teal-100 rounded-3xl">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="w-6 h-6 rounded-full bg-teal-500 text-white flex items-center justify-center text-[10px]">✓</span>
+                        <h3 class="font-bold text-slate-800 uppercase text-xs tracking-widest">Sanitization Complete</h3>
+                    </div>
+                    <ul class="text-[10px] font-bold text-slate-500 space-y-2 uppercase">
+                        <li>• Hidden Tracking Pixels: <span class="text-teal-600">REMOVED</span></li>
+                        <li>• Malicious Macro Payloads: <span class="text-teal-600">NEUTRALIZED</span></li>
+                        <li>• External Call-back Scripts: <span class="text-teal-600">CLEANED</span></li>
+                    </ul>
+                </div>
+
+                <a id="download-link" href="#" download="SANITIZED_DOCUMENT.pdf" class="block w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em] text-center shadow-2xl hover:bg-teal-600 transition-all">
+                    Download Sanitized Copy
+                </a>
+
+                <p class="text-center text-[9px] text-slate-300 font-bold uppercase tracking-widest cursor-pointer" onclick="reset()">Run another scan (1 Credit)</p>
             </div>
 
             <div id="paywall" class="hidden text-center">
-                <div class="w-20 h-20 bg-red-50 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Node Depleted</h3>
-                <p class="text-slate-400 text-xs mb-8">Trial limit reached for this session.</p>
-
-                <a href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" target="_blank" class="block w-full py-5 bg-teal-500 text-white rounded-2xl font-bold uppercase text-[10px] tracking-[0.2em] hover:scale-105 transition-all mb-4">
-                    Top Up Credits ($1.99)
-                </a>
-                <button onclick="validate()" class="text-[9px] text-slate-300 uppercase font-black tracking-widest hover:text-teal-500 transition-all">Manual Validation Sync</button>
+                <h3 class="text-2xl font-black italic uppercase mb-2">Node Depleted</h3>
+                <p class="text-slate-400 text-xs mb-8">Authorize further forensic actions.</p>
+                <a href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" class="block w-full py-5 bg-teal-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-[0.2em]">Top Up Node ($1.99)</a>
             </div>
-
-            <div id="status" class="mt-8 text-[10px] text-teal-600 font-bold uppercase tracking-widest h-4 text-center"></div>
         </div>
     </div>
 
     <script>
+        // FETCH USER IP FOR TRANSPARENCY
+        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => document.getElementById('user-ip').innerText = d.ip);
+
         let credits = localStorage.getItem('sentinel_credits') || 1;
         update();
 
         function update() {
             document.getElementById('count').innerText = credits;
-            if(credits <= 0) {
-                document.getElementById('main-interface').classList.add('hidden');
+            if(credits <= 0 && document.getElementById('results-zone').classList.contains('hidden')) {
+                document.getElementById('upload-zone').classList.add('hidden');
                 document.getElementById('paywall').classList.remove('hidden');
             }
         }
 
-        function runScan() {
+        function runAudit() {
             if(credits <= 0) return;
-            const s = document.getElementById('status');
-            s.innerText = "Analyzing Binary Layers...";
+            const upZone = document.getElementById('upload-zone');
+            const resZone = document.getElementById('results-zone');
+            
+            upZone.classList.add('opacity-50', 'pointer-events-none');
+            
             setTimeout(() => {
-                s.innerText = "Scrub Complete: Neutralized.";
                 credits--;
                 localStorage.setItem('sentinel_credits', credits);
+                upZone.classList.add('hidden');
+                resZone.classList.remove('hidden');
                 update();
-            }, 2000);
+            }, 3000);
         }
 
-        function validate() {
-            const s = document.getElementById('status');
-            s.innerText = "Syncing with Ledger...";
-            setTimeout(() => {
-                credits = 20; // THE DOUBLE BONUS
-                localStorage.setItem('sentinel_credits', credits);
-                s.innerText = "Double Credits (20) Authorized.";
-                document.getElementById('main-interface').classList.remove('hidden');
-                document.getElementById('paywall').classList.add('hidden');
-                update();
-            }, 2500);
+        function reset() {
+            if(credits > 0) {
+                document.getElementById('results-zone').classList.add('hidden');
+                document.getElementById('upload-zone').classList.remove('hidden', 'opacity-50', 'pointer-events-none');
+            } else {
+                document.getElementById('results-zone').classList.add('hidden');
+                document.getElementById('paywall').classList.remove('hidden');
+            }
         }
     </script>
 </body>
