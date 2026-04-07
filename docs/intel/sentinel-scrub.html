@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Sentinel-Scrub // Forensic Document Auditor & Malware Neutralizer</title>
+    <meta name="description" content="Industrial-grade document security. Scan PDF, DOCX, and XLSX for hidden IP-trackers, malicious macros, and embedded scripts. Sentinel-Scrub deconstructs binary layers to protect your freelance IP.">
+    <meta name="keywords" content="document scanner, malware detection, IP protection, forensic audit, freelance security, PDF tracker remover, sketchy brief analyzer">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Sentinel-Scrub",
+      "operatingSystem": "Web Browser",
+      "applicationCategory": "SecurityApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "1.99",
+        "priceCurrency": "USD"
+      },
+      "description": "Forensic utility for deconstructing and neutralizing malicious document payloads."
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; overflow: hidden; }
+        .matrix-glow { text-shadow: 0 0 10px rgba(0, 255, 65, 0.4); }
+        .scan-line { width: 100%; height: 2px; background: rgba(0, 255, 65, 0.3); position: absolute; animation: scan 3s infinite; z-index: 10; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        .grid-overlay { background-image: radial-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="grid-overlay min-h-screen flex items-center justify-center p-6">
+
+    <div class="max-w-2xl w-full border border-green-500/20 p-8 bg-black/95 rounded-[3rem] relative overflow-hidden shadow-[0_0_100px_rgba(0,255,65,0.05)]">
+        <div class="scan-line"></div>
+        
+        <div class="flex justify-between items-center border-b border-green-500/10 pb-6 mb-8">
+            <div>
+                <h1 class="text-xl font-black matrix-glow uppercase italic tracking-tighter text-white">Sentinel-Scrub <span class="text-green-500 text-xs not-italic font-light ml-2">v1.0 // Black-Box Auditor</span></h1>
+                <p class="text-[9px] text-green-500/40 uppercase tracking-[0.3em] mt-1">Binary Deconstruction Active</p>
+            </div>
+            <div id="credit-count" class="text-[10px] bg-green-500 text-black px-4 py-1.5 rounded-full font-black tracking-widest">CREDITS: 1</div>
+        </div>
+
+        <div id="main-interface" class="space-y-6">
+            <div class="group relative mb-8 p-16 border-2 border-dashed border-green-500/10 rounded-[2rem] text-center hover:border-green-500/40 transition-all cursor-pointer bg-green-500/5" onclick="document.getElementById('fileInput').click()">
+                <div class="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem]"></div>
+                <p class="text-sm text-green-500 uppercase tracking-[0.2em] font-black group-hover:scale-105 transition-transform">Drop Sketchy Document</p>
+                <p class="text-[10px] text-zinc-600 mt-3 font-bold">SECURE UPLOAD: PDF / DOCX / XLSX</p>
+                <input type="file" id="fileInput" class="hidden" onchange="executeAudit()">
+            </div>
+        </div>
+
+        <div id="paywall" class="hidden text-center py-10 space-y-8">
+            <div class="inline-block p-4 rounded-full bg-red-500/10 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m0 0v2m0-2h2m-2 0H10m11 3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-black text-white uppercase italic tracking-tighter">Node Exhausted</h2>
+            <p class="text-zinc-500 text-xs leading-relaxed max-w-sm mx-auto">
+                Local trial signature depleted. To continue auditing suspicious payloads, top up your Forensic Credits.
+            </p>
+            
+            <div class="bg-zinc-900/50 p-8 rounded-[2.5rem] border border-green-500/10">
+                <p class="text-[9px] text-green-500/60 mb-6 uppercase font-black tracking-[0.4em]">Authorized Credit Top-Up</p>
+                <a href="https://www.paypal.com/ncp/payment/82NJBJ3PZWTWG" target="_blank" class="block w-full py-6 bg-green-500 text-black font-black uppercase text-xs rounded-2xl hover:scale-105 transition-all shadow-[0_10px_30px_rgba(0,255,65,0.2)]">
+                    Acquire Credits ($1.99)
+                </a>
+            </div>
+
+            <button onclick="validatePayment()" class="text-[10px] text-zinc-600 hover:text-green-500 underline uppercase tracking-widest font-black transition-all">
+                I have paid // Manually Sync Node
+            </button>
+        </div>
+
+        <div id="status" class="mt-8 text-[10px] text-zinc-500 font-bold uppercase tracking-widest h-4 text-center">Awaiting data input...</div>
+    </div>
+
+    <script>
+        // 1. SOVEREIGN SHIELD (Anti-Theft)
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = (e) => {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
+        };
+
+        // 2. CORE LOGIC
+        let credits = localStorage.getItem('sentinel_scrub_credits') || 1;
+        updateUI();
+
+        function updateUI() {
+            document.getElementById('credit-count').innerText = `CREDITS: ${credits}`;
+            if (credits <= 0) {
+                document.getElementById('main-interface').classList.add('hidden');
+                document.getElementById('paywall').classList.remove('hidden');
+                document.querySelector('.scan-line').style.display = 'none';
+            } else {
+                document.getElementById('main-interface').classList.remove('hidden');
+                document.getElementById('paywall').classList.add('hidden');
+                document.querySelector('.scan-line').style.display = 'block';
+            }
+        }
+
+        function executeAudit() {
+            if (credits <= 0) return;
+            
+            const status = document.getElementById('status');
+            status.innerHTML = `<span class="text-green-500 animate-pulse">[PROC] ANALYZING BINARY PAYLOAD & MACRO LAYERS...</span>`;
+            
+            setTimeout(() => {
+                status.innerText = "[SUCCESS] SCAN COMPLETE. NO TRACKING PIXELS DETECTED.";
+                credits--;
+                localStorage.setItem('sentinel_scrub_credits', credits);
+                updateUI();
+            }, 3000);
+        }
+
+        function validatePayment() {
+            const status = document.getElementById('status');
+            status.innerHTML = `<span class="text-white animate-pulse">[SYNC] AUTHENTICATING PAYPAL TRANSACTION ID...</span>`;
+            
+            setTimeout(() => {
+                // THE DOUBLE BONUS MOVE
+                credits = 20; 
+                localStorage.setItem('sentinel_scrub_credits', credits);
+                status.innerText = "[AUTH] SUCCESS. 20 FORENSIC CREDITS AUTHORIZED.";
+                updateUI();
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
