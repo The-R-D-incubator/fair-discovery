@@ -1,201 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fair Discovery | Industry Utility Hub</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400;700&display=swap');
-    body { font-family: 'Geist', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
-    .grid-bg { background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 30px 30px; }
-
-    /* Industrial Palette */
-    .canary-yellow { color: #facc15 !important; }
-    .border-canary { border-color: #facc15 !important; }
-    .code-purple { color: #c084fc; }
-    .code-blue { color: #60a5fa; }
-
-    .hero-container { position: relative; overflow: hidden; min-height: 550px; display: flex; align-items: center; }
-    .footer-logo { height: 32px; width: auto; transition: all 0.4s ease; opacity: 0.8; }
-    .footer-logo:hover { opacity: 1; transform: scale(1.1); }
-
-    .neon-card { background: rgba(10, 10, 10, 0.98); border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
-    .neon-card:hover { border-color: #facc15; box-shadow: 0 0 30px rgba(250, 204, 21, 0.05); }
-
-    .reveal-anim { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  </style>
+    <meta charset="UTF-8">
+    <title>FORGE_COMMAND | Real-Time Engine Audit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #000; color: #facc15; font-family: 'JetBrains Mono', monospace; }
+        .grid-line { border-color: rgba(250, 204, 21, 0.1); }
+        .log-entry:nth-child(even) { background: rgba(255,255,255,0.02); }
+    </style>
 </head>
-<body class="grid-bg min-h-screen flex flex-col">
-
-  <nav class="max-w-7xl mx-auto w-full px-6 py-6 flex justify-between items-center sticky top-0 z-[110] bg-black/90 backdrop-blur-3xl border-b border-white/5">
-    <div class="flex items-center gap-4">
-      <img src="logo.png" alt="Logo" class="h-6 w-auto">
-      <span class="font-bold tracking-tighter text-sm uppercase italic">Fair Discovery</span>
-    </div>
-    <div class="flex gap-8 items-center">
-        <a href="mailto:jarrit@forgevertical.com" class="text-[10px] font-bold uppercase tracking-[0.3em] canary-yellow hover:text-white transition">Support</a>
-        <a href="https://forgevertical.com" target="_blank" class="hidden md:block text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition">Forge Vertical</a>
-    </div>
-  </nav>
-
-  <header class="hero-container py-32 px-6">
-    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10 reveal-anim">
-        <div class="lg:w-3/5 text-left">
-            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-8 uppercase italic text-white">
-                Fair Discovery<br><span class="canary-yellow">Tools Forged For Industry.</span>
-            </h1>
-            <p class="text-zinc-300 text-xl md:text-2xl font-light leading-relaxed max-w-2xl">
-                Building tools that <span class="canary-yellow font-bold">help businesses</span>, 
-                <span class="canary-yellow font-bold">secure files</span>, and 
-                <span class="canary-yellow font-bold">protect ad spend</span>. 
-            </p>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-start mb-12">
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase">Forge_Control v5.6</h1>
+            <div class="text-right">
+                <button onclick="clearLogs()" class="text-[10px] border border-red-500 text-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-black transition">Wipe Session Logs</button>
+            </div>
         </div>
-        <div class="lg:w-2/5 hidden lg:block">
-            <div class="bg-zinc-900/90 backdrop-blur-3xl border border-white/10 p-10 rounded-[2.5rem] font-mono text-sm shadow-2xl">
-                <span class="code-purple">if</span> (!perimeter_secure) {<br>
-                &nbsp;&nbsp;<span class="code-blue">deployForgeGuard</span>();<br>
-                } <span class="code-purple">else</span> {<br>
-                &nbsp;&nbsp;<span class="code-blue">quarantineLinks</span>();<br>
-                }
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="border grid-line p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase">Ads Displayed</p>
+                <p id="stat-ads" class="text-4xl font-black">0</p>
+            </div>
+            <div class="border grid-line p-6 rounded-2xl">
+                <p class="text-zinc-500 text-[10px] uppercase">Clicks/Interest</p>
+                <p id="stat-clicks" class="text-4xl font-black text-white">0</p>
+            </div>
+            <div class="border grid-line p-6 rounded-2xl bg-white/5">
+                <p class="text-zinc-500 text-[10px] uppercase">Conversion Rate</p>
+                <p id="stat-conv" class="text-4xl font-black text-green-500">0%</p>
+            </div>
+        </div>
+
+        <div class="border grid-line rounded-[2rem] overflow-hidden">
+            <div class="bg-zinc-900 px-6 py-3 border-b grid-line flex justify-between">
+                <span class="text-xs font-bold uppercase tracking-widest">Global Activity Stream</span>
+                <span class="text-[10px] text-zinc-500">AUTO-REFRESH: ON</span>
+            </div>
+            <div id="log-container" class="h-96 overflow-y-auto p-4 text-[11px] font-mono space-y-1">
+                <p class="text-zinc-700">Waiting for bot signals...</p>
             </div>
         </div>
     </div>
-  </header>
 
-  <div class="max-w-7xl mx-auto w-full px-6 -mt-10 mb-16 relative z-[100]">
-    <div class="bg-black/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-4 flex flex-col md:flex-row gap-6 items-center justify-between shadow-2xl">
-        <div class="relative w-full md:w-96">
-            <input type="text" id="toolSearch" onkeyup="filterTools()" placeholder="Search Repository..." 
-                   class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-canary transition text-zinc-300">
-        </div>
-        <div class="flex flex-wrap gap-2 justify-center">
-            <button onclick="setCategory('All')" class="cat-btn px-6 py-2 rounded-xl border border-canary text-canary-yellow text-[10px] font-bold uppercase tracking-widest transition bg-white/5">All</button>
-            <button onclick="setCategory('Security')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">Security</button>
-            <button onclick="setCategory('AI')" class="cat-btn px-4 py-2 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:border-canary transition">AI</button>
-        </div>
-    </div>
-  </div>
+    <script>
+        function updateDashboard() {
+            const logs = JSON.parse(localStorage.getItem('forge_logs') || '[]');
+            const container = document.getElementById('log-container');
+            
+            // Calculate Stats
+            const ads = logs.filter(l => l.event === 'AD_SHOWN').length;
+            const clicks = logs.filter(l => l.event === 'BUY_CLICK').length;
+            const conv = ads > 0 ? ((clicks / ads) * 100).toFixed(1) : 0;
 
-  <main class="max-w-7xl mx-auto px-6 pb-32 flex-grow">
-    <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-  </main>
+            document.getElementById('stat-ads').innerText = ads;
+            document.getElementById('stat-clicks').innerText = clicks;
+            document.getElementById('stat-conv').innerText = conv + "%";
 
-  <footer class="bg-zinc-950 border-t border-white/5 py-20 px-6 mt-auto">
-      <div class="max-w-7xl mx-auto flex flex-col items-center">
-          <div class="flex flex-wrap justify-center items-center gap-12 mb-12">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="footer-logo">
-              <img src="img/githublogo.svg" alt="GitHub" class="footer-logo">
-              <img src="img/cloudflarelogo.svg" alt="Cloudflare" class="footer-logo">
-              <img src="img/geminilogo.svg" alt="Gemini" class="footer-logo">
-          </div>
-          <p class="text-zinc-600 text-[10px] uppercase tracking-[0.5em]">Fair Discovery &copy; 2026 Sovereign Infrastructure</p>
-      </div>
-  </footer>
-
-  <script>
-    let allProducts = [];
-    let currentCategory = 'All';
-
-    // --- ENGINE 05: ANALYTICS PUSH ---
-    function pushSignal(eventType, details) {
-        const signal = {
-            timestamp: new Date().toISOString(),
-            event: eventType,
-            details: details,
-            origin: new URLSearchParams(window.location.search).get('ref') || 'organic'
-        };
-        console.log("📡 SIGNAL_SENT:", signal);
-        let logs = JSON.parse(localStorage.getItem('forge_logs') || '[]');
-        logs.push(signal);
-        localStorage.setItem('forge_logs', JSON.stringify(logs.slice(-100)));
-    }
-
-    // --- ENGINE 03: CONVERSION PULSE ---
-    const pulseMessages = ["Global Forge-Guard signature updated.", "Threat neutralized in UK.", "New deployment active.", "Ad-Spend Shield initialized."];
-    function createPulse() {
-        const pulseBar = document.createElement('div');
-        pulseBar.className = "fixed bottom-0 left-0 right-0 bg-black border-t border-canary p-2 z-[200] flex justify-center items-center";
-        pulseBar.innerHTML = `<p id="pulse-text" class="text-[9px] font-black uppercase tracking-[0.4em] canary-yellow italic"></p>`;
-        document.body.appendChild(pulseBar);
-        let i = 0;
-        setInterval(() => {
-            const text = document.getElementById('pulse-text');
-            text.innerText = `>>> [LIVE STATUS]: ${pulseMessages[i]}`;
-            i = (i + 1) % pulseMessages.length;
-        }, 4000);
-    }
-
-    // --- ENGINE 04: AGGRESSIVE SUGGESTOR ---
-    function runSuggestor() {
-        const origin = new URLSearchParams(window.location.search).get('ref');
-        if (origin) {
-            pushSignal('LEAD_LANDING', origin);
-            setTimeout(() => {
-                const ad = document.createElement('div');
-                ad.className = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 bg-black border-2 border-canary p-8 rounded-[2.5rem] z-[300] shadow-[0_0_150px_rgba(250,204,21,0.4)]";
-                const headline = origin === 'ads' ? "AD-REVENUE RISK" : "THREAT DETECTED";
-                ad.innerHTML = `
-                    <div class="text-center">
-                        <h4 class="text-2xl font-black italic uppercase mb-4 text-white">${headline}</h4>
-                        <p class="text-xs text-zinc-400 mb-8 leading-relaxed">Vulnerability found in session. Secure assets immediately.</p>
-                        <button onclick="pushSignal('AD_PURCHASE_INTENT', '${headline}'); this.parentElement.parentElement.remove(); window.open('https://paypal.me/YOUR_PAYPAL/20','_blank')" class="block w-full py-4 bg-canary-yellow text-black font-black uppercase text-xs rounded-xl">Deploy Node ($20)</button>
-                    </div>`;
-                document.body.appendChild(ad);
-                pushSignal('AD_SHOWN', headline);
-            }, 3000);
-        }
-    }
-
-    // --- STORE CORE ---
-    async function loadStore() {
-        try {
-            const response = await fetch('products.json');
-            const data = await response.json();
-            allProducts = data;
-            renderStore(allProducts);
-            pushSignal('PAGE_LOAD', 'Storefront Operational');
-        } catch (e) { console.error("Load failed", e); }
-    }
-
-    function renderStore(products) {
-        const grid = document.getElementById('store-grid');
-        grid.innerHTML = products.map((tool, index) => {
-            const isFree = tool.price.toUpperCase() === 'FREE';
-            return `
-            <div class="neon-card rounded-[2.5rem] flex flex-col overflow-hidden reveal-anim" style="animation-delay: ${index * 0.05}s">
-                <div class="h-[220px] bg-cover bg-center relative" style="background-image: url('img/${tool.image}')">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                </div>
-                <div class="p-10 pt-0 flex flex-col flex-grow relative">
-                    <div class="flex justify-between items-start mb-8">
-                        <div class="w-3 h-3 rounded-full mt-4 bg-green-500"></div>
-                        <span class="canary-yellow font-mono text-3xl font-bold tracking-tighter">${isFree ? 'FREE' : '$'+tool.price}</span>
+            // Render Logs
+            if (logs.length > 0) {
+                container.innerHTML = logs.reverse().map(l => `
+                    <div class="log-entry p-2 flex justify-between">
+                        <span class="text-zinc-500">[${l.timestamp.split('T')[1].split('.')[0]}]</span>
+                        <span class="font-bold text-white">${l.event}</span>
+                        <span class="text-blue-400">ORIGIN: ${l.origin}</span>
+                        <span class="text-zinc-400">${l.details}</span>
                     </div>
-                    <h3 class="text-3xl font-black tracking-tighter mb-4 italic uppercase leading-none text-white">${tool.name}</h3>
-                    <p class="text-zinc-400 text-base leading-relaxed mb-8 font-light">${tool.description}</p>
-                    <a href="${tool.paypal_url}" onclick="pushSignal('BUY_CLICK', '${tool.name}')" target="_blank" class="block text-center border border-canary text-canary-yellow py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#facc15] hover:text-black transition-all">
-                        Acquire Node
-                    </a>
-                </div>
-            </div>`;
-        }).join('');
-    }
+                `).join('');
+            }
+        }
 
-    function filterTools() {
-        const query = document.getElementById('toolSearch').value.toLowerCase();
-        const filtered = allProducts.filter(p => (p.name.toLowerCase().includes(query)) && (currentCategory === 'All' || p.category === currentCategory));
-        renderStore(filtered);
-    }
+        function clearLogs() {
+            localStorage.removeItem('forge_logs');
+            updateDashboard();
+        }
 
-    function setCategory(cat) {
-        currentCategory = cat;
-        filterTools();
-    }
-
-    window.onload = () => { loadStore(); createPulse(); runSuggestor(); };
-  </script>
+        setInterval(updateDashboard, 2000);
+        updateDashboard();
+    </script>
 </body>
 </html>
