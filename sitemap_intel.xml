@@ -1,24 +1,9 @@
-// SOVEREIGN SHIELD: ANTI-THEFT PROTOCOL
-document.addEventListener('contextmenu', event => event.preventDefault()); // Block Right Click
-
-document.onkeydown = function(e) {
-    if(e.keyCode == 123) return false; // Block F12
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Block Ctrl+Shift+I
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Block Ctrl+Shift+C
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Block Ctrl+Shift+J
-    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Block Ctrl+U (View Source)
-}
-
-// THE TRIAL LIMITER
-const toolID = 'session_shield_use';
-let uses = localStorage.getItem(toolID) || 0;
-
-function checkLimit() {
-    if (uses >= 1) {
-        showPaywall(); // Function to trigger your $8 Modal
-        return false;
-    }
-    uses++;
-    localStorage.setItem(toolID, uses);
-    return true;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://fairdiscovery.org/intel/fiverr-session-hijack-report-2026.html</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+</urlset>
