@@ -8,23 +8,34 @@ jobs:
   revenue-operations:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          # Handing the Master Key to the Hourly Strike Bot
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Install Dependencies
         run: pip install requests feedparser
+
       - name: 🔥 Execute Trend-Jacker
         run: python bot/trend_jacker.py
+
       - name: 📡 Execute Signal Scout
         run: python bot/scout.py
+
       - name: 📢 Execute Syndicator
         run: node bot/syndicator.js
+
       - name: 💾 Commit & Sync Intelligence
         run: |
           git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
-          git add bot/leads/*.csv bot/current_mission.json
+          # Adding leads and mission data to the secure vault
+          git add bot/leads/*.csv bot/current_mission.json docs/*.xml
           git commit -m "Intelligence Sync [$(date)]" || exit 0
-          git push
+          git push origin main
