@@ -20,14 +20,14 @@ jobs:
       - name: 2. Forge New Intel (NP-Quality)
         run: python .github/scripts/bot_army_brain.py
         
-      - name: 3. Sync Sitemap
+      - name: 3. Sync Segmented Sitemaps
         run: python .github/scripts/update_sitemap.py
         
       - name: 4. Push Updates
         run: |
           git config user.name "Fair-Discovery-Bot"
           git config user.email "bot@fairdiscovery.org"
-          git add .
+          git add docs/*.xml docs/intel/*.html docs/*.html .github/scripts/*.py
           git pull origin main --rebase || echo "No remote changes to sync"
-          git commit -m "integrity: auto-deploy forensic nodes [NP-Style]" || echo "Stable"
+          git commit -m "integrity: king kong sitemap index & forensic node deployment" || echo "Stable"
           git push origin main
