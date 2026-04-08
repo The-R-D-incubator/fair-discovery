@@ -11,6 +11,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Handing the Master Key to the Daily Bot Army
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0 
       
       - name: Run Bot Army Brain
         run: python .github/scripts/bot_army_brain.py
@@ -22,6 +26,7 @@ jobs:
         run: |
           git config user.name "Fair-Discovery-Bot"
           git config user.email "bot@fairdiscovery.org"
-          git add docs/intel/*.html docs/sitemap_intel.xml
-          git commit -m "bot: auto-forge intel reports and sitemap" || echo "No changes"
-          git push
+          # Tracking the forged intel and the updated sitemaps
+          git add docs/intel/*.html docs/*.xml
+          git commit -m "bot: auto-forge intel reports and king kong sitemap" || echo "No changes"
+          git push origin main
