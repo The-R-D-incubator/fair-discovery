@@ -1,4 +1,4 @@
-name: FORGE_MULTI_BOT_ARMY
+name: INTEL_FORGE_ARMY
 on:
   schedule:
     - cron: '0 12 * * *' # Every day at Noon
