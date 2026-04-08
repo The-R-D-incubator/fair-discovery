@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,57 +7,59 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
-        body {{ font-family: 'Geist', sans-serif; background-color: #020617; color: #94a3b8; line-height: 1.6; }}
-        .glow-border {{ border: 1px solid rgba(45, 212, 191, 0.1); }}
-        .gradient-text {{ background: linear-gradient(135deg, #fff 0%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }}
+        /* FIXED: Changed body color to slate-100 (near white) for sharp legibility */
+        body { font-family: 'Geist', sans-serif; background-color: #020617; color: #f1f5f9; line-height: 1.6; }
+        .glow-border { border: 1px solid rgba(45, 212, 191, 0.3); }
+        /* ADJUSTED: Stronger gradient for the title */
+        .gradient-text { background: linear-gradient(135deg, #fff 0%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="min-h-screen py-12 px-6 md:py-24">
     <div class="max-w-3xl mx-auto">
         <nav class="flex justify-between items-center mb-20">
-            <a href="../index.html" class="text-[10px] font-black uppercase tracking-[0.4em] text-teal-500 hover:text-white transition-all">← Infrastructure Home</a>
-            <span class="text-slate-700 text-[10px] font-black uppercase tracking-widest italic tracking-[0.2em]">Node-2026-A1</span>
+            <a href="../index.html" class="text-[10px] font-black uppercase tracking-[0.4em] text-teal-400 hover:text-white transition-all">← Infrastructure Home</a>
+            <span class="text-slate-500 text-[10px] font-black uppercase tracking-widest italic tracking-[0.2em]">Node-2026-A1</span>
         </nav>
 
         <header class="mb-16">
-            <span class="px-3 py-1 bg-teal-500/10 text-teal-400 text-[9px] font-black rounded-full border border-teal-500/20 uppercase tracking-[0.2em] mb-6 inline-block">SECURE COMMS</span>
+            <span class="px-3 py-1 bg-teal-500/20 text-teal-300 text-[9px] font-black rounded-full border border-teal-500/40 uppercase tracking-[0.2em] mb-6 inline-block">SECURE COMMS</span>
             <h1 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-[0.9] mt-4 mb-8 gradient-text">
                 Signal vs. WhatsApp: The Metadata War
             </h1>
         </header>
 
-        <article class="text-lg text-slate-300 font-light">
+        <article class="text-lg text-slate-200 font-light">
             <h2 class="text-white font-bold text-2xl mb-6 italic uppercase tracking-tight">The Hidden Cost of 'Free' Encrypted Messaging</h2>
             <p>WhatsApp encrypts the message, but Meta owns the metadata. They know who you talked to, when, for how long, and your physical location during the handshake. <br><br> Signal is the only consumer-grade node that treats metadata as toxic waste—it simply doesn't store it. If a platform knows your contact list, you are the product.</p>
 
-            <div class="glow-border bg-slate-900/40 p-8 rounded-[2rem] my-12 italic border-l-4 border-l-teal-500">
-                <p class="text-slate-400 text-md mb-0 italic">"Forensic Insight: Signal's sealed-sender protocol is the only industry benchmark that matters in 2026."</p>
+            <div class="glow-border bg-slate-900/80 p-8 rounded-[2rem] my-12 italic border-l-4 border-l-teal-500">
+                <p class="text-white font-semibold text-md mb-0 italic">"Forensic Insight: Signal's sealed-sender protocol is the only industry benchmark that matters in 2026."</p>
             </div>
             
             <h2 class="text-white font-bold text-2xl mb-8 italic uppercase tracking-tight">Deployment Access</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                <a href="../sentinel-scrub.html" class="block p-6 rounded-2xl border border-white/5 bg-white/5 hover:border-teal-500/50 transition-all">
+                <a href="../sentinel-scrub.html" class="block p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-teal-500/50 transition-all">
                     <h4 class="text-teal-400 font-black uppercase text-xs tracking-widest mb-2">Sentinel-Scrub</h4>
-                    <p class="text-[11px] text-slate-500 uppercase">Document Sanitization Node.</p>
+                    <p class="text-[11px] text-slate-400 uppercase">Document Sanitization Node.</p>
                 </a>
-                <a href="../pixel-purge.html" class="block p-6 rounded-2xl border border-white/5 bg-white/5 hover:border-teal-500/50 transition-all">
+                <a href="../pixel-purge.html" class="block p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-teal-500/50 transition-all">
                     <h4 class="text-teal-400 font-black uppercase text-xs tracking-widest mb-2">Pixel-Purge</h4>
-                    <p class="text-[11px] text-slate-500 uppercase">Image Privacy Node.</p>
+                    <p class="text-[11px] text-slate-400 uppercase">Image Privacy Node.</p>
                 </a>
             </div>
         </article>
 
         <div class="mt-20 p-12 bg-white rounded-[3.5rem] text-center">
             <h4 class="text-slate-900 font-black uppercase italic mb-2 tracking-tighter text-2xl">Secure the Feed</h4>
-            <p class="text-slate-500 text-[10px] mb-8 uppercase tracking-[0.2em] font-bold">Initialize Cloud Token // Get 20 Credits</p>
+            <p class="text-slate-600 text-[10px] mb-8 uppercase tracking-[0.2em] font-bold">Initialize Cloud Token // Get 20 Credits</p>
             <div class="flex flex-col sm:flex-row gap-3">
                 <input type="email" id="sub-email" placeholder="EMAIL@AGENCY.COM" class="flex-1 bg-slate-100 border-none rounded-2xl px-8 py-5 text-[11px] text-slate-900 focus:ring-2 focus:ring-teal-500 font-black outline-none uppercase tracking-widest">
-                <button onclick="saveLead()" class="bg-teal-500 text-white px-12 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest">Initialize</button>
+                <button onclick="saveLead()" class="bg-teal-500 text-white px-12 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-teal-400 transition-colors">Initialize</button>
             </div>
             <p id="sub-status" class="mt-6 text-[9px] text-teal-600 font-black uppercase"></p>
         </div>
 
-        <footer class="mt-24 pt-8 border-t border-white/5 flex justify-between items-center opacity-30 text-[8px] font-black uppercase tracking-[0.4em]">
+        <footer class="mt-24 pt-8 border-t border-white/10 flex justify-between items-center opacity-50 text-[8px] font-black uppercase tracking-[0.4em]">
             <span>FairDiscovery.org // Sovereign Utility</span>
             <span>2026 // ALPHA UNIT</span>
         </footer>
