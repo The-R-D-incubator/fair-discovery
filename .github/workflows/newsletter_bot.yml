@@ -9,10 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Handing the Master Key to the Postman
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0
+
       - name: Install dependencies
         run: pip install firebase-admin sendgrid
+        
       - name: Run Postman
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          # Providing the token as an env var in case the script needs it for git operations
+          GITHUB_TOKEN: ${{ secrets.BOT_DEPLOY_TOKEN }}
         run: python .github/scripts/send_newsletter.py
