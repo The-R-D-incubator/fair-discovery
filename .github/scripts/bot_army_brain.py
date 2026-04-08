@@ -3,58 +3,46 @@ import random
 from datetime import datetime
 
 def forge_intel_report():
-    # THE INTELLIGENCE LIBRARY (Deep-Dive Content)
+    # THE INTELLIGENCE LIBRARY
     briefings = [
         {
             "title": "The Death of the Black Box",
             "tag": "FORENSIC MANIFESTO",
             "headline": "Why Modern Software is a Security Liability",
-            "content": """
-                We’ve entered a strange era of digital tools. Most modern software is a mystery — hidden behind monthly subscriptions, locked in proprietary clouds, and bloated with features you never asked for. 
-                <br><br>
-                For security professionals, private investigators, and creators, this “Black Box” model isn’t just annoying; it’s a liability. When you are auditing a content gate or tracing a digital footprint, you don’t need a “platform.” <strong>You need a Node.</strong>
-                <br><br>
-                The internet is no longer a playground; it’s industrial infrastructure. It’s time our tools reflected that.
-            """,
+            "content": "We’ve entered a strange era of digital tools. Most modern software is a mystery — hidden behind monthly subscriptions, locked in proprietary clouds, and bloated with features you never asked for. <br><br> For security professionals, private investigators, and creators, this “Black Box” model isn’t just annoying; it’s a liability. When you are auditing a content gate or tracing a digital footprint, you don’t need a “platform.” <strong>You need a Node.</strong> <br><br> The internet is no longer a playground; it’s industrial infrastructure. It’s time our tools reflected that.",
             "insight": "Privacy isn't a feature you subscribe to. It's an infrastructure you own."
         },
         {
             "title": "Linux vs. Windows: The Kernel of Truth",
             "tag": "SYSTEM SOVEREIGNTY",
             "headline": "Reclaiming Your CPU Cycles from Telemetry",
-            "content": """
-                Windows isn't an OS; it's a telemetry suite that happens to run apps. Every click, file-open, and search query is indexed and sent to a centralized node. 
-                <br><br>
-                Switching to a hardened Linux kernel isn't about being a 'hacker'—it's about owning your own hardware. In a Linux environment, the user is the ultimate authority, not a corporate data-harvesting engine.
-            """,
+            "content": "Windows isn't an OS; it's a telemetry suite that happens to run apps. Every click, file-open, and search query is indexed and sent to a centralized node. <br><br> Switching to a hardened Linux kernel isn't about being a 'hacker'—it's about owning your own hardware. In a Linux environment, the user is the ultimate authority, not a corporate data-harvesting engine.",
             "insight": "Start with a bootable Mint drive. Experience what it feels like to not be 'indexed' by your own hardware."
         },
         {
             "title": "Signal vs. WhatsApp: The Metadata War",
             "tag": "SECURE COMMS",
             "headline": "The Hidden Cost of 'Free' Encrypted Messaging",
-            "content": """
-                WhatsApp encrypts the message, but Meta owns the metadata. They know who you talked to, when, for how long, and your physical location during the handshake. 
-                <br><br>
-                Signal is the only consumer-grade node that treats metadata as toxic waste—it simply doesn't store it. If a platform knows your contact list, you are the product.
-            """,
+            "content": "WhatsApp encrypts the message, but Meta owns the metadata. They know who you talked to, when, for how long, and your physical location during the handshake. <br><br> Signal is the only consumer-grade node that treats metadata as toxic waste—it simply doesn't store it. If a platform knows your contact list, you are the product.",
             "insight": "Signal's sealed-sender protocol is the only industry benchmark that matters in 2026."
         }
     ]
 
     os.makedirs("docs/intel", exist_ok=True)
     report = random.choice(briefings)
+    
+    # Clean filename logic
     filename = report['title'].lower().replace(" ", "-").replace(":", "").replace("/", "-") + ".html"
     path = f"docs/intel/{filename}"
     
-    # THE LONG-FORM HTML TEMPLATE
-    html_content = f"""
+    # THE SECURE TEMPLATE (No 'f' prefix here to prevent bracket crashes)
+    html_template = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{report['title']} // Fair Discovery Intel</title>
+    <title>{title} // Fair Discovery Intel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;600;900&display=swap');
@@ -71,18 +59,18 @@ def forge_intel_report():
         </nav>
 
         <header class="mb-16">
-            <span class="px-3 py-1 bg-teal-500/10 text-teal-400 text-[9px] font-black rounded-full border border-teal-500/20 uppercase tracking-[0.2em] mb-6 inline-block">{report['tag']}</span>
+            <span class="px-3 py-1 bg-teal-500/10 text-teal-400 text-[9px] font-black rounded-full border border-teal-500/20 uppercase tracking-[0.2em] mb-6 inline-block">{tag}</span>
             <h1 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-[0.9] mt-4 mb-8 gradient-text">
-                {report['title']}
+                {title}
             </h1>
         </header>
 
         <article class="text-lg text-slate-300 font-light">
-            <h2 class="text-white font-bold text-2xl mb-6 italic uppercase tracking-tight">{report['headline']}</h2>
-            <p>{report['content']}</p>
+            <h2 class="text-white font-bold text-2xl mb-6 italic uppercase tracking-tight">{headline}</h2>
+            <p>{content}</p>
 
             <div class="glow-border bg-slate-900/40 p-8 rounded-[2rem] my-12 italic border-l-4 border-l-teal-500">
-                <p class="text-slate-400 text-md mb-0 italic">"Forensic Insight: {report['insight']}"</p>
+                <p class="text-slate-400 text-md mb-0 italic">"Forensic Insight: {insight}"</p>
             </div>
             
             <h2 class="text-white font-bold text-2xl mb-8 italic uppercase tracking-tight">Deployment Access</h2>
@@ -115,47 +103,54 @@ def forge_intel_report():
     </div>
 
     <script type="module">
-        import {{ initializeApp }} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import {{ getFirestore, doc, getDoc, setDoc, collection, addDoc, serverTimestamp }} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const firebaseConfig = {{
+        const firebaseConfig = {
             apiKey: "AIzaSyAyqBa1_vjKePLo6apd_TrDojLgsQgngFY",
             authDomain: "fair-discovery.firebaseapp.com",
             projectId: "fair-discovery",
             storageBucket: "fair-discovery.firebasestorage.app",
             messagingSenderId: "827220975047",
             appId: "1:827220975047:web:6b399c410c41f9b5100de2"
-        }};
+        };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        window.saveLead = async function() {{
+        window.saveLead = async function() {
             const emailInput = document.getElementById('sub-email');
             const status = document.getElementById('sub-status');
             const email = emailInput.value.toLowerCase().trim();
-            if (!email.includes('@')) {{ status.innerText = "INVALID SECURE SIGNATURE"; return; }}
+            if (!email.includes('@')) { status.innerText = "INVALID SECURE SIGNATURE"; return; }
             status.innerText = "SYNCING CLOUD TOKEN...";
-            try {{
+            try {
                 const userRef = doc(db, "users", email);
                 const userSnap = await getDoc(userRef);
-                if (userSnap.exists()) {{
+                if (userSnap.exists()) {
                     status.innerText = "NODE RECONNECTED. BALANCE RESTORED.";
-                } else {{
-                    await setDoc(userRef, {{ email: email, credits: 20, joined: serverTimestamp() }});
-                    await addDoc(collection(db, "leads"), {{ email: email, source: "Master-Bot" }});
+                } else {
+                    await setDoc(userRef, { email: email, credits: 20, joined: serverTimestamp() });
+                    await addDoc(collection(db, "leads"), { email: email, source: "Master-Bot" });
                     status.innerText = "TOKEN AUTHORIZED: 20 CREDITS GRANTED.";
-                }}
+                }
                 emailInput.value = "";
-            }} catch (e) {{ status.innerText = "VAULT OFFLINE."; }}
-        }}
+            } catch (e) { status.innerText = "VAULT OFFLINE."; }
+        }
     </script>
 </body>
 </html>
-    """
+"""
     
+    # SAFER INJECTION: Injecting the report data into the template
+    final_html = html_template.replace("{title}", report['title'])\
+                              .replace("{tag}", report['tag'])\
+                              .replace("{headline}", report['headline'])\
+                              .replace("{content}", report['content'])\
+                              .replace("{insight}", report['insight'])
+
     with open(path, 'w') as f:
-        f.write(html_content)
+        f.write(final_html)
 
 if __name__ == "__main__":
     forge_intel_report()
