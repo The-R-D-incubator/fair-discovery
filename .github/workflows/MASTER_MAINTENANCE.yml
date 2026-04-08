@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Handing the Master Key to the Bot
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
           fetch-depth: 0 # Essential for rebase logic
 
       - name: 1. Repair & Optimize Files
@@ -27,6 +29,7 @@ jobs:
         run: |
           git config user.name "Fair-Discovery-Bot"
           git config user.email "bot@fairdiscovery.org"
+          # Adding everything to ensure the King Kong sitemaps land
           git add docs/*.xml docs/intel/*.html docs/*.html .github/scripts/*.py
           git pull origin main --rebase || echo "No remote changes to sync"
           git commit -m "integrity: king kong sitemap index & forensic node deployment" || echo "Stable"
