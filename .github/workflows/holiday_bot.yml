@@ -2,7 +2,7 @@ name: Holiday Promotion Governor
 on:
   schedule:
     - cron: '0 0 * * *' # Runs every day at midnight
-  workflow_dispatch: # Allows you to trigger it manually
+  workflow_dispatch: 
 
 jobs:
   update-promos:
@@ -11,6 +11,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Handing the Master Key to the Holiday Bot
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -21,19 +25,15 @@ jobs:
         run: pip install requests
 
       - name: Check Calendar & Update JSON
-        run: |
-          # The bot executes the brain script we created in .github/scripts/
-          python3 .github/scripts/check_holidays.py
+        run: python3 .github/scripts/check_holidays.py
 
       - name: Commit Changes
         run: |
-          # Standard Git Identity for the Bot
           git config user.name "Fair-Discovery-Bot"
           git config user.email "bot@fairdiscovery.org"
           
-          # Stage the updated promo file
-          git add global_promo.json
+          # Stage the updated promo file and any sitemap changes
+          git add global_promo.json docs/*.xml
           
-          # Commit and push back to main
           git commit -m "bot: global holiday sync [automated]" || echo "No changes detected today"
-          git push
+          git push origin main
