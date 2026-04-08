@@ -1,4 +1,4 @@
-name: FORGE_MULTI_BOT_ARMY
+name: REVENUE_OPS_ENGINE
 on:
   schedule:
     - cron: '0 * * * *' # Hourly Strike
