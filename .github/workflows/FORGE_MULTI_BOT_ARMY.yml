@@ -12,10 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Handing the Master Key to the Daily Bot Army
           token: ${{ secrets.BOT_DEPLOY_TOKEN }}
           fetch-depth: 0 
       
+      # BUILDING THE BRAIN
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install Industrial Dependencies
+        run: |
+          pip install requests feedparser firebase-admin
+
       - name: Run Bot Army Brain
         run: python .github/scripts/bot_army_brain.py
         
@@ -27,7 +36,6 @@ jobs:
           git config user.name "Fair-Discovery-Bot"
           git config user.email "bot@fairdiscovery.org"
           git add .
-          # Sync with any other bots that finished in the last few seconds
           git pull origin main --rebase || echo "No remote changes"
           git commit -m "integrity: industrial node sync [v1.2]" || echo "Stable"
           git push origin main
