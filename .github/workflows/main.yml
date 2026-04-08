@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          # Handing the Master Key to the Lead-Gen Bot
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -33,6 +37,7 @@ jobs:
         run: |
           git config --local user.email "forge-bot@fairdiscovery.org"
           git config --local user.name "Forge-Bot-v7"
-          git add bot/leads/*.csv intel/*.html
+          # Adding leads, intel, and ensuring sitemaps stay updated
+          git add bot/leads/*.csv intel/*.html docs/*.xml
           git commit -m "Forge Update: New Whales & SEO Intel Stacked [v7.1]" || echo "No changes detected"
-          git push
+          git push origin main
