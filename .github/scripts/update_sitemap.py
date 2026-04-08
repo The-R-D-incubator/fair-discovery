@@ -1,29 +1,49 @@
 import os
 from datetime import datetime
 
-def generate_sitemap():
-    base_url = "https://fairdiscovery.org"
-    intel_dir = "docs/intel"
-    sitemap_path = "docs/sitemap_intel.xml"
-    
-    # Start the XML structure
-    pages = [f"{base_url}/sentinel-scrub.html", f"{base_url}/pixel-purge.html"]
-    
-    # Scan the intel folder for new forensic reports
-    if os.path.exists(intel_dir):
-        for file in os.listdir(intel_dir):
-            if file.endswith(".html"):
-                pages.append(f"{base_url}/intel/{file}")
+DOMAIN = "https://fairdiscovery.org"
 
-    # Build the XML string
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    for page in pages:
-        xml += f'  <url>\n    <loc>{page}</loc>\n    <lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod>\n  </url>\n'
-    xml += '</urlset>'
+def generate_sitemap_file(filename, urls):
+    header = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    footer = '</urlset>'
+    content = ""
+    for url in urls:
+        content += f'  <url>\n    <loc>{DOMAIN}/{url}</loc>\n    <lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+    
+    with open(f"docs/{filename}", "w") as f:
+        f.write(header + content + footer)
+    print(f"Generated: {filename}")
 
-    with open(sitemap_path, 'w') as f:
-        f.write(xml)
-    print(f"Sitemap Sync: {len(pages)} pages indexed.")
+def generate_index_sitemap():
+    sitemaps = ["sitemap_pages.xml", "sitemap_tools.xml", "sitemap_intel.xml"]
+    header = '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    footer = '</sitemapindex>'
+    content = ""
+    for sm in sitemaps:
+        content += f'  <sitemap>\n    <loc>{DOMAIN}/{sm}</loc>\n    <lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod>\n  </sitemap>\n'
+    
+    with open("docs/sitemap_index.xml", "w") as f:
+        f.write(header + content + footer)
+    print("Generated: sitemap_index.xml (The Mother Ship)")
+
+def run_sync():
+    # 1. CORE PAGES
+    pages = ["index.html"] # Add other static pages here
+    generate_sitemap_file("sitemap_pages.xml", pages)
+
+    # 2. REVENUE TOOLS (Nodes)
+    # Automatically finds any .html in docs root that isn't index or a sitemap
+    tools = [f for f in os.listdir("docs") if f.endswith(".html") and f not in ["index.html"] and "sitemap" not in f]
+    generate_sitemap_file("sitemap_tools.xml", tools)
+
+    # 3. INTEL (The Bot Army Reports)
+    intel_files = []
+    if os.path.exists("docs/intel"):
+        intel_files = [f"intel/{f}" for f in os.listdir("docs/intel") if f.endswith(".html")]
+    generate_sitemap_file("sitemap_intel.xml", intel_files)
+
+    # 4. THE MOTHER SHIP
+    generate_index_sitemap()
 
 if __name__ == "__main__":
-    generate_sitemap()
+    run_sync()
