@@ -1,10 +1,20 @@
 import os
 
-# --- BRANDING & ASSETS ---
+# --- REVENUE STACK (The "Money" Variables) ---
 AMAZON_TAG = "fairdiscovery-20"
 SURFSHARK_URL = "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
 HONEYGAIN_URL = "https://join.honeygain.com/PRINY5083C"
 AURORA_URL = "https://www.aurora-repair.com"
+
+# Set your Pixel ID here. Use 'OFF' or leave empty to disable.
+PIXEL_ID = "YOUR_PIXEL_ID_HERE" 
+
+def generate_pixel_code(pixel_id):
+    """The 1x1 Silent Tracker - Non-intrusive and fast."""
+    if not pixel_id or pixel_id == "YOUR_PIXEL_ID_HERE": return ""
+    return f"""
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={pixel_id}&ev=PageView&noscript=1"/>
+    """
 
 def generate_industry_report(item):
     return f"""
@@ -19,44 +29,73 @@ def build_elite_portal(folder_name, title, keywords):
     base_path = os.path.join(root_affiliates, folder_name)
     os.makedirs(base_path, exist_ok=True)
     
-    # HUB
+    # HUB PAGE
     with open(os.path.join(base_path, "index.html"), "w") as f:
         links = "".join([f'<a href="{k.lower().replace(" ", "-")}.html" style="display:block; padding:20px; margin:10px 0; background:#fff; border-left:5px solid #00d18a; text-decoration:none; color:#333; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><strong>{k}</strong> &rarr;</a>' for k in keywords])
-        f.write(f"<html><head><title>{title}</title><style>body{{font-family:sans-serif; background:#f4f7f6; padding:40px;}} .container{{max-width:800px; margin:auto;}}</style></head><body><div class='container'><h1>{title} Hub</h1>{links}</div></body></html>")
+        f.write(f"<html><head><title>{title} | Hub</title><style>body{{font-family:sans-serif; background:#f4f7f6; padding:40px;}} .container{{max-width:800px; margin:auto;}}</style></head><body><div class='container'><h1>{title} Hub</h1>{links}</div></body></html>")
 
-    # ARTICLES
+    # ARTICLE PAGES
     for k in keywords:
         filename = k.lower().replace(" ", "-") + ".html"
         with open(os.path.join(base_path, filename), "w") as art:
             art.write(f"""
-            <html><head><title>{k} | Technical Report</title>
-            <style>body{{font-family:Georgia, serif; line-height:1.8; max-width:800px; margin:auto; padding:40px; color:#222;}} h1{{font-family:sans-serif;}} .box{{background:#f1f5f9; padding:25px; border-radius:8px; margin:20px 0; font-family:sans-serif;}}</style>
-            </head><body>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>{k} | Technical Analysis 2026</title>
+                {generate_pixel_code(PIXEL_ID)}
+                <style>
+                    body {{ font-family: 'Georgia', serif; line-height: 1.8; color: #222; max-width: 850px; margin: auto; padding: 40px; background: #fdfdfd; }}
+                    h1 {{ font-family: sans-serif; }}
+                    .ad-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0; }}
+                    .ad-card {{ background: #fff; border: 1px solid #eee; padding: 20px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); font-family: sans-serif; }}
+                    .tag {{ background: #00d18a; color: white; padding: 3px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; text-transform: uppercase; }}
+                    .cta-box {{ background: #00d18a; color: white; padding: 30px; border-radius: 12px; text-align: center; font-family: sans-serif; }}
+                    .btn-main {{ display: inline-block; background: white; color: #00d18a; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 15px; }}
+                </style>
+            </head>
+            <body>
                 <h1>Engineering Analysis: {k}</h1>
                 {generate_industry_report(k)}
-                <div class="box">
-                    <h3>Procurement Verified</h3>
-                    <script type="text/javascript">
-                        amzn_assoc_tracking_id = "{AMAZON_TAG}";
-                        amzn_assoc_ad_mode = "search";
-                        amzn_assoc_ad_type = "smart";
-                        amzn_assoc_marketplace = "amazon";
-                        amzn_assoc_region = "US";
-                        amzn_assoc_default_search_phrase = "{k}";
-                    </script>
-                    <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+                
+                <div class="ad-grid">
+                    <div class="ad-card">
+                        <span class="tag">Hardware</span>
+                        <h4>Procure Verified {k}</h4>
+                        <script type="text/javascript">
+                            amzn_assoc_tracking_id = "{AMAZON_TAG}";
+                            amzn_assoc_ad_mode = "search";
+                            amzn_assoc_ad_type = "smart";
+                            amzn_assoc_marketplace = "amazon";
+                            amzn_assoc_region = "US";
+                            amzn_assoc_default_search_phrase = "{k}";
+                        </script>
+                        <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+                    </div>
+                    <div class="ad-card">
+                        <span class="tag">Security</span>
+                        <h4>Data Integrity</h4>
+                        <p>Secure hardware diagnostics with 256-bit encryption tunnels.</p>
+                        <a href="{SURFSHARK_URL}" style="color:#00d18a; font-weight:bold;">Secure My Connection &rarr;</a>
+                    </div>
                 </div>
-                <div style="background:#00d18a; color:white; padding:30px; border-radius:12px; text-align:center;">
-                    <h3>Need Technical Support?</h3>
-                    <a href="{AURORA_URL}" style="color:white; font-weight:bold; font-size:1.2em;">Visit Aurora-Repair.com</a>
+
+                <div class="cta-box">
+                    <h3>Technical Infrastructure Support</h3>
+                    <p>For lifecycle maintenance, setup, and precision repair of {k} systems.</p>
+                    <a href="{AURORA_URL}" class="btn-main">Visit Aurora-Repair.com</a>
                 </div>
-                <p><small>🛡️ <a href="{SURFSHARK_URL}">Secure VPN</a> | 💰 <a href="{HONEYGAIN_URL}">Bandwidth Bounty</a></small></p>
-            </body></html>
+
+                <p style="margin-top:50px; text-align:center; font-size: 13px; font-family: sans-serif;">
+                    🛡️ <a href="{SURFSHARK_URL}">Secure VPN</a> | 💰 <a href="{HONEYGAIN_URL}">Passive Yield Bounty</a>
+                </p>
+            </body>
+            </html>
             """)
 
 if __name__ == "__main__":
     all_portals = [
-        # --- BATCH 1-50 ---
         ("pro-solar", "Solar Infrastructure", ["Solar Inverter", "Lithium Battery", "Solar Panels"]),
         ("auto-tech", "Automotive Diagnostics", ["OBD2 Scanner", "ECU Tuner", "Car Battery Tester"]),
         ("star-gear", "Satellite Comms", ["Starlink Mount", "Travel Case", "Starlink Adapter"]),
@@ -107,8 +146,6 @@ if __name__ == "__main__":
         ("music-biz", "Instrument Tech", ["Synthesizer", "Drum Machine", "Pedal Board"]),
         ("leather-tech", "Crafting Tools", ["Leather Stitcher", "Skiving Machine", "Burnisher"]),
         ("jewelry-eng", "Jewelry Tools", ["Micro-Motor", "Steam Cleaner", "Ring Stretcher"]),
-
-        # --- THE FINAL SPRINT (51-100) ---
         ("lab-freezer", "Ultra-Low Temp Storage", ["Cryogenic Freezer", "Vaccine Fridge", "Freeze Dryer"]),
         ("drone-mapping", "Aerial Photogrammetry", ["Lidar Drone", "Multispectral Sensor", "RTK Ground Station"]),
         ("greenhouse-tech", "Commercial Cultivation", ["Climate Controller", "Auto-Doser", "Thermal Screen"]),
