@@ -1,0 +1,29 @@
+name: REVENUE_OPS_ENGINE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Allows you to run it manually
+
+jobs:
+  build-and-deploy:
+    runs-with: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Generate 100 Portals
+        run: |
+          python factory.py
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./affiliates
+          keep_files: true # Prevents it from deleting your main site
