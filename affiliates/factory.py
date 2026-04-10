@@ -1,7 +1,7 @@
 import os
 
 # --- YOUR REVENUE KEYS ---
-AMAZON_TAG = "jarrit-20" 
+AMAZON_TAG = "fairdiscovery-20" 
 SURFSHARK_URL = "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
 
 def build_niche_site(folder_name, title, keywords):
