@@ -1,27 +1,37 @@
 name: REVENUE_OPS_ENGINE
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   revenue-operations:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.BOT_DEPLOY_TOKEN }}
           fetch-depth: 0
-      - name: Python
+
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: "3.9"
+
       - name: Build
         run: python factory.py
+
       - name: Sync
         run: |
           git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
-          git add affiliates/*
+          git add affiliates/* || true
           git commit -m "Network Sync" || exit 0
           git push origin main
