@@ -22,13 +22,13 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: 🔥 Build Global Affiliate Portals
+      - name: Build Global Affiliate Portals
         run: python factory.py
 
-      - name: 💾 Commit & Sync Affiliate Network
+      - name: Commit and Sync Affiliate Network
         run: |
           git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
           git add affiliates/*
-          git commit -m "Global Network Sync [$(date)]" || exit 0
+          git commit -m "Global Network Sync" || exit 0
           git push origin main
