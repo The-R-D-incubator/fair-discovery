@@ -1,48 +1,27 @@
 name: REVENUE_OPS_ENGINE
-
 on:
-  schedule:
-    - cron: '0 * * * *'          # Runs every hour
   push:
-    branches: [ main ]
-  workflow_dispatch:             # Allows manual trigger
-
+    branches: [main]
+  workflow_dispatch:
 jobs:
   revenue-operations:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.BOT_DEPLOY_TOKEN }}
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5        # Updated to v5 (recommended)
+      - name: Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-
-      - name: Build Global Affiliate Portals
+      - name: Build
         run: python factory.py
-
-      - name: Commit and Sync Affiliate Network
+      - name: Sync
         run: |
           git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
-
-          # Only commit if there are actual changes
-          if git diff --quiet --exit-code affiliates/; then
-            echo "No changes to commit."
-            exit 0
-          fi
-
           git add affiliates/*
-          
-          git commit -m "chore: Global Network Sync - $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
-          
+          git commit -m "Network Sync" || exit 0
           git push origin main
