@@ -1,29 +1,35 @@
 name: REVENUE_OPS_ENGINE
 
 on:
+  schedule:
+    - cron: '0 * * * *' # Hourly Build Strike
   push:
     branches: [ main ]
-  workflow_dispatch: 
+  workflow_dispatch: # Manual Trigger
 
 jobs:
-  build-and-deploy:
+  revenue-operations:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          # Using your Master Key for high-frequency deployment
+          token: ${{ secrets.BOT_DEPLOY_TOKEN }}
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.9'
 
-      - name: Generate 100 Portals
+      - name: 🔥 Build Global Affiliate Portals
+        run: python factory.py
+
+      - name: 💾 Commit & Sync Affiliate Network
         run: |
-          python factory.py
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./affiliates
-          keep_files: true
+          git config --local user.email "ops@fairdiscovery.org"
+          git config --local user.name "Forge-Bot-Army"
+          # This stages the 100 folders created in /affiliates
+          git add affiliates/*
+          git commit -m "Global Network Sync [$(date)]" || exit 0
+          git push origin main
