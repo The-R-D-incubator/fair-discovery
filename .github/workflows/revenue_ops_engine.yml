@@ -2,18 +2,18 @@ name: REVENUE_OPS_ENGINE
 
 on:
   schedule:
-    - cron: '0 * * * *' # Hourly Build Strike
+    - cron: '0 * * * *'
   push:
     branches: [ main ]
-  workflow_dispatch: # Manual Trigger
+  workflow_dispatch:
 
 jobs:
   revenue-operations:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          # Using your Master Key for high-frequency deployment
           token: ${{ secrets.BOT_DEPLOY_TOKEN }}
           fetch-depth: 0
 
@@ -29,7 +29,6 @@ jobs:
         run: |
           git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
-          # This stages the 100 folders created in /affiliates
           git add affiliates/*
           git commit -m "Global Network Sync [$(date)]" || exit 0
           git push origin main
