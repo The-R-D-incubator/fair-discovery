@@ -3,11 +3,11 @@ name: REVENUE_OPS_ENGINE
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Allows you to run it manually
+  workflow_dispatch: 
 
 jobs:
   build-and-deploy:
-    runs-with: ubuntu-latest
+    runs-on: ubuntu-latest  # FIXED: changed from 'runs-with'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -26,4 +26,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./affiliates
-          keep_files: true # Prevents it from deleting your main site
+          keep_files: true
