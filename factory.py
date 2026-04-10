@@ -55,8 +55,8 @@ def build_elite_portal(folder_name, title, keywords):
             """)
 
 if __name__ == "__main__":
-    # --- THE FULL 100-SITE REGISTRY ---
     all_portals = [
+        # --- BATCH 1-50 ---
         ("pro-solar", "Solar Infrastructure", ["Solar Inverter", "Lithium Battery", "Solar Panels"]),
         ("auto-tech", "Automotive Diagnostics", ["OBD2 Scanner", "ECU Tuner", "Car Battery Tester"]),
         ("star-gear", "Satellite Comms", ["Starlink Mount", "Travel Case", "Starlink Adapter"]),
@@ -97,7 +97,6 @@ if __name__ == "__main__":
         ("water-tech", "Filtration Science", ["Reverse Osmosis", "UV Sterilizer", "Water Tester"]),
         ("printing-pro", "Large Format", ["Plotter Printer", "Vinyl Cutter", "Heat Press"]),
         ("theatre-tech", "Stage Engineering", ["DMX Controller", "Stage Light", "Fog Machine"]),
-        # --- Continue adding to hit 100 ---
         ("robotics-pro", "Robotics Lab", ["Cobot Arm", "Lidar Scanner", "Servo Motor"]),
         ("radio-tech", "Ham Radio", ["SDR Receiver", "Antenna Tuner", "HF Transceiver"]),
         ("gym-tech", "Fitness Science", ["Smart Rower", "Massage Gun", "Smart Mirror"]),
@@ -107,7 +106,59 @@ if __name__ == "__main__":
         ("emergency-prep", "Survival Tech", ["Solar Crank Radio", "Water Filter Pro", "EMP Bag"]),
         ("music-biz", "Instrument Tech", ["Synthesizer", "Drum Machine", "Pedal Board"]),
         ("leather-tech", "Crafting Tools", ["Leather Stitcher", "Skiving Machine", "Burnisher"]),
-        ("jewelry-eng", "Jewelry Tools", ["Micro-Motor", "Steam Cleaner", "Ring Stretcher"])
+        ("jewelry-eng", "Jewelry Tools", ["Micro-Motor", "Steam Cleaner", "Ring Stretcher"]),
+
+        # --- THE FINAL SPRINT (51-100) ---
+        ("lab-freezer", "Ultra-Low Temp Storage", ["Cryogenic Freezer", "Vaccine Fridge", "Freeze Dryer"]),
+        ("drone-mapping", "Aerial Photogrammetry", ["Lidar Drone", "Multispectral Sensor", "RTK Ground Station"]),
+        ("greenhouse-tech", "Commercial Cultivation", ["Climate Controller", "Auto-Doser", "Thermal Screen"]),
+        ("packaging-pro", "Industrial Packaging", ["Vacuum Sealer", "Shrink Tunnel", "Pallet Wrapper"]),
+        ("forklift-tech", "Warehouse Mobility", ["Electric Stacker", "Pallet Jack", "Forklift Battery"]),
+        ("boiler-tech", "Thermal Engineering", ["Steam Boiler", "Heat Exchanger", "Pressure Gauge"]),
+        ("valve-eng", "Flow Control Systems", ["Solenoid Valve", "Ball Valve", "Pneumatic Actuator"]),
+        ("pump-tech", "Industrial Fluid Ops", ["Centrifugal Pump", "Diaphragm Pump", "Submersible Pump"]),
+        ("crane-ops", "Overhead Lifting", ["Gantry Crane", "Jib Crane", "Hoist Controller"]),
+        ("safe-storage", "High-Security Vaults", ["Biometric Safe", "Fireproof Cabinet", "Gun Safe"]),
+        ("kitchen-pro", "Commercial Culinary", ["Combi Oven", "Blast Chiller", "Sous Vide Pro"]),
+        ("gym-infra", "Facility Performance", ["Commercial Treadmill", "Squat Rack", "Cable Machine"]),
+        ("physio-tech", "Rehabilitation Gear", ["Shockwave Therapy", "Laser Therapy", "TENS Unit"]),
+        ("dental-tech", "Clinical Dentistry", ["Dental X-Ray", "Autoclave", "Intraoral Scanner"]),
+        ("vet-med", "Veterinary Diagnostics", ["Vet Ultrasound", "Anesthesia Machine", "Vet Table"]),
+        ("optometry-pro", "Visual Diagnostics", ["Phoropter", "Slit Lamp", "Autorefractor"]),
+        ("audio-visual", "Conference Systems", ["Video Wall", "Ceiling Mic Array", "Control Processor"]),
+        ("server-cool", "Data Center Thermal", ["Rack Cooling", "Immersion Cooling", "CRAH Unit"]),
+        ("pos-tech", "Retail Infrastructure", ["Receipt Printer", "Cash Drawer", "Touch Terminal"]),
+        ("kiosk-pro", "Self-Service Tech", ["Ordering Kiosk", "Check-in Kiosk", "Wayfinding Screen"]),
+        ("vending-ops", "Automated Retail", ["Smart Vender", "Coin Mech", "Card Reader Pro"]),
+        ("laundry-pro", "Industrial Washing", ["Commercial Dryer", "Washer Extractor", "Ironing Machine"]),
+        ("pool-tech", "Aquatic Management", ["Variable Speed Pump", "Salt Chlorinator", "Pool Robot"]),
+        ("spa-eng", "Wellness Engineering", ["Steam Generator", "Sauna Heater", "Hydrotherapy Jet"]),
+        ("light-show", "Event Production", ["Moving Head Light", "LED Video Panel", "Laser Projector"]),
+        ("sound-reinforcement", "Live Sound Tech", ["Line Array", "Digital Mixer", "Stage Monitor"]),
+        ("recording-pro", "Studio Infrastructure", ["Vocal Booth", "Patch Bay", "Preamp Rack"]),
+        ("film-gear", "Cinema Production", ["Camera Gimbal", "Follow Focus", "Matte Box"]),
+        ("lighting-grip", "Film Studio Tech", ["C-Stand", "LED Softbox", "DMX Dimmer"]),
+        ("battery-storage", "BESS Technology", ["Grid Battery", "Battery Management System", "DC Combiner"]),
+        ("wind-power", "Wind Turbine Tech", ["Vertical Wind Turbine", "Anemometer", "Brake System"]),
+        ("hydro-power", "Micro-Hydro Systems", ["Water Turbine", "Pelton Wheel", "Governor"]),
+        ("gas-eng", "Natural Gas Tech", ["Gas Meter", "Leak Detector", "Regulator Station"]),
+        ("welding-robot", "Automated Metallurgy", ["Welding Arm", "Positioner", "Wire Feeder"]),
+        ("conveyor-pro", "Material Handling", ["Belt Conveyor", "Roller Track", "Sortation System"]),
+        ("lab-glass", "Scientific Glassware", ["Rotary Evaporator", "Distillation Kit", "Glass Reactor"]),
+        ("chem-ops", "Chemical Processing", ["Magnetic Stirrer", "Heating Mantle", "Chemical Pump"]),
+        ("safety-gear", "PPE Industrial", ["Powered Respirator", "Safety Harness", "Gas Mask"]),
+        ("fire-defense", "Suppression Systems", ["Fire Panel", "Smoke Detector Pro", "Extinguisher Cabinet"]),
+        ("access-control", "Entry Security", ["Turnstile", "RFID Reader", "Maglock"]),
+        ("parking-tech", "Revenue Parking", ["Boom Gate", "Ticket Dispenser", "LPR Camera"]),
+        ("waste-ops", "Recycling Tech", ["Cardboard Baler", "Trash Compactor", "Glass Crusher"]),
+        ("water-well", "Borehole Tech", ["Well Pump", "Drilling Rig", "Casing Pipe"]),
+        ("irrigation-pro", "Agri-Water Tech", ["Center Pivot", "Drip Tape", "Pump Station"]),
+        ("pest-tech", "Commercial Mitigation", ["Thermal Fogger", "Bait Station", "UV Trap"]),
+        ("cold-chain", "Logistics Thermal", ["Reefer Unit", "Data Logger", "Insulated Container"]),
+        ("air-cargo", "Aviation Logistics", ["ULD Container", "Cargo Loader", "X-Ray Scanner"]),
+        ("rail-tech", "Railway Engineering", ["Track Switch", "Signaling System", "Locomotive Part"]),
+        ("telecom-tower", "Cellular Infra", ["RF Amplifier", "Sector Antenna", "Tower Light"]),
+        ("space-tech", "Satellite Engineering", ["Ground Station", "Star Tracker", "Ion Thruster"])
     ]
 
     print(f"🚀 INITIATING MASSIVE STRIKE: {len(all_portals)} Portals.")
