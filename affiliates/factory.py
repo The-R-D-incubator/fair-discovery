@@ -5,7 +5,7 @@ AMAZON_TAG = "fairdiscovery-20"
 SURFSHARK_URL = "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
 
 def build_niche_site(folder_name, title, keywords):
-    """Generates a mini-site inside a subfolder"""
+    """Generates a mini-site inside a subfolder with Auto-Pilot Ads"""
     base_path = f"affiliates/{folder_name}"
     os.makedirs(base_path, exist_ok=True)
     
@@ -13,11 +13,12 @@ def build_niche_site(folder_name, title, keywords):
     with open(f"{base_path}/index.html", "w") as f:
         f.write(f"""
         <html>
-        <head><title>{title}</title></head>
-        <body style="font-family:sans-serif; padding:40px; line-height:1.6;">
+        <head><title>{title} | Fair Discovery</title></head>
+        <body style="font-family:sans-serif; padding:40px; line-height:1.6; max-width:900px; margin:auto;">
             <h1>{title}</h1>
-            <p>Expert guides and hardware reviews for 2026.</p>
+            <p>Expert guides and hardware reviews for 2026. Managed by the Fair Discovery Network.</p>
             <hr>
+            <h3>Research Categories:</h3>
             <ul>
         """)
         
@@ -26,14 +27,42 @@ def build_niche_site(folder_name, title, keywords):
             filename = k.lower().replace(" ", "-") + ".html"
             f.write(f'<li><a href="{filename}">{k}</a></li>')
             
+            # THE SMART AD BLOCK (The "Auto-Pilot" code you found)
+            # This searches Amazon for the specific keyword automatically
+            amazon_widget = f"""
+            <div id="amzn-assoc-ad-fd-network"></div>
+            <script type="text/javascript">
+                amzn_assoc_tracking_id = "{AMAZON_TAG}";
+                amzn_assoc_ad_mode = "search";
+                amzn_assoc_ad_type = "smart";
+                amzn_assoc_marketplace = "amazon";
+                amzn_assoc_region = "US";
+                amzn_assoc_title = "Recommended {k} Gear";
+                amzn_assoc_default_search_phrase = "{k}"; 
+                amzn_assoc_default_category = "All";
+                amzn_assoc_linkid = "fd_auto_search_widget";
+            </script>
+            <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+            """
+            
             # Create the actual article page
             with open(f"{base_path}/{filename}", "w") as art:
                 art.write(f"""
-                <html><body>
+                <html>
+                <body style="font-family:sans-serif; padding:40px; line-height:1.6; max-width:800px; margin:auto;">
+                    <small>Fair Discovery > {title}</small>
                     <h1>The Best {k} in 2026</h1>
-                    <p>When looking for {k}, security and reliability are key.</p>
-                    <p><a href="{SURFSHARK_URL}">Secure your connection with Surfshark VPN</a></p>
-                    <p><a href="https://www.amazon.com/s?k={k.replace(' ','+')}&tag={AMAZON_TAG}">View top rated {k} on Amazon</a></p>
+                    <p>When looking for {k}, security and reliability are key. Our team has vetted the following options based on performance and user feedback.</p>
+                    
+                    <div style="margin: 30px 0;">
+                        {amazon_widget}
+                    </div>
+
+                    <div style="background:#f0f7ff; padding:20px; border-radius:10px; border-left:5px solid #00d18a;">
+                        <strong>Privacy Note:</strong> Always protect your data. 
+                        <a href="{SURFSHARK_URL}">Secure your connection with Surfshark VPN →</a>
+                    </div>
+                    
                     <hr>
                     <a href="index.html">Back to {title} Hub</a>
                 </body></html>
@@ -43,6 +72,12 @@ def build_niche_site(folder_name, title, keywords):
     print(f"✅ Created {title} at /affiliates/{folder_name}")
 
 if __name__ == "__main__":
-    # Let's test two "Verticals"
-    build_niche_site("privacy-hub", "Global Privacy Portal", ["VPN for PC", "Secure Routers", "Encrypted Email"])
-    build_niche_site("workshop-gear", "Elite Diagnostic Tools", ["OBD2 Scanner", "Digital Multimeter", "Thermal Camera"])
+    # BATCH 1: The Foundation (Privacy & Workshop)
+    build_niche_site("privacy-hub", "Global Privacy Portal", ["VPN for PC", "Secure Routers", "Encrypted Email", "Hardware Security Keys"])
+    build_niche_site("workshop-gear", "Elite Diagnostic Tools", ["OBD2 Scanner", "Digital Multimeter", "Thermal Camera", "Tire Pressure Monitor"])
+    
+    # BATCH 2: South African Energy & Security (High Demand)
+    build_niche_site("power-solutions", "SA Load Shedding Backup", ["Pure Sine Wave Inverter", "LiFePO4 Battery", "Portable Power Station", "Solar Charge Controller"])
+    build_niche_site("road-safety", "Dashcam & Vehicle Security", ["4K Dash Cam", "GPS Tracker", "Blind Spot Monitor", "Reverse Camera Kit"])
+
+    print("\n🚀 100-Portal Engine is Warming Up. Ready for GitHub push.")
