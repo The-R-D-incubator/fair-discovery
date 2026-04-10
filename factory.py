@@ -6,14 +6,35 @@ SURFSHARK_URL = "https://get.surfshark.net/aff_c?offer_id=6&aff_id=4160"
 HONEYGAIN_URL = "https://join.honeygain.com/PRINY5083C"
 AURORA_URL = "https://www.aurora-repair.com"
 
-# Set your Pixel ID here. Use 'OFF' or leave empty to disable.
+# --- ANALYTICS & TRACKING ---
+# GA4 ID provided: G-C6Z3VMB0ND
+GA_ID = "G-C6Z3VMB0ND"
+# Set your Pixel ID here when ready (e.g., "123456789")
 PIXEL_ID = "YOUR_PIXEL_ID_HERE" 
 
-def generate_pixel_code(pixel_id):
-    """The 1x1 Silent Tracker - Non-intrusive and fast."""
-    if not pixel_id or pixel_id == "YOUR_PIXEL_ID_HERE": return ""
+def generate_tracking_header(ga_id, pixel_id):
+    """Combines Google Analytics, Event Tracking, and the Silent Pixel."""
+    pixel_html = ""
+    if pixel_id and pixel_id != "YOUR_PIXEL_ID_HERE":
+        pixel_html = f'<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={pixel_id}&ev=PageView&noscript=1"/>'
+    
     return f"""
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={pixel_id}&ev=PageView&noscript=1"/>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={ga_id}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', '{ga_id}');
+
+      // CLICK TRACKER BOT: Reports button hits to your Dashboard
+      function trackAffiliateClick(label) {{
+        gtag('event', 'click', {{
+          'event_category': 'Affiliate Link',
+          'event_label': label
+        }});
+      }}
+    </script>
+    {pixel_html}
     """
 
 def generate_industry_report(item):
@@ -32,7 +53,12 @@ def build_elite_portal(folder_name, title, keywords):
     # HUB PAGE
     with open(os.path.join(base_path, "index.html"), "w") as f:
         links = "".join([f'<a href="{k.lower().replace(" ", "-")}.html" style="display:block; padding:20px; margin:10px 0; background:#fff; border-left:5px solid #00d18a; text-decoration:none; color:#333; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><strong>{k}</strong> &rarr;</a>' for k in keywords])
-        f.write(f"<html><head><title>{title} | Hub</title><style>body{{font-family:sans-serif; background:#f4f7f6; padding:40px;}} .container{{max-width:800px; margin:auto;}}</style></head><body><div class='container'><h1>{title} Hub</h1>{links}</div></body></html>")
+        f.write(f"""
+        <html><head><title>{title} | Hub</title>
+        {generate_tracking_header(GA_ID, PIXEL_ID)}
+        <style>body{{font-family:sans-serif; background:#f4f7f6; padding:40px;}} .container{{max-width:800px; margin:auto;}}</style>
+        </head><body><div class='container'><h1>{title} Hub</h1>{links}</div></body></html>
+        """)
 
     # ARTICLE PAGES
     for k in keywords:
@@ -43,8 +69,8 @@ def build_elite_portal(folder_name, title, keywords):
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-                <title>{k} | Technical Analysis 2026</title>
-                {generate_pixel_code(PIXEL_ID)}
+                <title>{k} | Technical Report 2026</title>
+                {generate_tracking_header(GA_ID, PIXEL_ID)}
                 <style>
                     body {{ font-family: 'Georgia', serif; line-height: 1.8; color: #222; max-width: 850px; margin: auto; padding: 40px; background: #fdfdfd; }}
                     h1 {{ font-family: sans-serif; }}
@@ -52,7 +78,9 @@ def build_elite_portal(folder_name, title, keywords):
                     .ad-card {{ background: #fff; border: 1px solid #eee; padding: 20px; border-radius: 8px; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); font-family: sans-serif; }}
                     .tag {{ background: #00d18a; color: white; padding: 3px 8px; border-radius: 3px; font-size: 10px; font-weight: bold; text-transform: uppercase; }}
                     .cta-box {{ background: #00d18a; color: white; padding: 30px; border-radius: 12px; text-align: center; font-family: sans-serif; }}
-                    .btn-main {{ display: inline-block; background: white; color: #00d18a; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 15px; }}
+                    .btn-main {{ display: inline-block; background: white; color: #00d18a; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 15px; cursor: pointer; }}
+                    .cookie-bar {{ position: fixed; bottom: 0; left: 0; width: 100%; background: #1a2a3a; color: white; padding: 12px; text-align: center; font-size: 12px; font-family: sans-serif; z-index: 10000; }}
+                    .cookie-btn {{ background: #00d18a; border: none; color: white; padding: 6px 15px; border-radius: 4px; cursor: pointer; margin-left: 12px; font-weight: bold; }}
                 </style>
             </head>
             <body>
@@ -60,7 +88,7 @@ def build_elite_portal(folder_name, title, keywords):
                 {generate_industry_report(k)}
                 
                 <div class="ad-grid">
-                    <div class="ad-card">
+                    <div class="ad-card" onclick="trackAffiliateClick('Amazon-{k}')">
                         <span class="tag">Hardware</span>
                         <h4>Procure Verified {k}</h4>
                         <script type="text/javascript">
@@ -77,19 +105,24 @@ def build_elite_portal(folder_name, title, keywords):
                         <span class="tag">Security</span>
                         <h4>Data Integrity</h4>
                         <p>Secure hardware diagnostics with 256-bit encryption tunnels.</p>
-                        <a href="{SURFSHARK_URL}" style="color:#00d18a; font-weight:bold;">Secure My Connection &rarr;</a>
+                        <a href="{SURFSHARK_URL}" onclick="trackAffiliateClick('Surfshark-{k}')" style="color:#00d18a; font-weight:bold;">Secure My Connection &rarr;</a>
                     </div>
                 </div>
 
                 <div class="cta-box">
                     <h3>Technical Infrastructure Support</h3>
                     <p>For lifecycle maintenance, setup, and precision repair of {k} systems.</p>
-                    <a href="{AURORA_URL}" class="btn-main">Visit Aurora-Repair.com</a>
+                    <a href="{AURORA_URL}" onclick="trackAffiliateClick('Aurora-{k}')" class="btn-main">Visit Aurora-Repair.com</a>
                 </div>
 
                 <p style="margin-top:50px; text-align:center; font-size: 13px; font-family: sans-serif;">
                     🛡️ <a href="{SURFSHARK_URL}">Secure VPN</a> | 💰 <a href="{HONEYGAIN_URL}">Passive Yield Bounty</a>
                 </p>
+
+                <div id="cookie-bar" class="cookie-bar">
+                    Technical analysis and metrics are active to optimize industrial reports.
+                    <button class="cookie-btn" onclick="document.getElementById('cookie-bar').style.display='none'">Accept</button>
+                </div>
             </body>
             </html>
             """)
