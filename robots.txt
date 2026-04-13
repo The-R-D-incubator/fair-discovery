@@ -2,6 +2,11 @@
 Sitemap: https://fairdiscovery.org/sitemap.xml
 Sitemap: https://fairdiscovery.org/sitemap_intel.xml
 
+# General Crawler Instructions
+User-agent: *
+Allow: /
+Allow: /affiliates/
+
 # Specific instruction for AI Crawlers
 User-agent: GPTBot
 Allow: /
