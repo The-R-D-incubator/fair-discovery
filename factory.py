@@ -3,14 +3,13 @@ import datetime
 import random
 
 # --- 1. CONFIG & BATCHING ---
-# Captured from GitHub Action Input
 BATCH_START = int(os.environ.get("BATCH_START", 0))
-BATCH_SIZE = 1000 # Set high to catch all 600+ in one strike
+BATCH_SIZE = 1000 
 BASE_URL = "https://fairdiscovery.org"
 ADSENSE_ID = "ca-pub-3215536871572990"
 GA_ID = "G-C6Z3VMB0ND"
 
-# --- 2. REVENUE STACK ---
+# --- 2. THE REVENUE STACK ---
 LINKS = {
     "nord_vpn": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902",
     "nord_pass": "https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356",
@@ -21,9 +20,11 @@ LINKS = {
 }
 
 def get_image(k):
+    """Dynamic tech-focused image fetcher."""
     sources = [
         f"https://source.unsplash.com/800x450/?{k.replace(' ', ',')},industrial",
-        f"https://loremflickr.com/800/450/{k.replace(' ', ',')},tech"
+        f"https://loremflickr.com/800/450/{k.replace(' ', ',')},tech",
+        f"https://picsum.photos/seed/{k.replace(' ', '')}/800/450"
     ]
     return random.choice(sources)
 
@@ -32,7 +33,7 @@ def generate_header(keyword):
     return f"""
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technical 2026 Analysis of {keyword} systems. Industrial ROI and security protocols verified.">
+    <meta name="description" content="2026 Technical analysis of {keyword} systems. Industrial ROI and security protocols verified.">
     <title>{keyword} | Technical Analysis 2026</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
@@ -51,7 +52,7 @@ def generate_header(keyword):
         .container {{ max-width: 850px; margin: 30px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }}
         .hero-img {{ width: 100%; height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 25px; }}
         .ad-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }}
-        .ad-card {{ border: 1px solid #eee; padding: 20px; border-radius: 10px; border-top: 4px solid var(--primary); transition: 0.3s; cursor: pointer; }}
+        .ad-card {{ border: 1px solid #eee; padding: 20px; border-radius: 10px; border-top: 4px solid var(--primary); transition: 0.3s; cursor: pointer; text-decoration:none; color:inherit; display:block; }}
         .ad-card.nord {{ border-top: 4px solid var(--nord); }}
         .ad-card.honey {{ border-top: 4px solid var(--honey); }}
         .ad-card:hover {{ transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }}
@@ -76,24 +77,24 @@ def build_page(folder, keyword):
         <div class="container">
             <img src="{get_image(keyword)}" class="hero-img">
             <h1>2026 Engineering Guide: {keyword}</h1>
-            <p>Verified technical analysis of <strong>{keyword}</strong> infrastructure deployment. Audit focus: hardware resilience and 2026 security standards.</p>
+            <p>Verified technical analysis of <strong>{keyword}</strong> infrastructure deployment. Audit focus: hardware resilience, diagnostic handshakes, and 2026 network security standards.</p>
             
             <div class="ad-grid">
-                <div class="ad-card nord" onclick="trackAff('NordVPN'); window.location.href='{LINKS['nord_vpn']}';">
+                <a href="{LINKS['nord_vpn']}" class="ad-card nord" onclick="trackAff('NordVPN')">
                     <small style="color:var(--nord); font-weight:bold;">ENCRYPTION</small>
                     <h4>Secure {keyword} Stream</h4>
                     <p>Protect your industrial data with NordVPN tunnels.</p>
-                </div>
-                <div class="ad-card honey" onclick="trackAff('Honeygain'); window.location.href='{LINKS['honeygain']}';">
+                </a>
+                <a href="{LINKS['honeygain']}" class="ad-card honey" onclick="trackAff('Honeygain')">
                     <small style="color:var(--honey); font-weight:bold;">PASSIVE REVENUE</small>
                     <h4>Monetize Idle Bandwidth</h4>
                     <p>Turn your {keyword} network into passive income with Honeygain.</p>
-                </div>
-                <div class="ad-card" onclick="trackAff('NordPass'); window.location.href='{LINKS['nord_pass']}';">
+                </a>
+                <a href="{LINKS['nord_pass']}" class="ad-card" onclick="trackAff('NordPass')">
                     <small style="color:var(--primary); font-weight:bold;">SECURITY</small>
                     <h4>Credential Management</h4>
                     <p>Encrypted vaulting for all {keyword} system passwords.</p>
-                </div>
+                </a>
             </div>
 
             <div style="background:var(--dark); color:white; padding:30px; border-radius:10px; text-align:center;">
@@ -104,7 +105,7 @@ def build_page(folder, keyword):
             
             <p style="font-size:10px; color:#aaa; margin-top:40px; text-align:center;">
                 Associate Disclosure: As an Amazon Associate, we earn from qualifying purchases. 
-                Funded by Nord Security and Honeygain passive income partnerships.
+                Reports are funded by Nord Security and Honeygain passive income partnerships.
             </p>
         </div>
     </body>
@@ -126,22 +127,30 @@ def update_sitemap():
         f.write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{"".join(entries)}</urlset>')
 
 if __name__ == "__main__":
-    # --- ADD YOUR FULL LIST OF 1000 KEYWORDS HERE ---
     all_portals = [
-        ("auto", ["OBD2 Scanner", "ECU Tuner"]),
-        ("solar", ["Solar Inverter", "Lithium Battery"]),
-        ("mining", ["Deep Drill Rig", "Survey Drone"])
-        # ... Paste the rest here ...
+        ("cyber-intel", ["Zero Trust Architecture", "Endpoint Detection Response", "Network Traffic Analysis", "SIEM Log Management", "Encrypted Data Vault", "Hardware Security Module", "Biometric Access Control", "DDoS Mitigation", "Incident Response", "Quantum Encryption"]),
+        ("robotics", ["Collaborative Robots", "Six Axis Robotic Arm", "Machine Vision System", "Delta Robot Assembly", "Hydraulic Actuators", "Pneumatic Logic", "PLC Programming", "SCADA Audit", "HMI Interface", "Industrial Sensors"]),
+        ("solar-industrial", ["Three Phase Inverter", "MPPT Controller", "Bifacial Solar Panel", "Solar Tracker", "PV Combiner Box", "Battery Energy Storage", "Hybrid Power Plant", "Microgrid Control", "Grid Tie Protection", "Solar Maintenance"]),
+        ("power-systems", ["Uninterruptible Power Supply", "Generator Sync", "Power Factor Correction", "Voltage Stabilizers", "Circuit Breakers", "Transformer Oil Analysis", "Busbar Trunking", "Energy Management", "Harmonic Filters", "Switchgear"]),
+        ("green-hydrogen", ["Hydrogen Electrolyzer", "Fuel Cell Stack", "Hydrogen Storage", "Ammonia Synthesis", "Carbon Capture", "Electrolysis Membrane", "Ammonia Production", "Refuelling Stations", "Thermal Storage", "Biofuel Processing"]),
+        ("additive-mfg", ["Industrial 3D Printer", "Sintering Furnace", "Laser Powder Bed Fusion", "CNC Machining", "Injection Molding", "Die Casting", "Surface Grinding", "Electro Discharge Machining", "Waterjet Cutting", "Plasma Cutter"]),
+        ("precision-eng", ["CMM Inspection", "Digital Micrometers", "Laser Alignment", "Non Destructive Testing", "Metrology Lab", "Optical Comparator", "Borescope Inspection", "Hardness Tester", "Surface Profile Meter", "Profile Projector"]),
+        ("smart-building", ["BMS Control", "HVAC Variable Speed Drive", "Smart Lighting", "Elevator Logic", "Water Treatment Automation", "Waste Management IoT", "Smart Parking Sensors", "EV Chargers", "Occupancy Sensors", "Energy Audit"]),
+        ("agri-tech", ["Precision Irrigation", "Hydroponic Control", "Automated Greenhouse", "Livestock Tracking", "Soil Moisture Probe", "Satellite Crop Monitoring", "Drone Fertilizer Spreader", "Autonomous Tractor", "Grain Silo Sensors", "Dairy Automation"]),
+        ("mining-tech", ["Underground Mining Drone", "Ore Crushing Automation", "Conveyor Monitor", "Blast Hole Drill", "Tailings Dam Sensor", "Autonomous Haul Truck", "Seismic Monitoring", "Mineral Processing", "Ventilation Control", "Rock Bolt Inspection"]),
+        ("industrial-repair", [f"Repairing {k}" for k in ["PLC Modules", "VFD Drives", "Servo Motors", "CNC Spindles", "Hydraulic Pumps", "Solar Inverters", "Medical Imaging", "Lab Centrifuges", "Industrial Chillers", "Boiler Controls"]]),
+        ("maintenance-guides", [f"{k} Maintenance" for k in ["Preventative", "Predictive", "Condition Based", "Reliability Centered", "Lifecycle", "Remote", "Augmented Reality", "AI Driven", "Scheduled", "Emergency"]]),
+        ("procurement-2026", [f"Buying {k} in 2026" for k in ["Industrial Sensors", "Networking Gear", "Security Cameras", "Solar Batteries", "Encrypted Drives", "Laboratory Gear", "Robotic Parts", "Power Tools", "Server Hardware", "Measuring Tools"]])
     ]
     
+    # Flat list generation
     flat_list = []
     for folder, k_list in all_portals:
         for k in k_list:
             flat_list.append((folder, k))
 
-    # This slice handles the Strike
+    # Slice handles the strike
     batch = flat_list[BATCH_START : BATCH_START + BATCH_SIZE]
-    
     print(f"🚀 Processing Batch from {BATCH_START}. Found {len(batch)} keywords.")
     
     for f, k in batch:
