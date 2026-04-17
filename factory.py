@@ -3,8 +3,8 @@ import datetime
 import random
 
 # --- 1. CONFIG & REVENUE STACK ---
-BATCH_START = int(os.environ.get("BATCH_START", 582))
-BATCH_SIZE = 1000 
+BATCH_START = int(os.environ.get("BATCH_START", 0))
+BATCH_SIZE = 10000 
 BASE_URL = "https://fairdiscovery.org"
 ADSENSE_ID = "ca-pub-3215536871572990"
 GA_ID = "G-C6Z3VMB0ND"
