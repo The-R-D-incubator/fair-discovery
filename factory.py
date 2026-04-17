@@ -3,8 +3,9 @@ import datetime
 import random
 
 # --- 1. CONFIG & BATCHING ---
+# Captured from GitHub Action Input
 BATCH_START = int(os.environ.get("BATCH_START", 0))
-BATCH_SIZE = 200 
+BATCH_SIZE = 1000 # Set high to catch all 600+ in one strike
 BASE_URL = "https://fairdiscovery.org"
 ADSENSE_ID = "ca-pub-3215536871572990"
 GA_ID = "G-C6Z3VMB0ND"
@@ -31,7 +32,7 @@ def generate_header(keyword):
     return f"""
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technical 2026 Analysis of {keyword} systems. Global industrial ROI and security protocols verified.">
+    <meta name="description" content="Technical 2026 Analysis of {keyword} systems. Industrial ROI and security protocols verified.">
     <title>{keyword} | Technical Analysis 2026</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
@@ -75,7 +76,7 @@ def build_page(folder, keyword):
         <div class="container">
             <img src="{get_image(keyword)}" class="hero-img">
             <h1>2026 Engineering Guide: {keyword}</h1>
-            <p>Verified technical analysis of <strong>{keyword}</strong> infrastructure deployment. Our 2026 audit focuses on hardware resilience and network traffic optimization.</p>
+            <p>Verified technical analysis of <strong>{keyword}</strong> infrastructure deployment. Audit focus: hardware resilience and 2026 security standards.</p>
             
             <div class="ad-grid">
                 <div class="ad-card nord" onclick="trackAff('NordVPN'); window.location.href='{LINKS['nord_vpn']}';">
@@ -86,7 +87,7 @@ def build_page(folder, keyword):
                 <div class="ad-card honey" onclick="trackAff('Honeygain'); window.location.href='{LINKS['honeygain']}';">
                     <small style="color:var(--honey); font-weight:bold;">PASSIVE REVENUE</small>
                     <h4>Monetize Idle Bandwidth</h4>
-                    <p>Turn your {keyword} diagnostic network into passive ZAR with Honeygain.</p>
+                    <p>Turn your {keyword} network into passive income with Honeygain.</p>
                 </div>
                 <div class="ad-card" onclick="trackAff('NordPass'); window.location.href='{LINKS['nord_pass']}';">
                     <small style="color:var(--primary); font-weight:bold;">SECURITY</small>
@@ -103,7 +104,7 @@ def build_page(folder, keyword):
             
             <p style="font-size:10px; color:#aaa; margin-top:40px; text-align:center;">
                 Associate Disclosure: As an Amazon Associate, we earn from qualifying purchases. 
-                Reports are funded by Nord Security and Honeygain passive income partnerships.
+                Funded by Nord Security and Honeygain passive income partnerships.
             </p>
         </div>
     </body>
@@ -125,11 +126,12 @@ def update_sitemap():
         f.write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{"".join(entries)}</urlset>')
 
 if __name__ == "__main__":
-    # --- ADD YOUR KEYWORDS HERE ---
+    # --- ADD YOUR FULL LIST OF 1000 KEYWORDS HERE ---
     all_portals = [
         ("auto", ["OBD2 Scanner", "ECU Tuner"]),
         ("solar", ["Solar Inverter", "Lithium Battery"]),
         ("mining", ["Deep Drill Rig", "Survey Drone"])
+        # ... Paste the rest here ...
     ]
     
     flat_list = []
@@ -137,8 +139,13 @@ if __name__ == "__main__":
         for k in k_list:
             flat_list.append((folder, k))
 
+    # This slice handles the Strike
     batch = flat_list[BATCH_START : BATCH_START + BATCH_SIZE]
+    
+    print(f"🚀 Processing Batch from {BATCH_START}. Found {len(batch)} keywords.")
+    
     for f, k in batch:
         build_page(f, k)
     
     update_sitemap()
+    print("🏁 Strike Complete. Sitemap Updated.")
