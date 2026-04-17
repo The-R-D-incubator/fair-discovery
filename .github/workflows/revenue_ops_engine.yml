@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       batch_start:
-        description: 'Site index to start from'
+        description: 'Index'
         required: true
         default: '0'
 
@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.BOT_DEPLOY_TOKEN }}
-          fetch-depth: 0
 
       - name: Python Setup
         uses: actions/setup-python@v4
@@ -28,11 +27,10 @@ jobs:
           BATCH_START: ${{ github.event.inputs.batch_start }}
         run: python factory.py
 
-      - name: Sync to Main
+      - name: Sync
         run: |
           git config --local user.email "ops@fairdiscovery.org"
           git config --local user.name "Forge-Bot-Army"
-          git add affiliates/
-          git add sitemap.xml
-          git commit -m "Batch Strike: ${{ github.event.inputs.batch_start }}" || exit 0
+          git add .
+          git commit -m "Strike at ${{ github.event.inputs.batch_start }}" || exit 0
           git push origin main
