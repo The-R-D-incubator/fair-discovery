@@ -235,6 +235,19 @@
     "paypal_url": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902"
   },
   {
+  "id": "csrf-handshake-node",
+  "name": "CSRF-Protocol: Cross-Platform Research Node",
+  "category": "Security",
+  "description": "Industrial-grade forensic PDF briefing. A deep-dive into cross-platform endpoint vulnerabilities. Learn the methodology for extracting authenticated CSRF tokens via logic-flaw identification. Strictly for Ethical Research and Safe Harbor audits.",
+  "price": "20",
+  "popularity": 125,
+  "image": "csrf-protocol-tile.jpg",
+  "tags": ["Security", "Bug-Bounty", "Educational", "Forensics"],
+  "featured": true,
+  "download_url": "[YOUR_PCLOUD_LINK_HERE]",
+  "paypal_url": "[YOUR_PAYPAL_BUTTON_URL_HERE]"
+  },
+  {
     "id": "nordpass-direct",
     "name": "NordPass: Credential Vault",
     "category": "Partner Infrastructure",
