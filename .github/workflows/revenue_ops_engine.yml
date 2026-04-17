@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       batch_start:
-        description: 'Site index to start from (e.g., 0, 100, 200)'
+        description: 'Site index to start from'
         required: true
         default: '0'
 
@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Build Pages and Sitemap
+      - name: Run Factory
         env:
           BATCH_START: ${{ github.event.inputs.batch_start }}
         run: python factory.py
@@ -34,5 +34,5 @@ jobs:
           git config --local user.name "Forge-Bot-Army"
           git add affiliates/
           git add sitemap.xml
-          git commit -m "Batch Strike: ${{ github.event.inputs.batch_start }} [Sitemap Sync]" || exit 0
+          git commit -m "Batch Strike: ${{ github.event.inputs.batch_start }}" || exit 0
           git push origin main
