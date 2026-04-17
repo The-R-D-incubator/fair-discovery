@@ -1,79 +1,38 @@
 name: REVENUE_OPS_ENGINE
 
 on:
-
   workflow_dispatch:
-
     inputs:
-
       batch_start:
-
-        description: 'Site index to start from (0, 20, 40, 60, 80)'
-
+        description: 'Site index to start from (e.g., 0, 100, 200)'
         required: true
-
         default: '0'
 
-
-
 jobs:
-
   revenue-operations:
-
     runs-on: ubuntu-latest
-
     steps:
-
       - name: Checkout
-
         uses: actions/checkout@v4
-
         with:
-
           token: ${{ secrets.BOT_DEPLOY_TOKEN }}
-
           fetch-depth: 0
 
-
-
-      - name: Python
-
+      - name: Python Setup
         uses: actions/setup-python@v4
-
         with:
-
           python-version: '3.9'
 
-
-
-      - name: Build
-
+      - name: Build Pages and Sitemap
         env:
-
           BATCH_START: ${{ github.event.inputs.batch_start }}
-
         run: python factory.py
 
-
-
-      - name: Build Global Sitemap
-
-        run: python "Sitemap Deep Scanner.py"
-
-
-
-      - name: Sync
-
+      - name: Sync to Main
         run: |
-
           git config --local user.email "ops@fairdiscovery.org"
-
           git config --local user.name "Forge-Bot-Army"
-
           git add affiliates/
-
           git add sitemap.xml
-
           git commit -m "Batch Strike: ${{ github.event.inputs.batch_start }} [Sitemap Sync]" || exit 0
-
           git push origin main
