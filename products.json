@@ -241,7 +241,7 @@
   "description": "Industrial-grade forensic PDF briefing. A deep-dive into cross-platform endpoint vulnerabilities. Learn the methodology for extracting authenticated CSRF tokens via logic-flaw identification. Strictly for Ethical Research and Safe Harbor audits.",
   "price": "20",
   "popularity": 125,
-  "image": "csrf-protocol-tile.jpg",
+  "image": "csrf_bypass.jpg",
   "tags": ["Security", "Bug-Bounty", "Educational", "Forensics"],
   "featured": true,
   "download_url": "[YOUR_PCLOUD_LINK_HERE]",
