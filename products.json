@@ -220,5 +220,31 @@
     "featured": false,
     "download_url": "https://u.pcloud.link/publink/show?code=XZLIp65ZzM0cu4tw9VfwpDn1nAoibQjS7IoV",
     "paypal_url": "https://www.paypal.com/ncp/payment/S6RGTCUWDLA54"
+  },
+  {
+    "id": "nordvpn-direct",
+    "name": "NordVPN: Industrial Tunnel",
+    "category": "Partner Infrastructure",
+    "description": "High-speed encryption backbone. Secure your digital industry nodes with the world's most trusted VPN protocol.",
+    "price": "Affiliate Offer",
+    "popularity": 160,
+    "image": "[IMAGE_PLACEHOLDER_NORDVPN]",
+    "tags": ["VPN", "Security", "Infrastructure"],
+    "featured": true,
+    "download_url": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902",
+    "paypal_url": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145959&url_id=902"
+  },
+  {
+    "id": "nordpass-direct",
+    "name": "NordPass: Credential Vault",
+    "category": "Partner Infrastructure",
+    "description": "Secure password management for digital teams. Protect industrial logins and sensitive repository keys in an encrypted vault.",
+    "price": "Affiliate Offer",
+    "popularity": 150,
+    "image": "[IMAGE_PLACEHOLDER_NORDPASS]",
+    "tags": ["Security", "Passwords", "Infrastructure"],
+    "featured": true,
+    "download_url": "https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356",
+    "paypal_url": "https://go.nordpass.io/aff_c?offer_id=488&aff_id=145959&url_id=9356"
   }
 ]
