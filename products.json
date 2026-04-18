@@ -1,5 +1,18 @@
 [
   {
+    "id": "infinite-void",
+    "name": "The Infinite Void: Sovereign-Grade Burner Vault",
+    "category": "Security",
+    "description": "A surgical, zero-trace local encryption vault. The Infinite Void physically destroys file metadata, encrypts the raw binary using AES-256-GCM, and locks it behind a 1GB Argon2id memory burn to prevent brute-force attacks. Includes an Electron X-Ray Projection Window to view files securely without leaving decrypted traces.",
+    "price": "20",
+    "popularity": 150,
+    "image": "berner.jpg",
+    "tags": ["Encryption", "Security", "Burner-Vault", "Zero-Trace"],
+    "featured": true,
+    "download_url": "https://u.pcloud.link/publink/show?code=XZwSzE5ZMgqHTfAH9n46K0IbpoClHj7piYy7",
+    "paypal_url": "https://www.paypal.com/ncp/payment/9XDB22M9WQE6Q"
+  },
+  {
     "id": "ghost-ping",
     "name": "Ghost-Ping: IP Location Verifier",
     "category": "Security",
