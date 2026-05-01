@@ -1,7 +1,7 @@
 {
-  "active_holiday": "None",
-  "reason": "Standard Operations",
-  "multiplier": 1,
-  "confetti": false,
-  "last_update": "2026-04-30"
+  "active_holiday": "Labour Day",
+  "reason": "Global Celebration in BR",
+  "multiplier": 2,
+  "confetti": true,
+  "last_update": "2026-05-01"
 }
