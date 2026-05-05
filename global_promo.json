@@ -1,7 +1,7 @@
 {
-  "active_holiday": "Early May Bank Holiday",
-  "reason": "Global Celebration in GB",
-  "multiplier": 2,
-  "confetti": true,
-  "last_update": "2026-05-04"
+  "active_holiday": "None",
+  "reason": "Standard Operations",
+  "multiplier": 1,
+  "confetti": false,
+  "last_update": "2026-05-05"
 }
