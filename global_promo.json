@@ -1,7 +1,7 @@
 {
-  "active_holiday": "Independence Day",
-  "reason": "Global Celebration in US",
-  "multiplier": 2,
-  "confetti": true,
-  "last_update": "2026-07-03"
+  "active_holiday": "None",
+  "reason": "Standard Operations",
+  "multiplier": 1,
+  "confetti": false,
+  "last_update": "2026-07-04"
 }
