@@ -1,7 +1,7 @@
 {
-  "active_holiday": "Constitutionalist Revolution of 1932",
-  "reason": "Global Celebration in BR",
-  "multiplier": 2,
-  "confetti": true,
-  "last_update": "2026-07-09"
+  "active_holiday": "None",
+  "reason": "Standard Operations",
+  "multiplier": 1,
+  "confetti": false,
+  "last_update": "2026-07-10"
 }
