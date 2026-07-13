@@ -1,7 +1,7 @@
 {
-  "active_holiday": "None",
-  "reason": "Standard Operations",
-  "multiplier": 1,
-  "confetti": false,
-  "last_update": "2026-07-12"
+  "active_holiday": "Battle of the Boyne",
+  "reason": "Global Celebration in GB",
+  "multiplier": 2,
+  "confetti": true,
+  "last_update": "2026-07-13"
 }
